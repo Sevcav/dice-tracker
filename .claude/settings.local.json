@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/chapm/**)",
+      "Bash(ls /shared/)",
+      "Read(//c/Users/chapm/Desktop/**)",
+      "Bash(python -c ' *)",
+      "Bash(taskkill /F /IM python.exe)"
+    ]
+  }
+}

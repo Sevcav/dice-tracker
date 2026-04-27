@@ -1,0 +1,127 @@
+====================================================
+  BLOOD BOWL DICE TRACKER — SETUP INSTRUCTIONS
+====================================================
+
+REQUIREMENTS
+------------
+- Windows 10 / 11
+- Python 3.10 or 3.11  (https://www.python.org/downloads/)
+- Your USB Google/Blink camera plugged in
+- ~2 GB free disk space (for PyTorch + EasyOCR models)
+
+
+STEP 1 — Install Python packages
+---------------------------------
+Open a Command Prompt in this folder (Dice Code) and run:
+
+    pip install -r requirements.txt
+
+This installs OpenCV, PyTorch, EasyOCR, and Pillow.
+It may take several minutes the first time.
+
+
+STEP 2 — Prepare training images
+----------------------------------
+Run this once to crop and augment your reference dice photos:
+
+    python classifier/prepare_training_data.py
+
+You should see output like:
+    Done. 168 images written, 0 skipped.
+
+
+STEP 3 — Train the block dice classifier
+------------------------------------------
+Run:
+
+    python classifier/train_block_dice.py
+
+This trains the neural network on your dice images.
+Takes 1-3 minutes.  You should see:
+    Epoch 40/40  loss=0.0xxx  val_acc=100.0%
+    Model saved to: classifier/block_dice_model.pt
+
+
+STEP 4 — Test your camera
+---------------------------
+To find your camera index (usually 0):
+
+    python detection/camera.py
+
+A live preview window opens.  Press Q to close.
+If it opens a black screen try:  python detection/camera.py  (edit source=1 in the file)
+
+
+STEP 5 — Run the tracker
+--------------------------
+Basic start (Player 1 vs Player 2, USB camera 0):
+
+    python main.py
+
+With custom player names:
+
+    python main.py --player1 "Team Chaos" --player2 "Team Order"
+
+Different camera index:
+
+    python main.py --camera 1
+
+Resume a saved game:
+
+    python main.py --load session.json
+
+
+CONTROLS (in the tracker window)
+----------------------------------
+SPACE       Confirm the current roll and record it
+BACKSPACE   Undo the last recorded roll
+1           Set Player 1 as the active roller
+2           Set Player 2 as the active roller
+N           Manually advance to next turn
+S           Save game (creates session.json + session.csv)
+Q / ESC     Quit (will ask if you want to save)
+
+
+HOW IT WORKS
+------------
+1. Camera watches the dice tray continuously.
+2. When dice stop moving for ~0.5 seconds, the window border flashes GREEN.
+3. The system reads each die and shows the results on screen.
+4. Press SPACE to confirm the roll — it gets added to the scoresheet.
+5. After 16 turns the final scores are displayed and you can export to CSV.
+
+
+FUTURE — ARDUINO / WIRELESS CAMERA (Phase 2)
+---------------------------------------------
+When you get the specs of your friend's Arduino camera, run:
+
+    python main.py --camera http://192.168.x.x/stream
+
+(replace the IP with whatever the Arduino camera serves)
+No other code changes needed.
+
+
+FILES CREATED DURING PLAY
+--------------------------
+session.json    Full game state (can be loaded to resume)
+session.csv     Roll-by-roll export for spreadsheet analysis
+
+
+TROUBLESHOOTING
+---------------
+"Cannot open camera source: 0"
+  -> Try --camera 1 or --camera 2
+  -> Make sure no other app (Teams, Zoom, OBS) is using the camera
+
+"Model not found" error
+  -> Re-run steps 2 and 3
+
+Block dice misidentified
+  -> Adjust camera height / lighting
+  -> Add more training photos to training_data/<class>/ and re-train
+
+d8/d16 not distinguished correctly
+  -> Edit detection/classify_die_type.py
+  -> Adjust D16_MIN_AREA_FRACTION and D8_MIN_AREA_FRACTION values
+
+====================================================
