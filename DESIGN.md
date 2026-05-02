@@ -1,7 +1,7 @@
 # Blood Bowl Dice Tracker — Design Document
 
-**Last updated:** April 30, 2026 (evening)
-**Status:** Pre-production prototype phase
+**Last updated:** May 2, 2026
+**Status:** Production rig CAD in progress
 
 ---
 
@@ -19,87 +19,124 @@ roll is logged to a database for later analysis via a web app.
 - Self-contained — no PC on the table
 - Works under variable lighting (gaming store conditions)
 - Powered by USB power bank for portability
-- Single 3D-printed shell (or modular assembly)
+- Modular 3D-printed rig (lower tier + lid + removable dice tray + power bank shelf)
 - Phone connects over WiFi for the web UI
 
 ---
 
-## 2. Final Form Factor (Production Target)
+## 2. Production Rig Design (Active)
 
-Reference: Gemini render with corner OLEDs, sloped front face, rear cantilever
-camera arm, accessible Pi/power bank compartment.
+The production rig is a **modular two-tier design** with a removable dice tray.
 
-**Footprint:** ~250 × 280mm
-**Print volume:** Fits Bambu P1S (256³) — assembled from multiple printed parts
-**Material:** PETG (heat resistance for hot summer venues)
+### Architecture
 
-### Major components
-
-| Component | Spec |
+| Tier | Purpose |
 |---|---|
-| Base plate with integrated tray pocket | ~250 × 200mm × 25mm |
-| Soft-tray corner posts (4) | 15×15×50mm at 90mm offsets |
-| Front sloped button panel | 4 arcade buttons, 15° slope |
-| Front-corner OLED mounts (2) | 45° outward angle |
-| Rear access compartment | Houses Pi + power bank |
-| Camera arm | Cantilevered, 35° down look angle |
+| **Lower tier** | Electronics enclosure — Pi, buttons, LEDs, OLEDs, camera mount |
+| **Lid** | Sits on top of lower tier, has tray opening + posts hanging down to bolt to lower tier |
+| **Dice tray (removable)** | Drops into the lid's tray opening, felt-lined, removable for felt application and Pi access |
+| **Power bank shelf** | External, attaches to rear of rig |
+
+### Outer Dimensions
+
+- **Outer footprint:** 260 × 190mm (W × D) with 55 × 55mm chamfered front corners
+- **Lower tier height:** 60mm
+- **Lid height:** 60mm
+- **Total stack height:** 120mm + tray protrusion
+
+### Material
+
+- **PETG** throughout (heat resistance for hot summer venues)
+- 4mm wall thickness on all major shells
 
 ---
 
-## 3. Bench Prototype (Current Phase)
+## 3. Component Status
 
-**Goal:** Validate individual components before committing to the integrated
-production base. Print small, test, iterate.
-
-### Validation pieces
-
-| Piece | Status | Notes |
+| Component | Status | Notes |
 |---|---|---|
-| Tray cradle (corner posts) | ✅ Printed, validated | 200×200×5mm plate, 50mm posts at ±90mm offset |
-| Camera arm — Camera_Base | ✅ Printed (from MakerWorld 627829) | Was originally for V2.1 ribbon cam |
-| Camera arm — Camera_Link | ✅ Printed (from MakerWorld 627829) | 137mm forward reach |
-| Arm foot — bridges over back two cradle posts | 🟡 Printing now | Captive M4 nuts, friction-fits over posts |
-| Camera cradle (USB Arducam) | 🔧 Blocked | Need camera in hand for pocket sizing |
-
-### Bench prototype layout (revised)
-
-The arm foot **bridges across the two back posts** of the cradle. No separate base — the cradle posts themselves are the structural anchors for the camera arm.
-
-```
-        [Camera @ end of Camera_Link]
-                       ↓
-              [Camera_Base, M4 bolted]
-                       ↓
-              [ARM FOOT — bridges back two posts]
-            ┌─────┐                    ┌─────┐
-            │     │                    │     │
-            │ POST│                    │ POST│   ← back two posts
-            │     │                    │     │     of the cradle
-   ┌────────┴─────┴────────────────────┴─────┴────────┐
-   │                                                  │
-   │                   TRAY (in pocket)               │
-   │                                                  │
-   └──────┬─────┬─────────────────────┬─────┬─────────┘
-          │POST │                     │POST │   ← front two posts
-          └─────┘                     └─────┘
-```
-
-This is the **bench prototype layout**, not the production form factor.
-
-### Arm Foot Spec (bench prototype)
-
-- **Bridge:** 230 × 40 × 15mm (PETG, 30% gyroid)
-- **Sockets:** 27×27mm outer, 16×16mm inner pocket, 35mm tall, 5.5mm walls
-- **Socket centers:** ±97.5mm from foot center (matches cradle back post positions)
-- **Mounting:** Friction-fit over posts (no bolts to cradle)
-- **Camera_Base mount:** 4× M4 holes in 59.2 × 16.8mm pattern, centered on bridge
-- **Captive nut method:** M4 hex pockets (7.2mm flat-to-flat × 3.4mm deep) embedded mid-thickness; print pause at layer ~34 to drop in 4 nuts before resuming
-- **Bolt spec:** M4 × 12mm flat head, 4 each (Camera_Base to foot)
-- **Through-cut top:** 16×16 squares cut all the way through bridge so posts pass through entirely
+| **Lower tier** | ✅ Modeled | All cuts complete: buttons, LEDs, OLED windows, camera mount |
+| **Lid (with posts)** | ✅ Modeled | Tray opening + 4 hanging posts with captive M4 nuts |
+| **Dice tray (removable)** | ⏳ To design | Felt-lined insert, drops into lid tray opening |
+| **Camera base plate** | ⏳ To design | Replaces MakerWorld Camera_Base bottom; bolts into lower tier rear detent |
+| **Power bank shelf** | ⏳ To design | External rear shelf for UGREEN power bank |
+| **Camera cradle** | 🔧 Blocked | Need Arducam in hand for pocket sizing |
+| **Bench prototype tray cradle** | ✅ Printed | Standalone test, validated soft-tray support concept |
+| **Bench prototype arm foot** | ✅ Printed | Bridges over cradle back posts; captive nuts; friction-fit |
+| **Camera_Base + Camera_Link** | ✅ Printed | From MakerWorld 627829, will be re-used for production rig |
 
 ---
 
-## 4. Detection Software
+## 4. Production Rig — Detailed Specs
+
+### 4.1 Lower Tier
+
+| Spec | Value |
+|---|---|
+| Outer footprint | 260 × 190mm with 55mm front chamfers |
+| Wall thickness | 4mm |
+| Height | 60mm |
+| Front face: button holes | 4 × Ø27.78mm |
+| Front face: LED holes | 4 × Ø8mm (for 7.5mm snap-in bezels) |
+| Button positions (X) | ±56.7 and ±18.9mm |
+| Button vertical (Z) | ~33mm centered |
+| LED positions (X) | Same as buttons |
+| LED vertical (Z) | ~9mm |
+| Both chamfered corners | OLED window (62.53 × 40.28mm) + PCB recess (3mm deep) |
+| Rear face: camera mount detent | 50 × 50 × 3mm pocket on outside |
+| Rear inside wall: nut pockets | 4× hex pockets, 0.25mm deep, on inside of rear wall |
+| Rear bolt clearance | 4 × Ø4.5mm holes through rear wall |
+| Camera mount bolt path | Outside (camera plate) → through 4.5mm clearance → into captive nut on inside |
+
+### 4.2 Lid
+
+| Spec | Value |
+|---|---|
+| Outer footprint | 251.44 × 181.44mm with chamfered front corners (matches lower tier outline) |
+| Wall thickness | 4mm |
+| Height | 60mm |
+| Tray opening (visible from top) | 160mm wide × 130mm deep |
+| Tray opening lip | 4mm wide step around perimeter, 2mm deep recess |
+| Tray opening biased toward rear | Yes |
+| Posts (4) | Round Ø10mm columns hanging from lid underside |
+| Post length | 54mm (engages 2mm into lower tier floor pocket) |
+| Post positions | Front: (±110, -30); Rear: (±115, +85) |
+| Post captive nut | M4 hex pocket at bottom of each post (3.4mm deep) |
+| Post bolt clearance | Ø4.5mm hole through center of each post |
+| Bolt entry | From bottom of lower tier (countersunk) |
+
+### 4.3 Dice tray (still to design)
+
+| Spec | Value |
+|---|---|
+| Outer flange (sits on lid lip) | 159.7 × 138.7mm × 2mm tall |
+| Tray body (drops through lid) | 153.7 × 132.7mm |
+| Total height | ~52mm |
+| Wall thickness | 4mm |
+| Floor thickness | 3mm |
+| Inner draft | 5° outward (top wider) |
+| Felt lining | Self-adhesive felt sheet, applied after print |
+
+### 4.4 Camera base plate (still to design)
+
+| Spec | Value |
+|---|---|
+| Plate size | ~50 × 50mm (sized to fit in 50×50mm rear detent of lower tier) |
+| Plate thickness | 3mm (recessed flush into detent) |
+| Top mating | Hinge clevis matching Camera_Link's M4 hinge |
+| Bottom mating | 4× M4 clearance holes matching lower tier captive nut pattern |
+
+### 4.5 Power bank shelf (still to design)
+
+| Spec | Value |
+|---|---|
+| Power bank dimensions | 160.5 × 81 × 26.5mm (UGREEN Nexode) |
+| Shelf attachment | Snap-fits or bolts to rear face of lower tier |
+| Cable management | Routes USB-C power to rear of rig into Pi |
+
+---
+
+## 5. Detection Software
 
 ### Pipeline
 
@@ -146,33 +183,34 @@ rolls table:
 
 ---
 
-## 5. Hardware (Pi-Side)
+## 6. Hardware
 
-### On hand (already)
+### On hand
 
 - Raspberry Pi 4B in TH3D aluminum case (91 × 65 × 33mm)
 - Pi 3B (spare)
-- Pi Camera v2.1 with 22" ribbon (ribbon CSI port appears non-functional on this Pi 4 — confirmed via missing dmesg entries; using USB path instead)
-- USB camera (test only — not the production camera)
+- Pi Camera v2.1 with 22" ribbon (CSI port non-functional on this Pi 4 — moved to USB path)
+- USB camera (test only, not the production camera)
 - Bambu P1S 3D printer
 - M3 + M4 hardware in stock (M4 lengths: 8/12/16/20mm)
 - M3 + M4 nuts in stock
-- 32GB microSD (current, full from initial setup)
+- 32GB microSD (current, getting full)
+- HiLetgo SPI 2.42" OLED 128×64 (verified dimensions): PCB 71×43mm, glass 62.25×40mm, header zone 14mm at top
 
-### On order
+### On order / shipping
 
-- 64GB A2 microSD (clean install when arrives)
+- 64GB A2 microSD
 - Arducam 1080P Day/Night IR USB camera (OV2710 sensor)
 - Bambu LED Lamp Kit 001 ×2 (USB 5V, built-in PC diffuser)
-- WMYCONGCONG arcade buttons ×N
-- HiLetgo SPI OLED 2.42" displays ×2
-- UGREEN Power Bank
+- WMYCONGCONG arcade buttons (verified: thread Ø26.25mm, dial Ø33mm, body length 62mm — using Ø27.78mm holes for print clearance)
+- 5mm pre-wired LEDs in 7.5mm snap-in bezels (using Ø8mm holes)
+- UGREEN Power Bank (160.5 × 81 × 26.5mm)
 - Pre-crimped JST pigtails
-- M4 brass heat-set inserts (for production rig — not used on bench prototype)
+- M4 brass heat-set inserts (production future use, not yet needed)
 
 ---
 
-## 6. Software State
+## 7. Software State
 
 ### Pi-side stack (validated working)
 
@@ -191,7 +229,7 @@ rolls table:
 
 - iPhone hotspot saved as `iphone-hotspot` connection (for game stores)
 - Home WiFi (Knickerbocker on Deco mesh) saved separately as `home-knickerbocker`
-- 2.4GHz forced via `freq_list` in original wpa_supplicant attempts (not used; NetworkManager controls WiFi on Bookworm/Trixie)
+- NetworkManager (`nmcli`) controls WiFi on Bookworm/Trixie
 - mDNS broadcasting needed for `dicetracker.local` access from phone (TODO)
 - Pi default IP on iPhone hotspot: 172.20.10.x (Apple subnet)
 - Pi default IP on home network: 192.168.68.88 (DHCP, may shift)
@@ -201,7 +239,7 @@ rolls table:
 - ✅ Pi 4 boots, SSH works
 - ✅ All Python libraries import cleanly
 - ✅ ONNX classifier loads with all 11 classes
-- ✅ USB camera capture (low quality test cam, just for proof)
+- ✅ USB camera capture (test cam, just for proof)
 - ✅ iPhone hotspot connection saved
 - ✅ Home WiFi connection saved
 
@@ -217,34 +255,29 @@ rolls table:
 
 ---
 
-## 7. Open Questions / Deferred Decisions
+## 8. Open Questions / Deferred Decisions
 
 | Topic | Status |
 |---|---|
 | Lighting strategy | IR camera handles dark; lamps optional; lamps ordered for testing |
 | Camera angle | ~35° forward bank shot from rear-center — confirmed |
 | D16 detection | Deferred until block + d6 working end-to-end |
-| Production rig print strategy | Modular pieces vs. single print — TBD |
-| Pi case integration | Keep TH3D aluminum, design compartment around it — TBD |
-| OLED corner angle | 45° outward — confirmed |
-| Button arrangement | 4 across the front sloped face, P1 leftmost / P2 rightmost — confirmed |
+| OLED retention method | Friction / hot glue / M2 screws — TBD when OLEDs in hand |
 | Phone web UI scaffold | Not started |
 | Database schema | Drafted, not implemented |
-| Arm foot design | ✅ Designed, printing now |
 | Camera cradle for Arducam | Blocked — need camera in hand for measurements |
-| Production rig CAD | Deferred until bench prototype validates full pipeline |
 | Cable routing strategy | External clips for prototype, internal channels for production |
 | Aesthetic direction | Utilitarian for prototype; organic curves for production v2 |
+| Power bank shelf attachment method | Snap-fit, screw, or magnetic — TBD |
 
 ---
 
-## 8. Known Misconceptions / Lessons
+## 9. Known Lessons / Misconceptions
 
-- **Cradle ≠ production base.** The 200×200 cradle we printed is a standalone
-  bench test, not the foundation of the full rig. The arm foot bridges over
-  the cradle's two back posts as a temporary mounting solution.
-- **Pi camera ribbon hardware appears dead** on the current Pi 4 — switching
-  to USB camera path. Will not pursue ribbon further.
+- **Cradle ≠ production base.** The 200×200 cradle was a standalone bench
+  test, not the foundation of the full rig.
+- **Pi camera ribbon hardware appears dead** on the current Pi 4 — using USB
+  camera path instead. Will not pursue ribbon further.
 - **PyTorch is too big for the Pi.** ONNX Runtime is the runtime path; PyTorch
   stays on Windows for training only.
 - **Apostrophes and `$` in WiFi credentials** broke `nmcli` — needed single
@@ -253,32 +286,48 @@ rolls table:
   in charge. All WiFi config goes through `nmcli`.
 - **STL external data** — PyTorch ONNX export creates a `.onnx.data` sidecar
   for large models. Both files must be transferred together.
-- **Deco mesh routers can block new devices** — the WiFi was failing because
-  TP-Link Deco doesn't broadcast separate 2.4/5GHz SSIDs by default; even
-  with that fixed, NetworkManager + ethernet was the most reliable path for
-  initial setup.
-- **Captive nuts beat heat-set inserts** for this use case because the inserts
-  hadn't shipped yet, and captive nuts are stronger anyway (steel vs brass).
+- **Deco mesh routers can block new devices** — single SSID for both bands
+  caused initial connectivity issues; ethernet was the most reliable path
+  for initial setup.
+- **Captive nuts beat heat-set inserts** when inserts haven't shipped yet,
+  and captive nuts are stronger anyway (steel vs brass).
 - **Print pause at the right layer** is critical for captive nuts — too late
-  and the pocket caps over before the pause; too early and the pocket walls
-  haven't formed yet. ~34 layers at 0.2mm for our M4 hex pockets.
-- **Bridge length must accommodate sockets, not just bolt patterns.** Initial
-  220mm bridge length didn't leave room for 27×27 sockets at ±97.5mm. Bumped
-  to 230mm.
-- **Print tolerance for posts:** 0.28mm typical printer tolerance; 16mm pocket
-  on 15mm post leaves ~0.2mm slop per side after print — snug, no wobble.
+  and the pocket caps over; too early and pocket walls haven't formed yet.
+- **OLED PCB has a header strip** at the top — total height includes 14mm
+  header zone above the active glass area. Account for this when sizing
+  display windows.
+- **OLED requires inside-out mounting** — PCB sits on inside of shell wall,
+  glass protrudes outward through the through-window. Solder pins on PCB
+  back protrude 2mm and need clearance.
+- **Bumped lower tier height to 60mm** because OLED at 39.78mm tall plus
+  4mm floor + 4mm top wouldn't fit in original 50mm box.
+- **PCB recess depth dictates wall thickness** — initially considered 6mm
+  walls for outside pocket, but moving to inside-mounting kept walls at 4mm.
+- **OLED through-window goes glass-only** — header strip stays inside the
+  box, only the glass + active display protrudes through the window cut.
 
 ---
 
-## 9. Decisions Locked This Session
+## 10. Decisions Locked
 
-- ✅ Bench prototype: arm foot bridges over the cradle back posts (no separate base)
-- ✅ Captive M4 nuts in foot for Camera_Base mounting
-- ✅ Through-cut sockets so posts pass all the way through the foot
-- ✅ Friction-fit foot over posts (no bolts into cradle)
-- ✅ Foot dimensions: 230 × 40 × 15mm bridge, 27×27 sockets, 35mm walls
-- ✅ Detection scope: Block dice + BB d6 + D16 (CNN); D8/D3 manual entry
-- ✅ D16 needed for injury rolls, not kickoff events
+### Hardware geometry
+- ✅ Lower tier 260 × 190mm with 55mm front chamfers, 60mm tall, 4mm walls
+- ✅ Lid matches lower tier outer footprint, 60mm tall, 4mm walls
+- ✅ Tray opening in lid: 160 × 130mm with 2mm × 3-4mm wide perimeter lip
+- ✅ Lid mounted to lower tier with 4× Ø10mm posts hanging down + M4 captive nuts + bolts from below
+- ✅ Removable dice tray drops into lid pocket (felt-lined)
+- ✅ Camera base plate replaces MakerWorld Camera_Base; mounts in 50×50mm rear detent
+- ✅ Camera arm: re-use Camera_Link from MakerWorld 627829
+- ✅ Power bank external on rear shelf
+
+### Detection
+- ✅ Block dice + BB d6 + D16 (CNN); D8/D3 manual entry
+- ✅ D16 needed for injury rolls (not kickoff)
 - ✅ No turn tracking on rig — pure data capture
-- ✅ Camera angle: ~35° forward bank shot from rear-center mount
-- ✅ Production rig direction: utilitarian first, organic v2 later
+- ✅ Camera angle ~35° forward bank shot
+- ✅ Production rig direction: utilitarian for prototype, organic v2 later
+
+### Bench prototype (validation only — not production)
+- ✅ Tray cradle 200×200×5mm with 4 corner posts (15×15×50mm)
+- ✅ Arm foot bridges back two posts of cradle (230 × 40 × 15mm)
+- ✅ Both validated by printing
