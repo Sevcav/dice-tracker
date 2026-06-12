@@ -1,7 +1,18 @@
 # Blood Bowl Dice Tracker — Design Document
 
-**Last updated:** May 13, 2026 (late afternoon)
-**Status:** Production app `dice_tracker.py` validated end-to-end at 86% confirm rate, plus nudge-to-resettle feature working (player nudges misread die → model re-reads at new position, rest of roll preserved). Correction-flow design locked: no keyboard edit flow, prevention via OLED uncertainty markers (next priority) + nudge + reject; emergency-only Undo button; post-game phone review for late corrections. `agnostic_nms=True` is critical to prevent class-aware NMS from keeping cross-class duplicate detections. Rejected reads + tracker_ids/predictions auto-saved to `retrain_candidates/<type>/` for future model improvement. See `BB Dice Tracker Detection Architecture` and `BB Dice Tracker Current State 2026-05-04` in memory for the latest details.
+**Last updated:** June 12, 2026
+**Status:** Full pipeline working end-to-end on the PC bench rig. Combined
+27-class YOLOv11n deployed — **auto dice-type detection** (no manual
+switching; phone/keys remain as override). Settle-race bug fixed
+(COUNT_STABLE_FRAMES — missed-dice rolls 32% → 8%). Startup pre-flights:
+IR-mode self-check + camera-alignment overlay in both `dice_tracker.py`
+and `eval_harness.py`. Real accuracy numbers exist (block per-die ~83-87%;
+pow is the weak class at ~60% recall — fix is the tray-crop retrain).
+SQLite database + phone web app live: dice-type control, live read
+display, post-game corrections (dropdowns), CSV export, and the
+**BB3-style end-of-game dice record** with icons drawn from the actual
+dice. All committed + pushed. See `HANDOFF.md` for the session hand-off
+prompt, and memory entity `BB Dice Tracker Current State 2026-06-12`.
 
 **Retraining policy (locked):** Any retrain (block / d6 / d16) using accumulated rejection frames must still achieve **mAP ≥ ~92%** (block baseline) on the held-out validation set before its ONNX replaces the production model. If retrain regresses below baseline, do not deploy — revert and try a different mix of training data.
 
@@ -445,27 +456,38 @@ will drive the physical OLEDs.
 - Pi clones from this repo
 - ONNX model transferred via SCP (binary, not committed to git)
 
-### Repo layout (post-architecture-pivot)
+### Repo layout (current, 2026-06-12)
 
 ```
 Dice Code/
-├── DESIGN.md                       # This document
+├── DESIGN.md                # This document — single source of truth
+├── HANDOFF.md               # Session hand-off prompt + current priorities
 ├── README.md
-├── SETUP.txt
+├── SETUP.txt                # Original UX intent (settle→confirm) — still canon
 ├── requirements.txt
-├── capture_frames.py               # NEW — saves raw frames for Roboflow
-├── capture_sessions/               # gitignored — captured frames per session
-├── classifier/                     # Will hold the YOLO ONNX model file(s)
-├── detection/                      # Will hold yolo_inference.py (new)
-│   └── camera.py                   # Kept — generic camera abstraction
-├── game/                           # Kept — game state logic
-│   └── state.py
-├── ui/                             # Kept — overlay rendering
-│   └── overlay.py
-├── archive/legacy_rule_based_detector/   # Old rule-based code, recoverable
-│   └── README.md                   # Explains why it was archived
-├── Dice Images/                    # Reference images
-└── Stls/                           # 3D model files for the rig
+├── dice_tracker.py          # PRODUCTION app: YOLO + supervision stack +
+│                            #   settle/confirm UX + DB logging + web thread
+├── eval_harness.py          # Ground-truth per-die accuracy measurement
+├── db.py                    # SQLite layer (games/rolls, face tallies)
+├── webapp.py                # Phone web UI: live control + game record/review
+├── dice_types.py            # Shared face vocabularies / type mapping
+├── align_camera.py          # Standalone camera-alignment overlay
+├── calibrate_tray_roi.py    # (Re)writes tray_roi.json reference corners
+├── capture_frames.py        # Frame capture for labeling sessions
+├── scan_capture.py          # Pre-upload capture QA (Roboflow ingest checks)
+├── tray_roi.json            # Calibrated tray corners (may4 backup alongside)
+├── training/                # Local Ultralytics training (RTX 4080)
+│   ├── train_all.py         #   block / d6 / d16 / combined configs
+│   ├── merge_datasets.py    #   builds the 27-class combined dataset
+│   ├── models/              #   ONNX outputs (gitignored — SCP to Pi)
+│   ├── datasets/, runs/     #   gitignored artifacts
+│   └── live_detect*.py …    #   dev/debug scripts
+├── capture_sessions/        # gitignored — raw frames per session
+├── retrain_candidates/      # gitignored — reject/miss frames + ground truth
+├── eval_sessions/           # gitignored — eval reports
+├── archive/legacy_rule_based_detector/   # old pipeline, recoverable
+├── Dice Images/             # Reference photos of every die face
+└── Stls/                    # Rig CAD files (committed)
 ```
 
 ### Networking
@@ -489,16 +511,22 @@ Dice Code/
 - ✅ All 160 frames manually labeled in Roboflow with 5 block-die classes
 - ⏳ First Roboflow YOLO model training overnight 2026-05-04 → 2026-05-05
 
-### Not yet started
+### Next up (priority order, 2026-06-12)
 
-- ONNX export from Roboflow → drop into `classifier/`
-- `detection/yolo_inference.py` — load ONNX, run on a frame, return labeled boxes
-- New `main.py` — wire YOLO inference + camera + game state + UI + buttons
-- Stability tracker port from archived `detect_dice.py` to the new pipeline
-- D6 capture session + Roboflow labeling + retrain
-- D16 capture session + Roboflow labeling + retrain
-- mDNS broadcast for `dicetracker.local`
-- Wiring + GPIO code for buttons / OLEDs / LEDs
+1. **Live eval of the combined model** per dice type
+   (`python eval_harness.py --type block --model combined`, then d6/d16)
+   — confirms auto mode's real per-die accuracy vs the dedicated models.
+2. **Pow-heavy capture session + tray-crop retrain** — pow recall is ~60%;
+   proven to be a resolution problem (tray-crop re-reads fixed 4 misreads).
+   Build the dataset tray-cropped; fold in `retrain_candidates/` frames
+   (they carry ground truth). ≥92% mAP bar applies.
+3. **Wiring + GPIO code** for buttons / OLEDs / LEDs (luma.oled, SSD1309
+   SPI ×2). OLED rendering = the three-state uncertainty logic already
+   proven on the HUD and phone (yellow / orange-? / gray, threshold 0.85).
+4. **Pi port**: pure onnxruntime inference path (ultralytics needs torch —
+   too heavy for the Pi), mDNS broadcast for `dicetracker.local`, DHCP
+   reservation or hotspot config.
+5. D8/D3 manual entry flow in the web app.
 
 ---
 
