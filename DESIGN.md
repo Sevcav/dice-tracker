@@ -1,7 +1,24 @@
 # Blood Bowl Dice Tracker — Design Document
 
-**Last updated:** May 2, 2026
-**Status:** Production rig CAD in progress
+**Last updated:** May 13, 2026 (late afternoon)
+**Status:** Production app `dice_tracker.py` validated end-to-end at 86% confirm rate, plus nudge-to-resettle feature working (player nudges misread die → model re-reads at new position, rest of roll preserved). Correction-flow design locked: no keyboard edit flow, prevention via OLED uncertainty markers (next priority) + nudge + reject; emergency-only Undo button; post-game phone review for late corrections. `agnostic_nms=True` is critical to prevent class-aware NMS from keeping cross-class duplicate detections. Rejected reads + tracker_ids/predictions auto-saved to `retrain_candidates/<type>/` for future model improvement. See `BB Dice Tracker Detection Architecture` and `BB Dice Tracker Current State 2026-05-04` in memory for the latest details.
+
+**Retraining policy (locked):** Any retrain (block / d6 / d16) using accumulated rejection frames must still achieve **mAP ≥ ~92%** (block baseline) on the held-out validation set before its ONNX replaces the production model. If retrain regresses below baseline, do not deploy — revert and try a different mix of training data.
+
+**Combined model + auto dice-type detection (deployed 2026-06-11):**
+manual dice-type switching proved unworkable in play (players alternate
+block/d6 constantly; a wrong-model read logs confident garbage). Cheap
+discriminators failed offline (confidence-vote 73%, brightness
+inconclusive), so the original single-combined-model plan was revived:
+the three datasets were merged (`training/merge_datasets.py`, 1126
+images, 27 classes) and one YOLOv11n trained locally. Per-type mAP@50 vs
+the separate models: block 92.4% (−3.7, still over the 92% bar), d6
+98.4% (−1.1), d16 87.4% (−1.1). `dice_tracker.py` defaults to **auto
+mode** (`combined.onnx`): dice type is derived from the detected face
+labels per roll; per-type models remain as manual overrides (keys
+B/D/X, phone buttons). Pi cost unchanged — one nano inference per frame.
+
+**Session startup rule (locked 2026-06-11):** **Camera alignment is ALWAYS the first step of any camera session.** Moving the rig moves the camera, and the models only know the calibrated tray perspective in `tray_roi.json`. Both `dice_tracker.py` and `eval_harness.py` enforce this with a built-in startup overlay (match tray edges to the green outline → SPACE); standalone `align_camera.py` does the same for bench work. Never score, capture, or log rolls before alignment is confirmed.
 
 ---
 
@@ -61,6 +78,7 @@ The production rig is a **modular two-tier design** with a removable dice tray.
 | **Camera base plate** | ⏳ To design | Replaces MakerWorld Camera_Base bottom; bolts into lower tier rear detent |
 | **Power bank shelf** | ⏳ To design | External rear shelf for UGREEN power bank |
 | **Camera cradle** | 🔧 Blocked | Need Arducam in hand for pocket sizing |
+| **Photoresistor light shield** | ✅ Printed | Black cover over the B0205 photoresistor forcing IR mode. NOTE: frame analysis 2026-06-11 found the May 13 *morning* session ran in day mode (color cast) while the afternoon ran in IR — verify the shield fully seals against bright-room light |
 | **Bench prototype tray cradle** | ✅ Printed | Standalone test, validated soft-tray support concept |
 | **Bench prototype arm foot** | ✅ Printed | Bridges over cradle back posts; captive nuts; friction-fit |
 | **Camera_Base + Camera_Link** | ✅ Printed | From MakerWorld 627829, will be re-used for production rig |
@@ -138,27 +156,68 @@ The production rig is a **modular two-tier design** with a removable dice tray.
 
 ## 5. Detection Software
 
-### Pipeline
+### Pipeline (current — YOLO architecture)
 
-1. **Mask** — find dice in tray (HSV color or dark-object mask)
-2. **Stability tracker** — wait for dice to settle (no motion)
-3. **Crop** — extract per-die crops
-4. **CLAHE preprocess** — illumination normalization
-5. **CNN classify** — MobileNetV3-Small, exported to ONNX
+1. **Frame capture** — `capture_frames.py` saves raw 1280×720 frames in IR mode
+2. **Stability tracker** — wait for dice to settle (no motion) — to be carried over from old code
+3. **YOLO inference** — single ONNX model produces per-die `(class, x, y, w, h, conf)` boxes
+4. **Player attribution** — handled at the rig (see Player attribution section)
+
+The legacy rule-based pipeline (mask → contours → watershed → CNN classifier)
+has been **archived** under `archive/legacy_rule_based_detector/`.
+See that folder's README.md for why it was abandoned.
 
 ### Dice scope
 
-| Die | Detection | Classes |
-|---|---|---|
-| Block dice (cream) | ✅ CNN | 5 (POW, Push, Both Down, Player Down, Stumble) |
-| BB d6 (black) | ✅ CNN | 6 (1-5, BB Logo) |
-| D16 (cream, trapezohedron) | 🔄 Future CNN | 16 (1-16) — for injury rolls |
-| D8 (scatter) | 📱 Manual entry on phone | — |
-| D3 | 📱 Manual entry on phone | — |
+| Die | Detection | Classes | Status |
+|---|---|---|---|
+| Block dice (cream) | YOLO | 5 (pow, push, both_down, player_down, stumble) | ✅ Labeled, training overnight 5/4 |
+| BB d6 (black) | YOLO | 6 (1-5, bb_logo) | ⏳ After block validates |
+| D16 (cream, trapezohedron) | YOLO | 16 (1-16) | ⏳ After d6 — injury rolls |
+| D8 (scatter) | 📱 Manual entry on phone | — | — |
+| D3 | 📱 Manual entry on phone | — | — |
 
-**Note:** Camera angle changed from overhead to ~35° forward bank shot. The
-existing CNN was trained on overhead images and will need retraining once we
-capture training data from the new angle.
+**Single combined model is preferred** — one YOLO model with all classes vs.
+separate models per die type. Easier deployment, single inference call. We
+will train block-only first to validate the workflow, then expand the same
+model to include d6 then d16.
+
+### Camera angle
+
+Set **empirically** by functional constraints (full tray visible + arm clear
+of rolling area), not to a fixed degree number. As-built geometry comes out
+shallow / near-overhead — top faces dominate each die crop, side faces are
+minimized. The "~35° forward bank shot" figure from earlier docs was an
+estimate that did not match the as-built rig.
+
+### Lighting / IR
+
+Production lighting strategy is **forced IR mode** on the Arducam B0205.
+This eliminates color/white-balance variability across gaming store
+conditions, and IR LED illumination dominates ambient light from windows
+and store fluorescents — making the dice appearance consistent regardless
+of time of day.
+
+The B0205's IR mode is **photoresistor-controlled only** (no software
+toggle available). A 3D-printed light shield over the photoresistor will
+force IR mode on regardless of room brightness — see Section 3 component
+list.
+
+### Roboflow + training workflow
+
+- **Dataset:** Roboflow Public/Free workspace `bbdicetracker`
+- **Project:** "My First Project" (Object Detection, public)
+- **Capture script:** `capture_frames.py` saves 1280×720 frames to
+  `capture_sessions/<timestamp>/`
+- **Labeling:** Roboflow web UI, manual bounding boxes per die
+- **Preprocessing:** Auto-Orient, Resize 640×640
+- **Augmentation:** Horizontal flip, ±15° rotation, ±20% brightness,
+  ≤1px blur, ≤1% noise
+- **Train/val/test split:** 70/20/10 (112/32/16 of the 160 frames)
+- **Model:** Roboflow 3.0 Object Detection (Fast variant)
+- **Checkpoint:** Fine-tune from MS COCO
+- **Deployment:** ONNX export → `classifier/` folder → ONNX Runtime on Pi
+  (already validated)
 
 ### Player attribution
 
@@ -167,19 +226,162 @@ capture training data from the new angle.
 - No turn tracking on rig — that lives in the web app
 - Phone web app selects dice type (Block / D6 / D16) before each roll
 
-### Database schema (planned)
+### Correction flow (LOCKED 2026-05-13)
+
+The rig has **4 buttons total**. There is **no keyboard, no number-pad,
+no menu navigation** during play. Players will abandon any correction
+tool that takes more than a button press. This drives a hard design
+principle: **prevention over correction**.
+
+**Pre-confirm correction tools (real-time, frequent use):**
+
+1. **Nudge to re-read** — player physically nudges a misread die.
+   `dice_tracker.py` detects per-die motion of more than
+   `NUDGE_PIXEL_THRESHOLD = 20px` between consecutive frames and
+   automatically releases the settle lock back to "watching" so the
+   model re-evaluates. The rest of the roll is preserved; only the
+   nudged die gets re-read. Built and validated.
+2. **OLED uncertainty markers** *(planned)* — low-confidence labels
+   shown with a `?` so the player's attention is drawn to questionable
+   dice. High-confidence labels show clean. The OLED's role is to
+   make wrong-reads obvious BEFORE the player confirms.
+3. **Reject button** — explicit "this read is wrong" before confirm.
+   Saves the frame to `retrain_candidates/<type>/` for future model
+   improvement.
+
+**Post-confirm correction tools (emergency, rare use):**
+
+4. **Undo button** — removes the LAST logged roll. Player must catch
+   the mistake immediately (within ~1 roll). If they realize N rolls
+   later, Undo would lose the rolls in between.
+5. **Phone web app post-game session review** *(planned, post-MVP)* —
+   the phone app's session export/review screen will allow editing
+   historical mis-logged rolls. This is the only path for corrections
+   discovered late. It is explicitly NOT a real-time tool — it's run
+   after the game when speed doesn't matter.
+
+**What we deliberately did NOT build:**
+
+- No keyboard-driven edit flow (`E` to enter manual values for last
+  roll) — violates the 4-button constraint and the "no menus" rule.
+- No mid-game phone-based correction — adds a context switch that
+  slows play; players abandon the tool.
+- No "undo by roll number" — too complex for buttons; ambiguous which
+  intermediate rolls to preserve.
+
+The cost of this constraint: occasional wrong rolls slip into the log
+and aren't caught until later. That is acceptable as long as the
+model + OLED-warning + nudge UX keeps the slip rate low. If real-world
+play shows the slip rate is too high, the fix is more training data
+(retrain to a higher mAP) or richer OLED warning — NOT a richer
+correction UI on the rig.
+
+### Accuracy evaluation (added 2026-06-11)
+
+`eval_harness.py` measures **real per-die accuracy** against keyed-in ground
+truth, using the exact production detection stack from `dice_tracker.py`.
+Per roll: settle → console prints the read (dice numbered left→right,
+matching `[n]` overlays in the window) → user types truth (ENTER = correct)
+→ clear tray → repeat; `q` prints + saves the report
+(`eval_sessions/eval_<type>_<ts>.json/.csv`). Misread frames are saved to
+`retrain_candidates/<type>/eval_miss_*.jpg/.json` **with ground truth
+attached**, ready for relabeling. The report includes per-die accuracy with
+a 95% Wilson CI, roll-level accuracy, per-class recall, confusion pairs,
+detection-count errors, and how many rolls were captured in day mode.
+
+Target: ≥50 rolls per dice type (~±3-4% CI at 3 dice/roll). The previous
+"86% confirm rate" was 6/7 rolls — 95% CI of 49-97%, not a usable number.
+
+**First block eval (2026-06-11, 50 rolls, 144 dice, all IR):**
+
+- Per-die accuracy 86/96 = **89.6%** (95% CI 81.9–94.2%) on count-correct
+  rolls; roll-level 79.4%.
+- **Dominant failure: missed dice** — 16/50 rolls lost dice (23 dice never
+  read). ROOT CAUSE FOUND: a settle-logic race, not model blindness —
+  14/16 saved miss-frames had ALL dice detectable at standard settings on
+  the very frame that settled. A detection flickering in/out at the conf
+  threshold let the roll settle during an "out" frame. **Fixed** by
+  requiring the detection count to hold constant for
+  `COUNT_STABLE_FRAMES = 10` consecutive frames before settle (restores
+  the count-stability requirement the legacy DiceStabilityTracker had).
+  Needs re-eval to confirm.
+- Weakest class: **pow, 64% recall** (7/11), confused with stumble ×3.
+  More pow training data wanted at next retrain.
+- **Confidence threshold 0.85 validated for OLED `?` markers**: 8/10
+  wrong reads fell below 0.85; only 18/86 correct reads did.
+- The 2 miss-frames not recovered at conf 0.40 full-frame WERE recovered
+  by a tray-ROI crop — keep tray-crop inference in the back pocket as an
+  accuracy lever.
+
+**Re-eval after settle fix (2026-06-11, 25 rolls, 75 dice):**
+
+- **Count errors collapsed: 16/50 → 2/25** (32% → 8%). Settle-race fix
+  validated.
+- Per-die accuracy 57/69 = 82.6% (CI 72.0–89.8%) — *lower* than session 1
+  because the hard flickery dice that previously vanished as count errors
+  now stay in the read and get scored. This is the honest number.
+  Combined across both sessions: 143/165 = 86.7%.
+- **pow recall 57%** (8/14); combined 15/25 = 60%. pow confusions go both
+  directions (read as both_down ×3, stumble ×2). Every other class is
+  86–97%.
+- **Misread-frame experiment:** re-reading the same frames full-frame fixed
+  0/10 (errors are systematic, not flicker). Tray-crop re-read flipped pow
+  to CORRECT in 4 rolls — pow is distinguishable at 2× resolution — but
+  broke other dice because the model wasn't trained on crops.
+- **Conclusion / retrain plan:** the pow fix is RESOLUTION, i.e. retrain
+  on tray-cropped data and run inference on crops. Next capture session:
+  pow-heavy + wall/corner positions; build the dataset tray-cropped
+  (training is local now, we control preprocessing); fold in the banked
+  `retrain_candidates/block/` frames with ground truth. ≥92% mAP bar
+  applies. Until then the current model stays in production — the 0.85
+  OLED `?` threshold catches ~80% of its wrong reads.
+
+Both `dice_tracker.py` and `eval_harness.py` now run two startup
+pre-flights, in order:
+
+1. **IR-mode self-check** — refuse-to-start prompt in day mode;
+   `dice_tracker.py` also re-checks every ~3s during play with a red HUD
+   warning if the camera flips to day mode mid-session.
+2. **Camera alignment check** — overlays the saved tray-corner reference
+   (`tray_roi.json`) on the live feed; adjust the camera arm until the
+   tray matches the green outline, SPACE to continue. The rig moves
+   between sessions and the model only knows the calibrated perspective,
+   so this always runs first (standalone `align_camera.py` still exists
+   for bench work).
+
+### Database + web app (IMPLEMENTED 2026-06-11)
+
+**`db.py`** — SQLite (`dice_tracker.db`, gitignored), short-lived
+connections (safe across tracker + Flask threads):
 
 ```
-rolls table:
-  id              auto-increment
-  game_id         FK
-  player          P1 or P2
-  dice_type       "block" | "d6" | "d16" | "d8" | "d3"
-  dice_results    JSON list e.g. ["POW", "Push", "POW"]
-  timestamp       unix epoch
-  rejected        bool (if REJECT was pressed before confirm)
-  raw_image_path  optional, for review
+games:  id, started_at, ended_at, player1_name, player2_name, notes
+rolls:  id, game_id FK, roll_no, timestamp, player (P1|P2), dice_type,
+        results JSON, confidences JSON, rejected, edited, raw_image_path
 ```
+
+`dice_tracker.py` creates the game row lazily on the first logged roll,
+inserts on confirm AND reject (rejected=1), deletes on undo, closes the
+game on quit. `face_tallies()` produces THE end-of-game record:
+per-player, per-dice-type face counts over confirmed rolls.
+
+**`webapp.py`** — Flask phone UI, mobile-first, single file:
+
+- **Live control** (`/`): dice-type buttons (Block/D6/D16) and active
+  player buttons; requests flow to the tracker loop through a
+  thread-safe `WebControl` mailbox; 1s status poll (state, last roll,
+  roll count, day-mode warning).
+- **Game review** (`/games`, `/games/<id>`): roll log with confidences +
+  reject/edit flags, the face-tally record, per-roll edit (flagged
+  `edited` — this is the post-game correction path from the locked
+  correction flow), delete, CSV export.
+- Started automatically in a daemon thread by `dice_tracker.py` on port
+  5000 (`--no-web` disables). Standalone review mode: `python webapp.py`.
+
+**HUD uncertainty markers (OLED precursor, threshold 0.85 from eval
+data):** stable+confident = yellow; stable but conf < 0.85 = ORANGE with
+`?` and a NUDGE hint; still settling = gray. The same three-state logic
+will drive the physical OLEDs.
 
 ---
 
@@ -205,8 +407,26 @@ rolls table:
 - WMYCONGCONG arcade buttons (verified: thread Ø26.25mm, dial Ø33mm, body length 62mm — using Ø27.78mm holes for print clearance)
 - 5mm pre-wired LEDs in 7.5mm snap-in bezels (using Ø8mm holes)
 - UGREEN Power Bank (160.5 × 81 × 26.5mm)
-- Pre-crimped JST pigtails
+- Pre-crimped JST pigtails (5 red, 5 black, ~500mm, pins both ends)
 - M4 brass heat-set inserts (production future use, not yet needed)
+
+### Wiring notes
+
+- **OLEDs (SSD1309, SPI, 7-pin):** All 7 pins used. Two OLEDs share CLK/MOSI/DC/RES/VCC/GND; differentiated by CE0 (GPIO 8) and CE1 (GPIO 7). Requires ~20 female-to-female dupont jumper wires — **not yet on hand**.
+- **LEDs:** Pre-wired with resistor inline under heatshrink on red lead. Connect red → GPIO, black → GND directly. No additional resistors needed.
+- **Arcade button switches:** PCB-mount microswitch (pin legs, not spade). Use COM + NO only (ignore NC). Solder wires direct to pins or friction-fit female dupont. 2 wires per button × 4 buttons = 8 connections.
+- **GPIO allocation:** OLEDs ×2 = 6 pins; Buttons ×4 = 4 pins; LEDs ×4 = 4 pins. Total = 14 of 28 available GPIOs.
+- **Library:** luma.oled (pip install luma.oled) — native SSD1309 SPI support.
+
+### Captive nut pocket dimensions (PETG, 0.28mm gap)
+
+| Nut | Circumscribed dia (Fusion polygon) | Flat-to-flat | Depth |
+|---|---|---|---|
+| M4 | 8.32mm | 7.56mm | 3.4mm |
+| M5 | 9.80mm | 8.56mm | 4.1mm |
+
+- Camera arm friction joints use M5×25mm SHCS + M5 nyloc nuts (M5×20 button heads too short — 5mm deficit at 16.5mm joint span)
+- M5 bolt clearance hole: 5.7mm
 
 ---
 
@@ -215,15 +435,38 @@ rolls table:
 ### Pi-side stack (validated working)
 
 - Python 3.13.5
-- OpenCV 4.10.0
-- ONNX Runtime 1.25.0
+- OpenCV 4.13.0
+- ONNX Runtime 1.25.1
 - Flask 3.1.1
 
 ### Code repo
 
 - GitHub: github.com/Sevcav/dice-tracker
 - Pi clones from this repo
-- ONNX model + labels.json transferred via SCP (binary, not committed to git)
+- ONNX model transferred via SCP (binary, not committed to git)
+
+### Repo layout (post-architecture-pivot)
+
+```
+Dice Code/
+├── DESIGN.md                       # This document
+├── README.md
+├── SETUP.txt
+├── requirements.txt
+├── capture_frames.py               # NEW — saves raw frames for Roboflow
+├── capture_sessions/               # gitignored — captured frames per session
+├── classifier/                     # Will hold the YOLO ONNX model file(s)
+├── detection/                      # Will hold yolo_inference.py (new)
+│   └── camera.py                   # Kept — generic camera abstraction
+├── game/                           # Kept — game state logic
+│   └── state.py
+├── ui/                             # Kept — overlay rendering
+│   └── overlay.py
+├── archive/legacy_rule_based_detector/   # Old rule-based code, recoverable
+│   └── README.md                   # Explains why it was archived
+├── Dice Images/                    # Reference images
+└── Stls/                           # 3D model files for the rig
+```
 
 ### Networking
 
@@ -234,22 +477,26 @@ rolls table:
 - Pi default IP on iPhone hotspot: 172.20.10.x (Apple subnet)
 - Pi default IP on home network: 192.168.68.88 (DHCP, may shift)
 
-### Tested
+### Tested / validated
 
 - ✅ Pi 4 boots, SSH works
-- ✅ All Python libraries import cleanly
-- ✅ ONNX classifier loads with all 11 classes
-- ✅ USB camera capture (test cam, just for proof)
-- ✅ iPhone hotspot connection saved
-- ✅ Home WiFi connection saved
+- ✅ All Python libraries import cleanly on the 64GB card
+- ✅ USB Arducam captures at 1920×1080 on the PC
+- ✅ Arducam IR mode engages when photoresistor is darkened
+- ✅ iPhone hotspot connection saved (`iphone-hotspot`)
+- ✅ Home WiFi connection saved (`home-knickerbocker`, SSID has trailing space)
+- ✅ 160 frames captured of block dice in IR mode (`capture_sessions/2026-05-04_201259/`)
+- ✅ All 160 frames manually labeled in Roboflow with 5 block-die classes
+- ⏳ First Roboflow YOLO model training overnight 2026-05-04 → 2026-05-05
 
 ### Not yet started
 
-- Flask web UI scaffold
-- Database schema implementation
-- D16 training data capture
-- D16 CNN training
-- Retraining CNN on new ~35° camera angle
+- ONNX export from Roboflow → drop into `classifier/`
+- `detection/yolo_inference.py` — load ONNX, run on a frame, return labeled boxes
+- New `main.py` — wire YOLO inference + camera + game state + UI + buttons
+- Stability tracker port from archived `detect_dice.py` to the new pipeline
+- D6 capture session + Roboflow labeling + retrain
+- D16 capture session + Roboflow labeling + retrain
 - mDNS broadcast for `dicetracker.local`
 - Wiring + GPIO code for buttons / OLEDs / LEDs
 
@@ -259,8 +506,8 @@ rolls table:
 
 | Topic | Status |
 |---|---|
-| Lighting strategy | IR camera handles dark; lamps optional; lamps ordered for testing |
-| Camera angle | ~35° forward bank shot from rear-center — confirmed |
+| Lighting strategy | B0205 IR mode is photoresistor-only (no software control) — Bambu lamps will be the consistent-illumination strategy |
+| Camera angle | Set empirically to satisfy "full tray visible + arm clear of rolling area" — near-overhead shallow angle in as-built rig |
 | D16 detection | Deferred until block + d6 working end-to-end |
 | OLED retention method | Friction / hot glue / M2 screws — TBD when OLEDs in hand |
 | Phone web UI scaffold | Not started |
@@ -305,6 +552,44 @@ rolls table:
   walls for outside pocket, but moving to inside-mounting kept walls at 4mm.
 - **OLED through-window goes glass-only** — header strip stays inside the
   box, only the glass + active display protrudes through the window cut.
+- **Arcade button switches are PCB-mount** — pin legs not spade tabs. Solder direct to COM + NO. NC unused.
+- **LEDs have inline resistor** under heatshrink on red lead — no external resistors needed.
+- **Female-to-female dupont jumpers still needed** for OLED wiring — pre-crimped JST pigtails are wrong connector type for OLED pin strip.
+- **M5 captive nut pocket** — circumscribed 9.80mm, flat-to-flat 8.56mm, depth 4.1mm at 0.28mm gap. Confirmed by test print.
+- **Camera arm requires M5×25mm** — M5×20mm button heads are 3.3mm too short for the 16.5mm friction joint. Use M5×25 SHCS instead.
+- **B0205 (Arducam UC-A53) IR is photoresistor-controlled only** — no software/UVC control of the IR LEDs or IR-cut filter. The 6 IR LEDs only activate in genuinely dark ambient conditions. Software-controlled IR is **not possible** on this unit. Bambu LED lamps + day-mode is the lighting strategy instead.
+- **B0205 spec lists 1m minimum focus** — but the lens is in fact adjustable to focus at ~12 inches once the locking ring is loosened. Confirmed empirically by getting a sharp image at the actual rig working distance.
+- **B0205 lens locking ring is partially obstructed by the IR LED ring** — adjustment is possible but tight. Do NOT force it. Loosen with care; replacement lens would require desoldering LEDs.
+- **Camera angle is empirical, not a target** — earlier "~35°" figure was wrong for the as-built rig. The functional constraints (full tray + arm clear of rolling area) drive the angle, and what comes out is shallow / near-overhead. Always measure as-built rather than declaring a degree number.
+- **Wide-angle lens has heavy barrel distortion + edge softness** — center is sharp, edges warped. Acceptable for CNN training because per-die crops are small relative to the distortion field, but training data must include dice in many tray positions so the CNN sees the full distortion range.
+- **35° camera angle would have made side faces visible enough to confuse the CNN** — at the actual shallow angle, top faces dominate each die crop. This was a lucky outcome of letting functional constraints drive the angle instead of picking a number.
+- **Rule-based detector failed in IR mode** — `find_tray_roi` required a saturated red tray; `_mask_dice` had a polarity bug that flooded the combined mask with white. Tuning thresholds for a new lighting/camera/distance was a losing fight. Pivoted to a YOLO object detector trained via Roboflow. Old code is in `archive/legacy_rule_based_detector/`, recoverable.
+- **YOLO replaces both detection AND classification** — one model outputs labeled bounding boxes per die in a single inference. The previous architecture (rule-based detector → per-die crop → MobileNetV3 classifier) is gone. Simpler runtime, less code, more robust.
+- **Tray ROI calibration is still useful but not strictly required** — `calibrate_tray_roi.py` writes a JSON file with the 4 tray corners. YOLO can search the full frame, but cropping to the tray region speeds inference and reduces false positives outside the tray. Currently archived; may be revived later as an inference-time optimization.
+- **Roboflow Public/Free workspace is fine for this project** — $60/mo credits, 250k image cap, free fine-tuning of small YOLO variants, free ONNX export. Public Universe sharing is acceptable since the data is dice on a felt tray. **Frames are uploaded full-frame** (background workspace visible at edges); for any future privacy concern, crop to tray ROI before upload.
+- **Always check class count BEFORE clicking "Create Version"** — a single typo class (`Pow` vs `pow`, etc.) splits training data across two labels and silently degrades model accuracy. Caught one such typo in the first labeling session via the "Source Images: Classes: 6" mismatch on the Versions wizard.
+- **Roboflow defaults are not optimal** — first wizard suggested 100% train / 0% valid / 0% test (no overfitting check), and 512×512 resize (YOLOv8 native is 640×640). Always edit the train/test split and the resize step before clicking Create.
+- **Manual labeling 160 frames in one session is feasible** — took the user one sitting. SAM auto-labeling was *not* used because it labels generic objects without class semantics; manual labeling was actually faster end-to-end given that you'd have to re-confirm every box anyway.
+- **Single combined YOLO model > separate models per dice type** — block / d6 / d16 will all share one model with combined classes (5 + 6 + 16 = 27 classes when fully expanded). Easier deployment (one ONNX file), single inference call, retrains include all dice types together.
+- **IR mode must be VERIFIED, not assumed, even with the light shield printed.**
+  Frame analysis (2026-06-11) of the May 13 reject frames: the morning frames
+  were day-mode (warm color cast), the afternoon frame matched the IR
+  training frames. The camera silently flipped lighting regimes mid-day.
+  The models were trained on IR frames only — day-mode frames are
+  out-of-distribution and degrade accuracy. Now guarded by a self-check in
+  `dice_tracker.py` + `eval_harness.py` (see below).
+- **IR check calibration (measured in-tray, 2026-06-11):** mean of |R−G|,
+  |G−B|, |R−B| inside the tray ROI: true IR = 4.0-5.2 (chroma noise on the
+  tray's high-contrast graphics), day mode = ~10.8-11. Threshold 8.0.
+  Measure INSIDE the tray (via `tray_roi.json`, scaled to capture
+  resolution) — ambient lamp spill on the floor inflates the global-frame
+  number (an IR frame measured 5.4 global with a lamp on, and 25 during the
+  transitional state right after plug-in). Auto-exposure takes ~2s to
+  settle after camera open and reads high during settling — warm up 2s and
+  take the median of 5 probes before judging.
+- **The B0205 takes a few seconds to drop into IR mode after plug-in** —
+  the first frames out of a freshly connected camera can be full day-mode
+  color even in a dim room. Never judge lighting from the first frame.
 
 ---
 
@@ -321,11 +606,15 @@ rolls table:
 - ✅ Power bank external on rear shelf
 
 ### Detection
-- ✅ Block dice + BB d6 + D16 (CNN); D8/D3 manual entry
+- ✅ Block dice + BB d6 + D16 (single combined YOLO model); D8/D3 manual entry
 - ✅ D16 needed for injury rolls (not kickoff)
 - ✅ No turn tracking on rig — pure data capture
-- ✅ Camera angle ~35° forward bank shot
+- ✅ Camera angle: set empirically by functional constraints (full tray visible, arm clear of rolling area) — not a fixed degree target
 - ✅ Production rig direction: utilitarian for prototype, organic v2 later
+- ✅ **Architecture: YOLO object detector via Roboflow** (replaces former rule-based detector + MobileNetV3 classifier). Trained on labeled IR-mode frames; ONNX-deployed on Pi.
+- ✅ Lighting strategy: forced IR mode (photoresistor light shield). No software toggle on B0205, so a 3D-printed shield permanently darkens the photoresistor.
+- ✅ Capture/labeling workflow: `capture_frames.py` → upload to Roboflow → manual bounding boxes → ONNX export → SCP to Pi.
+- ✅ Train block first, then expand same model to d6, then d16.
 
 ### Bench prototype (validation only — not production)
 - ✅ Tray cradle 200×200×5mm with 4 corner posts (15×15×50mm)

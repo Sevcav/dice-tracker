@@ -1,4 +1,4 @@
-# Debug and test images
+# Images (debug shots, snapshots, captures) — never committed
 *.jpg
 *.jpeg
 *.png
@@ -15,20 +15,34 @@ __pycache__/
 venv/
 env/
 
-# Session data
+# Claude Code local state
+.claude/
+
+# Session / game data (local records, not source)
 session.csv
 session.json
 session_report.txt
 test_report.txt
+dice_tracker.db
+eval_sessions/
+retrain_candidates/
+align_snapshots/
 
-# Training data (large, keep local)
+# Captured frames and training artifacts (large; models go to Pi via SCP)
+capture_sessions/
 training_data/
 live_samples/
+training/datasets/
+training/runs/
+training/models/
+training/recordings/
+training/live_snapshots/
+training/sanity_check/
 
-# Classifier model (will transfer separately)
-classifier/*.onnx
-classifier/*.pt
-classifier/*.pth
+# Model binaries (pretrained checkpoints auto-download; ONNX via SCP)
+*.pt
+*.pth
+*.onnx
 
 # Misc
 *.log

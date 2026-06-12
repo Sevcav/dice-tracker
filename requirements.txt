@@ -1,7 +1,16 @@
+# Blood Bowl Dice Tracker — runtime dependencies
+# (PC development; the Raspberry Pi deployment will need a pure
+#  onnxruntime inference path — ultralytics pulls in torch, which is the
+#  known Pi constraint. See DESIGN.md "Not yet started".)
 opencv-python>=4.8.0
 numpy>=1.24.0
-torch>=2.0.0
-torchvision>=0.15.0
-easyocr>=1.7.0
+ultralytics>=8.4.0
+supervision>=0.28.0,<0.30.0   # ByteTrack API removed in 0.30 — migrate before upgrading
+onnxruntime>=1.25.0
+flask>=3.1.0
 Pillow>=10.0.0
-scipy>=1.11.0
+PyYAML>=6.0
+
+# Training only (Windows PC, NVIDIA GPU) — install separately:
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu124
+#   pip install onnxruntime-gpu
