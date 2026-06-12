@@ -27,6 +27,8 @@ Phone access: http://<pi-or-pc-ip>:5000/  (same WiFi / hotspot).
 import csv
 import io
 import json
+import math
+import socket
 import threading
 import time
 
@@ -105,6 +107,26 @@ _BASE = """
   .tally { display: inline-block; background: #222; border: 1px solid #444;
            border-radius: 8px; padding: 8px 12px; margin: 4px; }
   .tally b { font-size: 1.2rem; }
+  .pbanner { padding: 8px 14px; border-radius: 8px; font-weight: 800;
+           text-transform: uppercase; letter-spacing: 0.5px;
+           margin: 18px 0 8px; }
+  .pbanner.p1 { background: #ffd60a; color: #111; }
+  .pbanner.p2 { background: #48cae4; color: #111; }
+  .facerow { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 10px 0;
+           align-items: flex-start; }
+  .face { display: inline-flex; flex-direction: column;
+           align-items: center; min-width: 44px; }
+  .face b { font-size: 1.05rem; margin-top: 3px; }
+  .facelabel { font-size: 0.66rem; color: #9a9a9a; margin-top: 1px;
+           white-space: nowrap; }
+  .face.dim { opacity: 0.4; }
+  .facedie { width: 34px; height: 34px; border-radius: 7px;
+           display: inline-flex; align-items: center; justify-content: center;
+           font-size: 19px; color: #111;
+           box-shadow: 0 1px 3px rgba(0,0,0,0.6); }
+  .facedie.bg-cream { background: #ece1bd; }
+  .facedie.bg-black { background: #1b1b1b; }
+  .d16num { font-weight: 800; font-size: 15px; }
   .rollcard { background: #1a1a1a; border: 1px solid #333;
            border-radius: 10px; padding: 10px 12px; margin: 8px 0; }
   .rollcard .head { font-size: 0.85rem; color: #aaa; }
@@ -132,6 +154,157 @@ _BASE = """
 
 def _page(body: str, script: str = "") -> str:
     return render_template_string(_BASE, body=body, script=script)
+
+
+# ── End-of-game record rendering (styled after the BB3 dice report, with
+#    face icons drawn to match the user's ACTUAL 2025 starter-box dice:
+#    cream block dice with spiked-ring symbols, black d6 with white pips,
+#    cream numbered d16. Reference photos in "Dice Images/". ─────────────────
+_D6_ORDER    = ["1pip", "2pip", "3pip", "4pip", "5pip", "6BB"]
+_BLOCK_ORDER = ["push", "both_down", "stumble", "pow", "player_down"]
+_INK   = "#151515"
+_CREAM = "#f1e8cf"
+_PIPS = {
+    1: [(18, 18)],
+    2: [(10, 10), (26, 26)],
+    3: [(10, 10), (18, 18), (26, 26)],
+    4: [(10, 10), (26, 10), (10, 26), (26, 26)],
+    5: [(10, 10), (26, 10), (18, 18), (10, 26), (26, 26)],
+}
+
+
+def _spiked_ring(filled: bool, cx=18.0, cy=18.0, r=12.0,
+                 spikes=10, spike_len=3.2) -> str:
+    """The chaos-spike ring common to every block die face."""
+    parts = []
+    for i in range(spikes):
+        a = 2 * math.pi * i / spikes
+        tx, ty = cx + (r + spike_len) * math.cos(a), \
+                 cy + (r + spike_len) * math.sin(a)
+        b1x, b1y = cx + r * math.cos(a - 0.14), cy + r * math.sin(a - 0.14)
+        b2x, b2y = cx + r * math.cos(a + 0.14), cy + r * math.sin(a + 0.14)
+        parts.append(f'<polygon points="{b1x:.1f},{b1y:.1f} {tx:.1f},{ty:.1f}'
+                     f' {b2x:.1f},{b2y:.1f}" fill="{_INK}"/>')
+    if filled:
+        parts.append(f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="{_INK}"/>')
+    else:
+        parts.append(f'<circle cx="{cx}" cy="{cy}" r="{r - 1.3}" fill="none" '
+                     f'stroke="{_INK}" stroke-width="2.6"/>')
+    return "".join(parts)
+
+
+def _burst(cx, cy, r_out, r_in, n, fill, rot=0.0) -> str:
+    """Comic-style explosion starburst."""
+    pts = []
+    for i in range(2 * n):
+        rr = r_out if i % 2 == 0 else r_in
+        a = math.pi * i / n + rot
+        pts.append(f"{cx + rr * math.cos(a):.1f},{cy + rr * math.sin(a):.1f}")
+    return f'<polygon points="{" ".join(pts)}" fill="{fill}"/>'
+
+
+def _skull(cx, cy, s, outline=False) -> str:
+    st = f' stroke="{_INK}" stroke-width="{1.2 * s:.1f}"' if outline else ""
+    return (
+        f'<ellipse cx="{cx}" cy="{cy - 1.2 * s:.1f}" rx="{6.2 * s:.1f}" '
+        f'ry="{5.8 * s:.1f}" fill="{_CREAM}"{st}/>'
+        f'<rect x="{cx - 3.4 * s:.1f}" y="{cy + 3.0 * s:.1f}" '
+        f'width="{6.8 * s:.1f}" height="{3.6 * s:.1f}" rx="{1.4 * s:.1f}" '
+        f'fill="{_CREAM}"{st}/>'
+        f'<circle cx="{cx - 2.4 * s:.1f}" cy="{cy - 1.4 * s:.1f}" '
+        f'r="{1.7 * s:.1f}" fill="{_INK}"/>'
+        f'<circle cx="{cx + 2.4 * s:.1f}" cy="{cy - 1.4 * s:.1f}" '
+        f'r="{1.7 * s:.1f}" fill="{_INK}"/>'
+        f'<polygon points="{cx:.1f},{cy + 0.8 * s:.1f} '
+        f'{cx - 1.0 * s:.1f},{cy + 2.6 * s:.1f} '
+        f'{cx + 1.0 * s:.1f},{cy + 2.6 * s:.1f}" fill="{_INK}"/>'
+    )
+
+
+def _block_face_svg(face: str) -> str:
+    if face == "pow":
+        body = (_spiked_ring(True)
+                + _burst(18, 18, 9.6, 4.0, 11, _CREAM)
+                + _burst(18, 18, 5.4, 2.2, 11, _INK)
+                + _burst(18, 18, 3.2, 1.4, 11, _CREAM))
+    elif face == "push":
+        body = (_spiked_ring(True)
+                + f'<polygon points="24.9,10.8 15.6,13.0 22.6,20.0" '
+                  f'fill="{_CREAM}"/>'
+                + f'<polygon points="10.9,22.7 13.3,25.1 20.4,18.0 '
+                  f'18.0,15.6" fill="{_CREAM}"/>')
+    elif face == "both_down":
+        body = (_spiked_ring(True)
+                + _burst(23.2, 13.2, 5.6, 2.4, 9, _CREAM)
+                + _skull(14.6, 19.8, 0.78))
+    elif face == "player_down":
+        body = _spiked_ring(False) + _skull(18, 17.8, 1.05, outline=True)
+    else:  # stumble — exclamation mark with burst wings
+        body = (_spiked_ring(True)
+                + _burst(11.3, 16.5, 3.8, 1.7, 8, _CREAM)
+                + _burst(24.7, 16.5, 3.8, 1.7, 8, _CREAM)
+                + f'<polygon points="16.6,9.5 19.4,9.5 18.6,19.5 17.4,19.5" '
+                  f'fill="{_CREAM}"/>'
+                + f'<circle cx="18" cy="23.6" r="1.9" fill="{_CREAM}"/>')
+    return f'<svg viewBox="0 0 36 36" width="28" height="28">{body}</svg>'
+
+
+def _d6_face_svg(face: str) -> str:
+    """User's BB d6: black die, white pips; the 6 is the BB logo."""
+    if face == "6BB":
+        inner = ('<text x="18" y="23" font-size="13" font-weight="800" '
+                 'font-style="italic" text-anchor="middle" fill="#fff" '
+                 'font-family="sans-serif">BB</text>')
+    else:
+        n = int(face[0])
+        inner = "".join(f'<circle cx="{x}" cy="{y}" r="4" fill="#fff"/>'
+                        for x, y in _PIPS[n])
+    return f'<svg viewBox="0 0 36 36" width="26" height="26">{inner}</svg>'
+
+
+_FACE_LABEL = {"push": "Push", "both_down": "Both Down",
+               "stumble": "Stumble", "pow": "POW!",
+               "player_down": "Player Down",
+               "1pip": "1", "2pip": "2", "3pip": "3",
+               "4pip": "4", "5pip": "5", "6BB": "6 (BB)"}
+
+
+def _face_chip(inner: str, count: int, title: str,
+               bg: str = "bg-cream") -> str:
+    dim = ' dim' if count == 0 else ''
+    label = _FACE_LABEL.get(title, "")
+    label_html = (f'<span class="facelabel">{label}</span>' if label else "")
+    return (f'<span class="face{dim}" title="{title}">'
+            f'<span class="facedie {bg}">{inner}</span>'
+            f'<b>{count}</b>{label_html}</span>')
+
+
+def _player_record_html(tally: dict) -> str:
+    """One player's dice record: d6 row, block row, d16 row (if rolled)."""
+    d6 = tally.get("d6", {})
+    block = tally.get("block", {})
+    d16 = tally.get("d16", {})
+
+    rows = '<div class="facerow">' + "".join(
+        _face_chip(_d6_face_svg(face), d6.get(face, 0), face, "bg-black")
+        for face in _D6_ORDER) + "</div>"
+    rows += '<div class="facerow">' + "".join(
+        _face_chip(_block_face_svg(face), block.get(face, 0), face)
+        for face in _BLOCK_ORDER) + "</div>"
+    rows += '<div class="facerow">' + "".join(
+        _face_chip(f'<span class="d16num">{n}</span>',
+                   d16.get(f"D16_{n}", 0), f"D16_{n}")
+        for n in range(1, 17)) + "</div>"
+    # anything outside the known vocabularies (manual entries etc.)
+    known = set(_D6_ORDER) | set(_BLOCK_ORDER) | {f"D16_{n}"
+                                                  for n in range(1, 17)}
+    extras = [(t, f, c) for t, faces in tally.items()
+              for f, c in faces.items() if f not in known]
+    if extras:
+        rows += ('<p class="muted">other: '
+                 + ", ".join(f"{t}/{f}: {c}" for t, f, c in extras)
+                 + "</p>")
+    return rows
 
 
 def _fix_fields(roll: dict) -> str:
@@ -329,20 +502,16 @@ setInterval(poll, 700); poll();
         tallies = db.face_tallies(game_id)
         names = {"P1": g["player1_name"], "P2": g["player2_name"]}
 
-        # The end-of-game record: per-player face tallies
+        # The end-of-game record: per-player face tallies, styled after
+        # the BB3 dice report (banner + icon-per-face counts).
         tally_html = ""
-        for player in ("P1", "P2"):
-            tally_html += f"<h2>{names[player]} ({player})</h2>"
+        for player, css in (("P1", "p1"), ("P2", "p2")):
+            tally_html += (f'<div class="pbanner {css}">'
+                           f'{names[player]}</div>')
             if not tallies[player]:
                 tally_html += '<p class="muted">No confirmed rolls.</p>'
-            for dice_type, faces in sorted(tallies[player].items()):
-                total = sum(faces.values())
-                chips = "".join(
-                    f'<span class="tally">{face}<br><b>{n}</b></span>'
-                    for face, n in sorted(faces.items(),
-                                          key=lambda kv: -kv[1]))
-                tally_html += (f"<p>{dice_type} — {total} dice</p>"
-                               f"<div>{chips}</div>")
+            else:
+                tally_html += _player_record_html(tallies[player])
 
         roll_cards = ""
         for r in reversed(rolls):       # newest first on the phone
@@ -452,6 +621,40 @@ setInterval(checkNew, 2500);
     return app
 
 
+def lan_ip() -> str:
+    """Best-guess LAN address of this machine (DHCP moves it around — print
+    the real URL rather than a placeholder). Prefers home-LAN ranges and
+    skips VPN/CGNAT (100.64-127.*) and link-local addresses, because the
+    default route may go through a VPN tunnel the phone can't reach."""
+    ips: list[str] = []
+    try:
+        ips.extend(socket.gethostbyname_ex(socket.gethostname())[2])
+    except OSError:
+        pass
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))      # no traffic sent; just picks a route
+        ips.append(s.getsockname()[0])
+        s.close()
+    except OSError:
+        pass
+
+    def usable(ip: str) -> bool:
+        if ip.startswith(("127.", "169.254.")):
+            return False
+        parts = ip.split(".")
+        if parts[0] == "100" and 64 <= int(parts[1]) <= 127:
+            return False                # CGNAT / VPN (Tailscale, etc.)
+        return True
+
+    candidates = [ip for ip in ips if usable(ip)]
+    for prefix in ("192.168.", "10.", "172."):
+        for ip in candidates:
+            if ip.startswith(prefix):
+                return ip
+    return candidates[0] if candidates else "localhost"
+
+
 def start_in_thread(control: WebControl, port: int = 5000) -> threading.Thread:
     """Run the web app in a daemon thread (called by dice_tracker.py)."""
     app = create_app(control)
@@ -473,5 +676,6 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser(description="Standalone review server")
     ap.add_argument("--port", type=int, default=5000)
     args = ap.parse_args()
-    print(f"Review server: http://localhost:{args.port}/games")
+    print(f"Review server (phone): http://{lan_ip()}:{args.port}/games")
+    print(f"Review server (this PC): http://localhost:{args.port}/games")
     create_app(None).run(host="0.0.0.0", port=args.port, threaded=True)

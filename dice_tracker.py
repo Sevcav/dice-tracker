@@ -361,11 +361,10 @@ def main():
     web_control = None
     if "--no-web" not in sys.argv:
         try:
-            from webapp import WebControl, start_in_thread
+            from webapp import WebControl, lan_ip, start_in_thread
             web_control = WebControl()
             start_in_thread(web_control, port=WEB_PORT)
-            print(f"Web UI on port {WEB_PORT} — phone: "
-                  f"http://<this-machine-ip>:{WEB_PORT}/")
+            print(f"Web UI — phone: http://{lan_ip()}:{WEB_PORT}/")
         except Exception as e:
             print(f"Web UI disabled: {e}")
 
