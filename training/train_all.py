@@ -76,6 +76,19 @@ DATASET_CONFIGS = {
         data=DATASETS / "combined" / "data.yaml",
         name="combined",
     ),
+    # Tray-cropped retrain: real (re-cropped from raw frames) +
+    # auto-labeled retrain_candidates + copy-paste synthetic, all at the
+    # tray-ROI crop geometry. Build with build_crop_dataset.py
+    # (auto_label_rejects.py + synth_dice.py first). Inference with this
+    # model MUST crop frames to the tray ROI (see models/*.onnx.json).
+    "combined_crop": dict(
+        data=DATASETS / "combined_crop" / "data.yaml",
+        name="combined_crop",
+        # written as models/combined_crop.onnx.json — dice_tracker and
+        # eval_harness read it and crop inference frames to the tray ROI
+        # (training and inference geometry must match)
+        meta={"tray_crop": True},
+    ),
 }
 
 
@@ -133,6 +146,11 @@ def train_one(key: str):
     out = MODELS_OUT / f"{key}.onnx"
     shutil.copy2(onnx_path, out)
     print(f"Copied to {out}")
+    if cfg.get("meta"):
+        import json
+        sidecar = MODELS_OUT / f"{key}.onnx.json"
+        sidecar.write_text(json.dumps(cfg["meta"], indent=2))
+        print(f"Wrote sidecar {sidecar}")
     print()
 
 

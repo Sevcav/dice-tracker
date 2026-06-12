@@ -64,7 +64,8 @@ from dice_tracker import (
     CAMERA_INDEX, CONF_THRESHOLD, COUNT_STABLE_FRAMES, DAY_MODE_DEVIATION,
     MODELS_DIR, RESOLUTION, RETRAIN_DIR, SMOOTHER_LENGTH,
     LabelStabilizer, alignment_check, color_deviation, draw_detections,
-    hud_line, make_tracker,
+    hud_line, load_model_meta, make_tracker, predict_detections,
+    tray_crop_rect,
 )
 from dice_types import TYPE_FACES
 
@@ -303,6 +304,9 @@ def main():
     print("=" * 70)
 
     model = YOLO(str(MODELS_DIR / f"{model_stem}.onnx"), task="detect")
+    model_meta = load_model_meta(model_stem)
+    if model_meta.get("tray_crop"):
+        print("Model is tray-crop-trained — inference crops to the tray ROI")
     class_names = list(model.names.values())
     # Restrict ground-truth shorthand to this dice type's faces — the
     # combined model carries all 27 classes and bare-number aliases would
@@ -321,6 +325,7 @@ def main():
         return
     actual_w = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     actual_h = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    crop_rect = tray_crop_rect(actual_w, actual_h)
 
     # IR-mode self-check (same as dice_tracker): warm up ~2s for
     # auto-exposure, then median of 5 probes.
@@ -375,9 +380,7 @@ def main():
         if not ret:
             continue
 
-        results = model.predict(source=frame, conf=CONF_THRESHOLD,
-                                agnostic_nms=True, verbose=False)[0]
-        detections = sv.Detections.from_ultralytics(results)
+        detections = predict_detections(model, frame, model_meta, crop_rect)
         detections = tracker.update_with_detections(detections)
         detections = smoother.update_with_detections(detections)
 

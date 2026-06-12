@@ -46,5 +46,7 @@ training/sanity_check/
 
 # Misc
 *.log
+training/train_log.txt
+training/train_err.txt
 .DS_Store
 Thumbs.db

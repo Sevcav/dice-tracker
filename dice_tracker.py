@@ -48,6 +48,7 @@ import supervision as sv
 from ultralytics import YOLO
 
 import db
+import d16_geometry
 from dice_types import majority_type
 
 ROOT       = Path(__file__).parent
@@ -91,6 +92,56 @@ def _load_tray_roi():
 
 
 _TRAY_ROI = _load_tray_roi()
+
+
+def load_model_meta(stem: str) -> dict:
+    """Sidecar metadata for models/<stem>.onnx — currently whether the
+    model was trained tray-cropped (models/<stem>.onnx.json, written by
+    train_all.py). Missing sidecar = full-frame model (the default for
+    every model trained before the 2026-06 crop retrain)."""
+    meta = {"tray_crop": False}
+    try:
+        meta.update(json.loads(
+            (MODELS_DIR / f"{stem}.onnx.json").read_text()))
+    except Exception:
+        pass
+    return meta
+
+
+def tray_crop_rect(actual_w: int, actual_h: int) -> tuple | None:
+    """Tray ROI (x, y, w, h) scaled to the actual capture resolution —
+    the inference crop for tray-crop-trained models."""
+    try:
+        d = json.loads(TRAY_ROI_FILE.read_text())
+        sx = actual_w / d["frame_width"]
+        sy = actual_h / d["frame_height"]
+        return (int(d["x"] * sx), int(d["y"] * sy),
+                int(d["w"] * sx), int(d["h"] * sy))
+    except Exception:
+        return None
+
+
+def predict_detections(model, frame, meta: dict, crop_rect) -> sv.Detections:
+    """Run YOLO the way the model was trained — full frame, or cropped to
+    the tray ROI for tray-crop models (training and inference geometry
+    MUST match; a full-frame model on crops, or vice versa, silently
+    breaks: proven 2026-06-11). Returns detections in FULL-FRAME coords.
+
+    agnostic_nms=True: merge overlapping boxes ACROSS classes, not just
+    within a class — without it one physical die can produce two
+    overlapping boxes of different classes that both survive NMS."""
+    ox = oy = 0
+    src = frame
+    if meta.get("tray_crop") and crop_rect is not None:
+        ox, oy, w, h = crop_rect
+        src = frame[oy:oy + h, ox:ox + w]
+    results = model.predict(source=src, conf=CONF_THRESHOLD,
+                            agnostic_nms=True, verbose=False)[0]
+    detections = sv.Detections.from_ultralytics(results)
+    if (ox or oy) and len(detections) > 0:
+        detections.xyxy = detections.xyxy + np.array(
+            [ox, oy, ox, oy], dtype=detections.xyxy.dtype)
+    return detections
 
 
 def color_deviation(frame) -> float:
@@ -374,6 +425,7 @@ def main():
         "d6":    YOLO(str(MODELS_DIR / "d6.onnx"),    task="detect"),
         "d16":   YOLO(str(MODELS_DIR / "d16.onnx"),   task="detect"),
     }
+    model_meta = {k: load_model_meta(k) for k in models}
     # The combined 27-class model reads any dice type in one inference —
     # "auto" mode derives the dice type from the detected face labels, so
     # no manual switching is needed during play. Same Pi cost as a single
@@ -382,6 +434,10 @@ def main():
     if (MODELS_DIR / "combined.onnx").exists():
         models["auto"] = YOLO(str(MODELS_DIR / "combined.onnx"),
                               task="detect")
+        model_meta["auto"] = load_model_meta("combined")
+        if model_meta["auto"]["tray_crop"]:
+            print("  combined model is tray-crop-trained — inference will "
+                  "crop to the tray ROI")
     current_type = "auto" if "auto" in models else "block"
     print(f"Dice mode: {current_type}"
           + ("" if "auto" in models else "  (no combined.onnx — manual "
@@ -396,6 +452,7 @@ def main():
     actual_w = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     actual_h = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     print(f"Camera open at {actual_w}x{actual_h}")
+    crop_rect = tray_crop_rect(actual_w, actual_h)
 
     # IR-mode self-check before starting — models only know IR frames.
     # Auto-exposure takes ~2s to settle after open and reads high during
@@ -449,6 +506,7 @@ def main():
     last_settled_frame = None
     last_settled_labels: list[tuple[int, float, bool]] = []
     last_settled_dets = None
+    last_settled_d16: list[dict] = []   # d16 geometry verdicts at settle
     # tracker_id -> (cx, cy) at settle time, used for nudge detection
     last_settled_centroids: dict[int, tuple[int, int]] = {}
     flash_until = 0.0
@@ -463,12 +521,14 @@ def main():
     frame_count = 0
 
     def reset_for_next_roll():
-        nonlocal tracker, smoother, last_settled_dets, last_settled_labels, state
+        nonlocal tracker, smoother, last_settled_dets, last_settled_labels, \
+            last_settled_d16, state
         tracker = make_tracker()
         smoother = sv.DetectionsSmoother(length=SMOOTHER_LENGTH)
         label_stab.reset()
         last_settled_dets   = None
         last_settled_labels = []
+        last_settled_d16    = []
         last_settled_centroids.clear()
         count_hist.clear()
         state = "watching"
@@ -511,16 +571,8 @@ def main():
                 print("  [ok] camera back in IR mode")
 
         model = models[current_type]
-        # agnostic_nms=True: merge overlapping boxes ACROSS classes, not just
-        # within a class. Without this, the model can return TWO overlapping
-        # boxes for one physical die (e.g. both_down 0.77 + pow 0.48 at the
-        # same xyxy) and both survive default class-aware NMS. With it, only
-        # the higher-confidence prediction per spatial location survives.
-        results = model.predict(
-            source=frame, conf=CONF_THRESHOLD, agnostic_nms=True,
-            verbose=False,
-        )[0]
-        detections = sv.Detections.from_ultralytics(results)
+        detections = predict_detections(model, frame,
+                                        model_meta[current_type], crop_rect)
         detections = tracker.update_with_detections(detections)
         detections = smoother.update_with_detections(detections)
 
@@ -557,6 +609,22 @@ def main():
                 flash_until = time.time() + 1.0   # initial settle flash
                 print(f"  [settled] {n_det} dice, labels: "
                       f"{[model.names.get(c, c) for c, _, _ in label_states]}")
+                # d16 geometric cross-check: the 3 face boxes of a die are
+                # physically married (adjacency table in d16_geometry).
+                last_settled_d16 = []
+                if detected_type == "d16":
+                    last_settled_d16 = d16_geometry.analyze_roll(
+                        [model.names.get(c, str(c))
+                         for c, _, _ in label_states],
+                        [list(map(float, detections.xyxy[i]))
+                         for i in range(len(detections))],
+                        [conf for _, conf, _ in label_states])
+                    for v in last_settled_d16:
+                        if v["status"] == "impossible":
+                            print(f"  [d16-check] IMPOSSIBLE read — "
+                                  f"{v['note']} — nudge the die to re-read")
+                        elif v["status"] == "deduced":
+                            print(f"  [d16-check] {v['note']}")
 
         elif state == "settled":
             # Release back to "watching" if labels became unstable...
@@ -629,6 +697,11 @@ def main():
             hud_line(annotated,
                      "DAY MODE - photoresistor seeing light, reads unreliable!",
                      75, color=(0, 0, 255), scale=0.6)
+        if state == "settled" and any(v["status"] == "impossible"
+                                      for v in last_settled_d16):
+            hud_line(annotated,
+                     "D16 READ GEOMETRICALLY IMPOSSIBLE - nudge die to re-read",
+                     100, color=(0, 0, 255), scale=0.6)
         hint = {
             "watching":  "Roll dice...",
             "settled":   "SPACE = confirm  |  R = reject (save for retrain)",
@@ -698,6 +771,21 @@ def main():
                 results_str = [model.names.get(c, str(c))
                                for c, _, _ in last_settled_labels]
                 confs       = [conf for _, conf, _ in last_settled_labels]
+                # d16: when the verified adjacency table contradicts a
+                # low-confidence top face, the geometry wins (two flanking
+                # sides uniquely determine the top). Inactive until
+                # d16_geometry.ADJACENCY_VERIFIED is set.
+                for v in last_settled_d16:
+                    if (v["status"] == "deduced"
+                            and d16_geometry.ADJACENCY_VERIFIED
+                            and v["indices"]):
+                        i = v["indices"][0]
+                        if (i < len(results_str)
+                                and confs[i] < CONF_UNCERTAIN):
+                            old = results_str[i]
+                            results_str[i] = f"D16_{v['deduced_top']}"
+                            print(f"  [d16-check] corrected {old} -> "
+                                  f"{results_str[i]} ({v['note']})")
                 logged_type = (majority_type(results_str) or "unknown"
                                if current_type == "auto" else current_type)
                 rec = session.record(

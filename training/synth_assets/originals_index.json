@@ -1,0 +1,2846 @@
+{
+ "block": {
+  "train": [
+   {
+    "stem": "frame_0001_20260504_201450_130",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0001_20260504_201450_130.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0001_20260504_201450_130_jpg.rf.4d89d1f4649ec6bbe395ad2d06e02072.txt"
+   },
+   {
+    "stem": "frame_0002_20260504_201459_419",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0002_20260504_201459_419.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0002_20260504_201459_419_jpg.rf.87a4b0b29e16d8125b559b6d20605d3c.txt"
+   },
+   {
+    "stem": "frame_0004_20260504_201514_750",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0004_20260504_201514_750.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0004_20260504_201514_750_jpg.rf.c1ee20b009cc205903d769f782d86c0f.txt"
+   },
+   {
+    "stem": "frame_0005_20260504_201521_100",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0005_20260504_201521_100.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0005_20260504_201521_100_jpg.rf.6f3077de6d4b4c25f35b5e6b3650fa43.txt"
+   },
+   {
+    "stem": "frame_0008_20260504_201542_221",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0008_20260504_201542_221.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0008_20260504_201542_221_jpg.rf.c97b2c610cbd5fe3bb9d905f31a01815.txt"
+   },
+   {
+    "stem": "frame_0009_20260504_201551_693",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0009_20260504_201551_693.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0009_20260504_201551_693_jpg.rf.a8d4348ebee2726f2a3694623ce8cc79.txt"
+   },
+   {
+    "stem": "frame_0010_20260504_201601_469",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0010_20260504_201601_469.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0010_20260504_201601_469_jpg.rf.33e68f29e6ec04d9d064953d1efb2eec.txt"
+   },
+   {
+    "stem": "frame_0011_20260504_201610_269",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0011_20260504_201610_269.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0011_20260504_201610_269_jpg.rf.3e75159b01415eb576c777141cc439bc.txt"
+   },
+   {
+    "stem": "frame_0012_20260504_201617_341",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0012_20260504_201617_341.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0012_20260504_201617_341_jpg.rf.4e995a824b36bee76b8b8d8aa8ab5268.txt"
+   },
+   {
+    "stem": "frame_0013_20260504_201629_224",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0013_20260504_201629_224.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0013_20260504_201629_224_jpg.rf.9c7104b5d76b2972e5abb47ccec69939.txt"
+   },
+   {
+    "stem": "frame_0014_20260504_201639_116",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0014_20260504_201639_116.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0014_20260504_201639_116_jpg.rf.75f5fc5391f7b2c7605cd4cdaeadc94c.txt"
+   },
+   {
+    "stem": "frame_0015_20260504_201651_084",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0015_20260504_201651_084.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0015_20260504_201651_084_jpg.rf.7f0ddc0a297c31cf1391c77d0cf186ca.txt"
+   },
+   {
+    "stem": "frame_0016_20260504_201704_551",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0016_20260504_201704_551.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0016_20260504_201704_551_jpg.rf.304f99403b8492c30933706384c7d2d9.txt"
+   },
+   {
+    "stem": "frame_0018_20260504_201720_221",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0018_20260504_201720_221.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0018_20260504_201720_221_jpg.rf.bda88d9324ec9863817166b3a293348d.txt"
+   },
+   {
+    "stem": "frame_0019_20260504_201740_294",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0019_20260504_201740_294.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0019_20260504_201740_294_jpg.rf.cecfb208eaa19f17a3b7c7bd60724de7.txt"
+   },
+   {
+    "stem": "frame_0020_20260504_201758_955",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0020_20260504_201758_955.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0020_20260504_201758_955_jpg.rf.4e4b70f68b798e75ca145ae51b44aa2b.txt"
+   },
+   {
+    "stem": "frame_0021_20260504_201809_037",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0021_20260504_201809_037.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0021_20260504_201809_037_jpg.rf.131764a9e9a6cd396e2e04f773126a17.txt"
+   },
+   {
+    "stem": "frame_0022_20260504_201817_533",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0022_20260504_201817_533.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0022_20260504_201817_533_jpg.rf.c9b334b73362b9bb6711df7919272e73.txt"
+   },
+   {
+    "stem": "frame_0024_20260504_201914_555",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0024_20260504_201914_555.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0024_20260504_201914_555_jpg.rf.85f010c0bf789af044c17d00759e3679.txt"
+   },
+   {
+    "stem": "frame_0025_20260504_201925_468",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0025_20260504_201925_468.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0025_20260504_201925_468_jpg.rf.e7655a9bf88dff3622d393fef08dd7bd.txt"
+   },
+   {
+    "stem": "frame_0027_20260504_201946_189",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0027_20260504_201946_189.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0027_20260504_201946_189_jpg.rf.2cdd281a1e70bb338a3fc6e682e9417a.txt"
+   },
+   {
+    "stem": "frame_0028_20260504_201953_517",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0028_20260504_201953_517.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0028_20260504_201953_517_jpg.rf.de5a8f0a7d146fe9d3e3e719efcfd763.txt"
+   },
+   {
+    "stem": "frame_0030_20260504_202017_053",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0030_20260504_202017_053.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0030_20260504_202017_053_jpg.rf.7099a5a6467dd34c788c3c9025f4373f.txt"
+   },
+   {
+    "stem": "frame_0031_20260504_202023_597",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0031_20260504_202023_597.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0031_20260504_202023_597_jpg.rf.c97278e77cd1480f0c6e1d32e377a399.txt"
+   },
+   {
+    "stem": "frame_0032_20260504_202036_925",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0032_20260504_202036_925.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0032_20260504_202036_925_jpg.rf.9944b1f4a5e8920b4fe9890255b71563.txt"
+   },
+   {
+    "stem": "frame_0035_20260504_202107_885",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0035_20260504_202107_885.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0035_20260504_202107_885_jpg.rf.91e18a9021d1838f8015d00b72ce7a67.txt"
+   },
+   {
+    "stem": "frame_0036_20260504_202116_413",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0036_20260504_202116_413.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0036_20260504_202116_413_jpg.rf.5dad342b08e9c1893ccf4e188bdb446a.txt"
+   },
+   {
+    "stem": "frame_0037_20260504_202133_197",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0037_20260504_202133_197.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0037_20260504_202133_197_jpg.rf.d05c4c99f432b26b4df7005093052c29.txt"
+   },
+   {
+    "stem": "frame_0038_20260504_202211_469",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0038_20260504_202211_469.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0038_20260504_202211_469_jpg.rf.7cf0d1d4a83dd1bc252d66c9ce98ba9c.txt"
+   },
+   {
+    "stem": "frame_0041_20260504_202228_964",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0041_20260504_202228_964.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0041_20260504_202228_964_jpg.rf.e52afadbde9e00d0af08fa9a9bb370bd.txt"
+   },
+   {
+    "stem": "frame_0042_20260504_202236_107",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0042_20260504_202236_107.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0042_20260504_202236_107_jpg.rf.92859235e20428160b90accfabdd7587.txt"
+   },
+   {
+    "stem": "frame_0043_20260504_202242_347",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0043_20260504_202242_347.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0043_20260504_202242_347_jpg.rf.4aa08d3bda456f00cb9577200a268298.txt"
+   },
+   {
+    "stem": "frame_0044_20260504_202247_245",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0044_20260504_202247_245.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0044_20260504_202247_245_jpg.rf.5bb1f5d6bd42fd4bbbd21229952deec0.txt"
+   },
+   {
+    "stem": "frame_0046_20260504_202301_271",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0046_20260504_202301_271.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0046_20260504_202301_271_jpg.rf.df28a4f30e7f28004dd79ded3f5682fd.txt"
+   },
+   {
+    "stem": "frame_0047_20260504_202308_107",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0047_20260504_202308_107.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0047_20260504_202308_107_jpg.rf.2cbb983b6a2c304f13ee7b624ac75cf6.txt"
+   },
+   {
+    "stem": "frame_0049_20260504_202322_237",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0049_20260504_202322_237.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0049_20260504_202322_237_jpg.rf.a1838eb4eb75ebc2cbd888e2a5f47ed8.txt"
+   },
+   {
+    "stem": "frame_0050_20260504_202327_836",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0050_20260504_202327_836.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0050_20260504_202327_836_jpg.rf.b5fce4b3bd16829565c919e85bb31c7f.txt"
+   },
+   {
+    "stem": "frame_0052_20260504_202339_820",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0052_20260504_202339_820.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0052_20260504_202339_820_jpg.rf.4793fcf1fb91b8fbe0f7a21384c0c9a6.txt"
+   },
+   {
+    "stem": "frame_0053_20260504_202351_437",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0053_20260504_202351_437.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0053_20260504_202351_437_jpg.rf.b58d47463b1d8f18d5f72448b468c742.txt"
+   },
+   {
+    "stem": "frame_0055_20260504_202407_053",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0055_20260504_202407_053.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0055_20260504_202407_053_jpg.rf.a73365c59d902734a3e6f88668f2fa58.txt"
+   },
+   {
+    "stem": "frame_0057_20260504_202425_550",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0057_20260504_202425_550.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0057_20260504_202425_550_jpg.rf.8b51a3adf96d9b8aa579f9d6d8b436eb.txt"
+   },
+   {
+    "stem": "frame_0058_20260504_202431_341",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0058_20260504_202431_341.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0058_20260504_202431_341_jpg.rf.8b96aaa987e78394291540a6a9b6b406.txt"
+   },
+   {
+    "stem": "frame_0060_20260504_202447_227",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0060_20260504_202447_227.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0060_20260504_202447_227_jpg.rf.fabe38ca1b50eeafda69080f7026f1ef.txt"
+   },
+   {
+    "stem": "frame_0061_20260504_202451_213",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0061_20260504_202451_213.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0061_20260504_202451_213_jpg.rf.db85370899944314b4b07db499e34e0d.txt"
+   },
+   {
+    "stem": "frame_0062_20260504_202454_141",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0062_20260504_202454_141.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0062_20260504_202454_141_jpg.rf.e087acfef66b54ae1c05e11bf56e1660.txt"
+   },
+   {
+    "stem": "frame_0063_20260504_202457_483",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0063_20260504_202457_483.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0063_20260504_202457_483_jpg.rf.710d36667640970611c50adb57623117.txt"
+   },
+   {
+    "stem": "frame_0065_20260504_202518_222",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0065_20260504_202518_222.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0065_20260504_202518_222_jpg.rf.d272d7e7d5932f9c979638d0aa7f2ba4.txt"
+   },
+   {
+    "stem": "frame_0067_20260504_202527_910",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0067_20260504_202527_910.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0067_20260504_202527_910_jpg.rf.a3fbf0053beec63f967bbf3295be6b0b.txt"
+   },
+   {
+    "stem": "frame_0068_20260504_202532_909",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0068_20260504_202532_909.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0068_20260504_202532_909_jpg.rf.5d506cd448946224306053ebeb602d4b.txt"
+   },
+   {
+    "stem": "frame_0069_20260504_202541_021",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0069_20260504_202541_021.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0069_20260504_202541_021_jpg.rf.c445c4e21d026d2cbe09f0343641c189.txt"
+   },
+   {
+    "stem": "frame_0072_20260504_202555_338",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0072_20260504_202555_338.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0072_20260504_202555_338_jpg.rf.2b513d8c450e0425140b531524119f54.txt"
+   },
+   {
+    "stem": "frame_0074_20260504_202618_637",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0074_20260504_202618_637.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0074_20260504_202618_637_jpg.rf.b69ff15b152a18c4b17c3876ca2fc2fb.txt"
+   },
+   {
+    "stem": "frame_0075_20260504_202626_524",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0075_20260504_202626_524.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0075_20260504_202626_524_jpg.rf.cdda825956926dab6429e4c07518c311.txt"
+   },
+   {
+    "stem": "frame_0078_20260504_202643_277",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0078_20260504_202643_277.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0078_20260504_202643_277_jpg.rf.472ddb58c0b41cdb23e6eb623997efb5.txt"
+   },
+   {
+    "stem": "frame_0080_20260504_202653_565",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0080_20260504_202653_565.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0080_20260504_202653_565_jpg.rf.07c6c8418550e8e8491625cae8691f20.txt"
+   },
+   {
+    "stem": "frame_0081_20260504_202700_443",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0081_20260504_202700_443.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0081_20260504_202700_443_jpg.rf.73983f72227f872d6396621ffebdde11.txt"
+   },
+   {
+    "stem": "frame_0082_20260504_202707_693",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0082_20260504_202707_693.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0082_20260504_202707_693_jpg.rf.22327b4e989d7b18a87e5fbaac43bcf9.txt"
+   },
+   {
+    "stem": "frame_0083_20260504_202713_051",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0083_20260504_202713_051.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0083_20260504_202713_051_jpg.rf.a60a1f3d959003b6f722ac844d0754d2.txt"
+   },
+   {
+    "stem": "frame_0084_20260504_202718_637",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0084_20260504_202718_637.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0084_20260504_202718_637_jpg.rf.d3a9340a65e48ec225c259d18afb1322.txt"
+   },
+   {
+    "stem": "frame_0085_20260504_202725_083",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0085_20260504_202725_083.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0085_20260504_202725_083_jpg.rf.c98b58e47e14e208ed96c5824a63d37d.txt"
+   },
+   {
+    "stem": "frame_0086_20260504_202728_890",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0086_20260504_202728_890.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0086_20260504_202728_890_jpg.rf.40043bb3987eb181551fc36837faca9a.txt"
+   },
+   {
+    "stem": "frame_0087_20260504_202733_908",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0087_20260504_202733_908.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0087_20260504_202733_908_jpg.rf.0cf51af5ff0bea06b6903b559b8941cd.txt"
+   },
+   {
+    "stem": "frame_0088_20260504_202740_851",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0088_20260504_202740_851.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0088_20260504_202740_851_jpg.rf.149c4cc1d998ea7d267b897f11e46d71.txt"
+   },
+   {
+    "stem": "frame_0089_20260504_202747_958",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0089_20260504_202747_958.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0089_20260504_202747_958_jpg.rf.ed24b4870cd51152535201508a794b33.txt"
+   },
+   {
+    "stem": "frame_0091_20260504_202800_214",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0091_20260504_202800_214.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0091_20260504_202800_214_jpg.rf.9cccc4e199111a4134e8e288a206aac2.txt"
+   },
+   {
+    "stem": "frame_0092_20260504_202818_061",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0092_20260504_202818_061.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0092_20260504_202818_061_jpg.rf.fe402da1ee9314621f661e4ae8b66503.txt"
+   },
+   {
+    "stem": "frame_0093_20260504_202821_917",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0093_20260504_202821_917.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0093_20260504_202821_917_jpg.rf.a62e5decad7750b30d0745885cd8cc16.txt"
+   },
+   {
+    "stem": "frame_0096_20260504_202841_741",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0096_20260504_202841_741.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0096_20260504_202841_741_jpg.rf.76cd83e1ddf6253f3ce7a1894b9bdd47.txt"
+   },
+   {
+    "stem": "frame_0097_20260504_202844_412",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0097_20260504_202844_412.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0097_20260504_202844_412_jpg.rf.3824d8819b51de981498ecd6a1ef00c7.txt"
+   },
+   {
+    "stem": "frame_0098_20260504_202848_397",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0098_20260504_202848_397.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0098_20260504_202848_397_jpg.rf.afe14af496c33e0142787c9e4680d713.txt"
+   },
+   {
+    "stem": "frame_0101_20260504_202903_723",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0101_20260504_202903_723.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0101_20260504_202903_723_jpg.rf.e3e0b6603f66af408ca09de6db7d2c93.txt"
+   },
+   {
+    "stem": "frame_0102_20260504_202908_559",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0102_20260504_202908_559.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0102_20260504_202908_559_jpg.rf.46d0f78742d5c8aba3aa7876f8ef519e.txt"
+   },
+   {
+    "stem": "frame_0105_20260504_202921_981",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0105_20260504_202921_981.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0105_20260504_202921_981_jpg.rf.a925d44bde2258a58a4fa54e4d128c53.txt"
+   },
+   {
+    "stem": "frame_0106_20260504_202926_556",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0106_20260504_202926_556.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0106_20260504_202926_556_jpg.rf.06543d390c6312c2a10ed76e4273e1f8.txt"
+   },
+   {
+    "stem": "frame_0107_20260504_202930_509",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0107_20260504_202930_509.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0107_20260504_202930_509_jpg.rf.20a0a0e7a5f60a66ce98fb4fae90e320.txt"
+   },
+   {
+    "stem": "frame_0109_20260504_202947_277",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0109_20260504_202947_277.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0109_20260504_202947_277_jpg.rf.11c5da1e1587e62b74def9ede0c1c01e.txt"
+   },
+   {
+    "stem": "frame_0113_20260504_203006_541",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0113_20260504_203006_541.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0113_20260504_203006_541_jpg.rf.44a60e83556afc9ffce632c0121809e9.txt"
+   },
+   {
+    "stem": "frame_0114_20260504_203009_277",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0114_20260504_203009_277.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0114_20260504_203009_277_jpg.rf.d46757ab9590cbcf8c4716539ab733a1.txt"
+   },
+   {
+    "stem": "frame_0115_20260504_203012_140",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0115_20260504_203012_140.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0115_20260504_203012_140_jpg.rf.c804c7fce66459d1919f7cbd07174221.txt"
+   },
+   {
+    "stem": "frame_0116_20260504_203017_879",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0116_20260504_203017_879.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0116_20260504_203017_879_jpg.rf.ef70d8bafa7a7aa58ac0b28320aef0e0.txt"
+   },
+   {
+    "stem": "frame_0117_20260504_203021_486",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0117_20260504_203021_486.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0117_20260504_203021_486_jpg.rf.61310e9575a6b39060b4a1eb9cd6b059.txt"
+   },
+   {
+    "stem": "frame_0118_20260504_203027_165",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0118_20260504_203027_165.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0118_20260504_203027_165_jpg.rf.0e0a0c69b91fb5344b3d5207c06f9189.txt"
+   },
+   {
+    "stem": "frame_0119_20260504_203030_206",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0119_20260504_203030_206.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0119_20260504_203030_206_jpg.rf.817646b8b1a437a3c8383a082cf86577.txt"
+   },
+   {
+    "stem": "frame_0120_20260504_203037_181",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0120_20260504_203037_181.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0120_20260504_203037_181_jpg.rf.ef4e4f1e5c349d927b65ae98e54b4df0.txt"
+   },
+   {
+    "stem": "frame_0122_20260504_203050_380",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0122_20260504_203050_380.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0122_20260504_203050_380_jpg.rf.ba9ffacef45ea5bbda7972e0588c7703.txt"
+   },
+   {
+    "stem": "frame_0123_20260504_203054_013",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0123_20260504_203054_013.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0123_20260504_203054_013_jpg.rf.b0ed1bd1b1a736a4e3e220a67d848514.txt"
+   },
+   {
+    "stem": "frame_0124_20260504_203057_229",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0124_20260504_203057_229.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0124_20260504_203057_229_jpg.rf.2e4c57ec33e8aebca4aa55460d7627b5.txt"
+   },
+   {
+    "stem": "frame_0126_20260504_203106_429",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0126_20260504_203106_429.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0126_20260504_203106_429_jpg.rf.84b7d0510eca21ef1adbf3436be4a36d.txt"
+   },
+   {
+    "stem": "frame_0128_20260504_203116_781",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0128_20260504_203116_781.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0128_20260504_203116_781_jpg.rf.a23cacff4c5a03b76193117f6822a988.txt"
+   },
+   {
+    "stem": "frame_0129_20260504_203122_988",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0129_20260504_203122_988.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0129_20260504_203122_988_jpg.rf.5d22f9f5ef49d89db5bb89814acca411.txt"
+   },
+   {
+    "stem": "frame_0130_20260504_203126_619",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0130_20260504_203126_619.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0130_20260504_203126_619_jpg.rf.f0f215e7dbf94d68d3b02e1e3e513a78.txt"
+   },
+   {
+    "stem": "frame_0132_20260504_203134_331",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0132_20260504_203134_331.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0132_20260504_203134_331_jpg.rf.feafe395ed0c0b5f9eab1e2aabcc4474.txt"
+   },
+   {
+    "stem": "frame_0133_20260504_203213_165",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0133_20260504_203213_165.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0133_20260504_203213_165_jpg.rf.71306ecf1c2c9753270f09d9c04046cb.txt"
+   },
+   {
+    "stem": "frame_0134_20260504_203236_349",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0134_20260504_203236_349.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0134_20260504_203236_349_jpg.rf.f4a09af97167063f0798d6d17cb2aa9a.txt"
+   },
+   {
+    "stem": "frame_0135_20260504_203304_619",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0135_20260504_203304_619.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0135_20260504_203304_619_jpg.rf.26652356ef0a51349c7f3535e3c19855.txt"
+   },
+   {
+    "stem": "frame_0137_20260504_203409_224",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0137_20260504_203409_224.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0137_20260504_203409_224_jpg.rf.88bbf005bcd177bf7b8806639dc3e002.txt"
+   },
+   {
+    "stem": "frame_0138_20260504_203416_702",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0138_20260504_203416_702.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0138_20260504_203416_702_jpg.rf.26a14560ce03ed518143cbd1a00af762.txt"
+   },
+   {
+    "stem": "frame_0140_20260504_203427_837",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0140_20260504_203427_837.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0140_20260504_203427_837_jpg.rf.893ef3f3b86932e81f84fc074437978b.txt"
+   },
+   {
+    "stem": "frame_0141_20260504_203432_235",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0141_20260504_203432_235.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0141_20260504_203432_235_jpg.rf.4dc17ec4b0c05c9a6c4571151f297a61.txt"
+   },
+   {
+    "stem": "frame_0142_20260504_203437_456",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0142_20260504_203437_456.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0142_20260504_203437_456_jpg.rf.567dbf0dea9a745c0abeaca338c3ace9.txt"
+   },
+   {
+    "stem": "frame_0144_20260504_203446_605",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0144_20260504_203446_605.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0144_20260504_203446_605_jpg.rf.407c98ee8674419a74aee19db60975f3.txt"
+   },
+   {
+    "stem": "frame_0145_20260504_203452_253",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0145_20260504_203452_253.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0145_20260504_203452_253_jpg.rf.e6dab08ef61c3bb957c961ecb4dcf045.txt"
+   },
+   {
+    "stem": "frame_0146_20260504_203457_550",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0146_20260504_203457_550.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0146_20260504_203457_550_jpg.rf.a10422c0bcdcb14745157da845d26a93.txt"
+   },
+   {
+    "stem": "frame_0148_20260504_203505_611",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0148_20260504_203505_611.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0148_20260504_203505_611_jpg.rf.69e920bdb8502e463d9fa18ab3f7f161.txt"
+   },
+   {
+    "stem": "frame_0149_20260504_203510_251",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0149_20260504_203510_251.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0149_20260504_203510_251_jpg.rf.967de4129f715cc2522ad718e17a69eb.txt"
+   },
+   {
+    "stem": "frame_0153_20260504_203527_130",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0153_20260504_203527_130.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0153_20260504_203527_130_jpg.rf.9a67e6337560ef27f97ff11345258729.txt"
+   },
+   {
+    "stem": "frame_0154_20260504_203535_356",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0154_20260504_203535_356.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0154_20260504_203535_356_jpg.rf.9dbb5778f3fcca4760f50db3933c3ddb.txt"
+   },
+   {
+    "stem": "frame_0155_20260504_203540_352",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0155_20260504_203540_352.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0155_20260504_203540_352_jpg.rf.ac349b81dd368a47fb0e8b41f7ee8194.txt"
+   },
+   {
+    "stem": "frame_0157_20260504_203555_949",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0157_20260504_203555_949.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0157_20260504_203555_949_jpg.rf.43042a53ecc569cd2891ab312d6cc9ef.txt"
+   },
+   {
+    "stem": "frame_0158_20260504_203600_331",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0158_20260504_203600_331.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0158_20260504_203600_331_jpg.rf.7db52bd8d62f86e13817bc84ae73239a.txt"
+   },
+   {
+    "stem": "frame_0159_20260504_203605_673",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0159_20260504_203605_673.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0159_20260504_203605_673_jpg.rf.a85b61a2c2ff0b911de7b21064c30238.txt"
+   },
+   {
+    "stem": "frame_0160_20260504_203613_755",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0160_20260504_203613_755.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\train\\labels\\frame_0160_20260504_203613_755_jpg.rf.ccc90605c505897af5e6f9d224a7469a.txt"
+   }
+  ],
+  "valid": [
+   {
+    "stem": "frame_0006_20260504_201526_142",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0006_20260504_201526_142.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\valid\\labels\\frame_0006_20260504_201526_142_jpg.rf.883468b4abd866c2f0f17b29a33ca65f.txt"
+   },
+   {
+    "stem": "frame_0017_20260504_201711_965",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0017_20260504_201711_965.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\valid\\labels\\frame_0017_20260504_201711_965_jpg.rf.2089ee2daef5cad013c1e3133fbff3af.txt"
+   },
+   {
+    "stem": "frame_0023_20260504_201858_881",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0023_20260504_201858_881.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\valid\\labels\\frame_0023_20260504_201858_881_jpg.rf.a73d19389b33ac090d4d4dedd0815437.txt"
+   },
+   {
+    "stem": "frame_0026_20260504_201935_309",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0026_20260504_201935_309.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\valid\\labels\\frame_0026_20260504_201935_309_jpg.rf.46dd60724166245bc175ba61011bf8fc.txt"
+   },
+   {
+    "stem": "frame_0039_20260504_202217_325",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0039_20260504_202217_325.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\valid\\labels\\frame_0039_20260504_202217_325_jpg.rf.4637cb7a976809dfe39b3ee80633588c.txt"
+   },
+   {
+    "stem": "frame_0040_20260504_202223_165",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0040_20260504_202223_165.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\valid\\labels\\frame_0040_20260504_202223_165_jpg.rf.c23306eb814b4c79eff74ecb3fe42c2f.txt"
+   },
+   {
+    "stem": "frame_0045_20260504_202255_355",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0045_20260504_202255_355.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\valid\\labels\\frame_0045_20260504_202255_355_jpg.rf.e27e028a6aad558afbb4ef109c6f1187.txt"
+   },
+   {
+    "stem": "frame_0051_20260504_202333_547",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0051_20260504_202333_547.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\valid\\labels\\frame_0051_20260504_202333_547_jpg.rf.6fb74e106bb4d39c50c632adb719f691.txt"
+   },
+   {
+    "stem": "frame_0054_20260504_202400_301",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0054_20260504_202400_301.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\valid\\labels\\frame_0054_20260504_202400_301_jpg.rf.0ca288ee038e76113510fff6b1c4da86.txt"
+   },
+   {
+    "stem": "frame_0056_20260504_202415_086",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0056_20260504_202415_086.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\valid\\labels\\frame_0056_20260504_202415_086_jpg.rf.1dbcac8ba88c7352d0ea4d3ecc24ff69.txt"
+   },
+   {
+    "stem": "frame_0064_20260504_202504_669",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0064_20260504_202504_669.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\valid\\labels\\frame_0064_20260504_202504_669_jpg.rf.195a76394bb64ea7ead16dc7bb271b3e.txt"
+   },
+   {
+    "stem": "frame_0066_20260504_202522_253",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0066_20260504_202522_253.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\valid\\labels\\frame_0066_20260504_202522_253_jpg.rf.513cc01c93a3abf08c8fdb48b8f9d347.txt"
+   },
+   {
+    "stem": "frame_0070_20260504_202544_938",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0070_20260504_202544_938.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\valid\\labels\\frame_0070_20260504_202544_938_jpg.rf.7496f777d22cd2b26201a1afa2b80228.txt"
+   },
+   {
+    "stem": "frame_0071_20260504_202549_630",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0071_20260504_202549_630.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\valid\\labels\\frame_0071_20260504_202549_630_jpg.rf.6ee2ca99d4ad7e2d1a9f84d8fd964fc6.txt"
+   },
+   {
+    "stem": "frame_0077_20260504_202636_318",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0077_20260504_202636_318.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\valid\\labels\\frame_0077_20260504_202636_318_jpg.rf.43918c7fdb9669929fd22eb8978e3a86.txt"
+   },
+   {
+    "stem": "frame_0079_20260504_202648_145",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0079_20260504_202648_145.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\valid\\labels\\frame_0079_20260504_202648_145_jpg.rf.b8b8d617f6024d93f7e067f0d507bce2.txt"
+   },
+   {
+    "stem": "frame_0090_20260504_202754_227",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0090_20260504_202754_227.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\valid\\labels\\frame_0090_20260504_202754_227_jpg.rf.3d013674a93299be2359c9042a0a392b.txt"
+   },
+   {
+    "stem": "frame_0095_20260504_202836_972",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0095_20260504_202836_972.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\valid\\labels\\frame_0095_20260504_202836_972_jpg.rf.90ce2256e0e4e8746f1b0aeed49ba263.txt"
+   },
+   {
+    "stem": "frame_0103_20260504_202913_917",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0103_20260504_202913_917.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\valid\\labels\\frame_0103_20260504_202913_917_jpg.rf.86f9ac869e2b039c1efc4c1939424ca7.txt"
+   },
+   {
+    "stem": "frame_0104_20260504_202917_293",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0104_20260504_202917_293.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\valid\\labels\\frame_0104_20260504_202917_293_jpg.rf.492a502b16c5211383249edaa8fcbd99.txt"
+   },
+   {
+    "stem": "frame_0108_20260504_202941_142",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0108_20260504_202941_142.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\valid\\labels\\frame_0108_20260504_202941_142_jpg.rf.cb48e13e460a7a22d0e3165a7cb5cded.txt"
+   },
+   {
+    "stem": "frame_0111_20260504_202955_101",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0111_20260504_202955_101.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\valid\\labels\\frame_0111_20260504_202955_101_jpg.rf.09b4a4a04e8b27f7654c2f2b08ab98b3.txt"
+   },
+   {
+    "stem": "frame_0112_20260504_203002_542",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0112_20260504_203002_542.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\valid\\labels\\frame_0112_20260504_203002_542_jpg.rf.6daef2f4e42489ade771951477ae01bf.txt"
+   },
+   {
+    "stem": "frame_0121_20260504_203040_827",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0121_20260504_203040_827.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\valid\\labels\\frame_0121_20260504_203040_827_jpg.rf.0e74dbda151c1a4b337b55238ff00445.txt"
+   },
+   {
+    "stem": "frame_0125_20260504_203102_237",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0125_20260504_203102_237.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\valid\\labels\\frame_0125_20260504_203102_237_jpg.rf.a59a5b0808a45c43970f4af581efb77a.txt"
+   },
+   {
+    "stem": "frame_0127_20260504_203110_781",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0127_20260504_203110_781.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\valid\\labels\\frame_0127_20260504_203110_781_jpg.rf.6024a2260195616d6e99a974501cb241.txt"
+   },
+   {
+    "stem": "frame_0131_20260504_203130_550",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0131_20260504_203130_550.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\valid\\labels\\frame_0131_20260504_203130_550_jpg.rf.90d3e6821fc8068c1016d8be994e6748.txt"
+   },
+   {
+    "stem": "frame_0136_20260504_203335_662",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0136_20260504_203335_662.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\valid\\labels\\frame_0136_20260504_203335_662_jpg.rf.915085df11dd9e5bf257d38b2f98ba0a.txt"
+   },
+   {
+    "stem": "frame_0139_20260504_203422_588",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0139_20260504_203422_588.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\valid\\labels\\frame_0139_20260504_203422_588_jpg.rf.93777979415f391f39c10a3786480896.txt"
+   },
+   {
+    "stem": "frame_0143_20260504_203442_861",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0143_20260504_203442_861.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\valid\\labels\\frame_0143_20260504_203442_861_jpg.rf.297659397c0af8d14b960c8668e1e62d.txt"
+   },
+   {
+    "stem": "frame_0151_20260504_203519_661",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0151_20260504_203519_661.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\valid\\labels\\frame_0151_20260504_203519_661_jpg.rf.18c32ae555fc5c0a2e8c31af09da20a6.txt"
+   },
+   {
+    "stem": "frame_0156_20260504_203551_485",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0156_20260504_203551_485.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\valid\\labels\\frame_0156_20260504_203551_485_jpg.rf.f8b10abbb44b81b4fb0cf0aecf2affbb.txt"
+   }
+  ],
+  "test": [
+   {
+    "stem": "frame_0003_20260504_201506_651",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0003_20260504_201506_651.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\test\\labels\\frame_0003_20260504_201506_651_jpg.rf.b587dd7b44d929b8642431943189636a.txt"
+   },
+   {
+    "stem": "frame_0007_20260504_201532_458",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0007_20260504_201532_458.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\test\\labels\\frame_0007_20260504_201532_458_jpg.rf.e00eb709d3fcedacd0f6a97402f549bf.txt"
+   },
+   {
+    "stem": "frame_0029_20260504_202010_685",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0029_20260504_202010_685.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\test\\labels\\frame_0029_20260504_202010_685_jpg.rf.61f683995be06f2d82995b6fc4e0e7d1.txt"
+   },
+   {
+    "stem": "frame_0033_20260504_202047_181",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0033_20260504_202047_181.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\test\\labels\\frame_0033_20260504_202047_181_jpg.rf.ece874ee2affc5175cb0447bc3714cb4.txt"
+   },
+   {
+    "stem": "frame_0034_20260504_202055_116",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0034_20260504_202055_116.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\test\\labels\\frame_0034_20260504_202055_116_jpg.rf.6a7fcec7b4ab5d7e9e00115763b14ffa.txt"
+   },
+   {
+    "stem": "frame_0048_20260504_202316_955",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0048_20260504_202316_955.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\test\\labels\\frame_0048_20260504_202316_955_jpg.rf.9cee1ccef600dfa67810ac4df4f3fd75.txt"
+   },
+   {
+    "stem": "frame_0059_20260504_202438_301",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0059_20260504_202438_301.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\test\\labels\\frame_0059_20260504_202438_301_jpg.rf.920c1df20edd3b62bd1a99b74c4a2c26.txt"
+   },
+   {
+    "stem": "frame_0073_20260504_202558_430",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0073_20260504_202558_430.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\test\\labels\\frame_0073_20260504_202558_430_jpg.rf.69352a1456026ecac22beb4753c83947.txt"
+   },
+   {
+    "stem": "frame_0076_20260504_202631_181",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0076_20260504_202631_181.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\test\\labels\\frame_0076_20260504_202631_181_jpg.rf.a9c3e787b74c76f0bf360fa6af75675a.txt"
+   },
+   {
+    "stem": "frame_0094_20260504_202829_067",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0094_20260504_202829_067.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\test\\labels\\frame_0094_20260504_202829_067_jpg.rf.cacddd1400f0f8a96f519e605ee6398d.txt"
+   },
+   {
+    "stem": "frame_0099_20260504_202853_099",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0099_20260504_202853_099.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\test\\labels\\frame_0099_20260504_202853_099_jpg.rf.6d6b0be153a17ed69c91a8c430b7d624.txt"
+   },
+   {
+    "stem": "frame_0100_20260504_202858_716",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0100_20260504_202858_716.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\test\\labels\\frame_0100_20260504_202858_716_jpg.rf.3dc2c72b2ab0eb03b4fb373c68f25eb7.txt"
+   },
+   {
+    "stem": "frame_0110_20260504_202951_740",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0110_20260504_202951_740.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\test\\labels\\frame_0110_20260504_202951_740_jpg.rf.5edff58f6ac36be40e687071549c1502.txt"
+   },
+   {
+    "stem": "frame_0147_20260504_203500_909",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0147_20260504_203500_909.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\test\\labels\\frame_0147_20260504_203500_909_jpg.rf.2f81568567ef8b51141373ffa1335ac3.txt"
+   },
+   {
+    "stem": "frame_0150_20260504_203514_301",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0150_20260504_203514_301.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\test\\labels\\frame_0150_20260504_203514_301_jpg.rf.47b17a7a5daa1de45f29af2d14f1b020.txt"
+   },
+   {
+    "stem": "frame_0152_20260504_203524_175",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-04_201259\\frame_0152_20260504_203524_175.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\block\\test\\labels\\frame_0152_20260504_203524_175_jpg.rf.60b4b21dab27a325c24e2c8600c1cd53.txt"
+   }
+  ]
+ },
+ "d6": {
+  "train": [
+   {
+    "stem": "frame_0001_20260505_145929_044",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0001_20260505_145929_044.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0001_20260505_145929_044_jpg.rf.c682c4f86d74042a91e62d9e65fbcdb6.txt"
+   },
+   {
+    "stem": "frame_0002_20260505_145952_180",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0002_20260505_145952_180.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0002_20260505_145952_180_jpg.rf.6c87389cc2c2e4e60e1c6b5259dbc5d6.txt"
+   },
+   {
+    "stem": "frame_0003_20260505_150012_932",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0003_20260505_150012_932.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0003_20260505_150012_932_jpg.rf.175650d36d47e326f09b950a7dbbd5e8.txt"
+   },
+   {
+    "stem": "frame_0004_20260505_150041_714",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0004_20260505_150041_714.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0004_20260505_150041_714_jpg.rf.8b8869846f6574cb61a3b6debe648289.txt"
+   },
+   {
+    "stem": "frame_0005_20260505_150103_569",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0005_20260505_150103_569.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0005_20260505_150103_569_jpg.rf.8664ba614e0d581aa50a9174adb1e720.txt"
+   },
+   {
+    "stem": "frame_0006_20260505_150126_627",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0006_20260505_150126_627.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0006_20260505_150126_627_jpg.rf.49bbc06eb72efa3145e8d29c77490755.txt"
+   },
+   {
+    "stem": "frame_0007_20260505_150147_683",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0007_20260505_150147_683.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0007_20260505_150147_683_jpg.rf.9e93a1d0a4731db0ada48206c173f638.txt"
+   },
+   {
+    "stem": "frame_0008_20260505_150155_056",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0008_20260505_150155_056.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0008_20260505_150155_056_jpg.rf.5d027150b0de5eeaaed0f3b4f7df6321.txt"
+   },
+   {
+    "stem": "frame_0009_20260505_150207_693",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0009_20260505_150207_693.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0009_20260505_150207_693_jpg.rf.b2ac9b776a60872f0c9eac9770338c18.txt"
+   },
+   {
+    "stem": "frame_0010_20260505_150213_027",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0010_20260505_150213_027.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0010_20260505_150213_027_jpg.rf.49a86aeb8204f66a97f90b05391baf33.txt"
+   },
+   {
+    "stem": "frame_0012_20260505_150224_932",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0012_20260505_150224_932.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0012_20260505_150224_932_jpg.rf.8a740369518c5a7c3cf4a44c409dc5ed.txt"
+   },
+   {
+    "stem": "frame_0015_20260505_150235_730",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0015_20260505_150235_730.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0015_20260505_150235_730_jpg.rf.7b2fafe0412c29abb4cf268e2c7fafd8.txt"
+   },
+   {
+    "stem": "frame_0016_20260505_150238_756",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0016_20260505_150238_756.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0016_20260505_150238_756_jpg.rf.38746435d0f5a886164205f108d1a2da.txt"
+   },
+   {
+    "stem": "frame_0017_20260505_150243_010",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0017_20260505_150243_010.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0017_20260505_150243_010_jpg.rf.7ead68ad2bbf37f1637f80e477931d43.txt"
+   },
+   {
+    "stem": "frame_0020_20260505_150303_577",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0020_20260505_150303_577.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0020_20260505_150303_577_jpg.rf.029c11c53b9a99ced315b3bcdd5fb0ce.txt"
+   },
+   {
+    "stem": "frame_0022_20260505_150313_412",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0022_20260505_150313_412.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0022_20260505_150313_412_jpg.rf.5e2097c7d6c37a06933d26674ecae69d.txt"
+   },
+   {
+    "stem": "frame_0023_20260505_150319_779",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0023_20260505_150319_779.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0023_20260505_150319_779_jpg.rf.f3b420f58a97ba40633970cface9e343.txt"
+   },
+   {
+    "stem": "frame_0024_20260505_150324_578",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0024_20260505_150324_578.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0024_20260505_150324_578_jpg.rf.6c99af0d88ad9d13705d6594d377487d.txt"
+   },
+   {
+    "stem": "frame_0025_20260505_150329_252",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0025_20260505_150329_252.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0025_20260505_150329_252_jpg.rf.9a4ed75ce288ea3bc6293e096071f2a0.txt"
+   },
+   {
+    "stem": "frame_0026_20260505_150334_508",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0026_20260505_150334_508.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0026_20260505_150334_508_jpg.rf.b5178d17c3058010824e40820257acdd.txt"
+   },
+   {
+    "stem": "frame_0027_20260505_150337_635",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0027_20260505_150337_635.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0027_20260505_150337_635_jpg.rf.c9da3e3ee4837e78af046eabfb57fb09.txt"
+   },
+   {
+    "stem": "frame_0028_20260505_150339_810",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0028_20260505_150339_810.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0028_20260505_150339_810_jpg.rf.8c117cd0fdd3634ee87733d865dc99c3.txt"
+   },
+   {
+    "stem": "frame_0029_20260505_150342_164",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0029_20260505_150342_164.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0029_20260505_150342_164_jpg.rf.3fbc92221408a2dff3b116a882b620ae.txt"
+   },
+   {
+    "stem": "frame_0030_20260505_150344_211",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0030_20260505_150344_211.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0030_20260505_150344_211_jpg.rf.0fd6fc9eef43cb45b4c80cabed8b0156.txt"
+   },
+   {
+    "stem": "frame_0032_20260505_150348_468",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0032_20260505_150348_468.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0032_20260505_150348_468_jpg.rf.bb596f858d00d5de7b03e2024243359b.txt"
+   },
+   {
+    "stem": "frame_0033_20260505_150350_885",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0033_20260505_150350_885.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0033_20260505_150350_885_jpg.rf.975596d7c8e488b1cfcef518bb19c55e.txt"
+   },
+   {
+    "stem": "frame_0034_20260505_150352_964",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0034_20260505_150352_964.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0034_20260505_150352_964_jpg.rf.a02e7d0e7d87f77132a5eab495dbf6a9.txt"
+   },
+   {
+    "stem": "frame_0035_20260505_150355_221",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0035_20260505_150355_221.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0035_20260505_150355_221_jpg.rf.9ffe67ca8ef3d3e0d74d93e61b6f8467.txt"
+   },
+   {
+    "stem": "frame_0039_20260505_150408_098",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0039_20260505_150408_098.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0039_20260505_150408_098_jpg.rf.b8f4a327c5da30cb961af5d48de9df12.txt"
+   },
+   {
+    "stem": "frame_0041_20260505_150413_235",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0041_20260505_150413_235.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0041_20260505_150413_235_jpg.rf.f0821663c7cf684ec4c9b721655a9106.txt"
+   },
+   {
+    "stem": "frame_0042_20260505_150416_148",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0042_20260505_150416_148.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0042_20260505_150416_148_jpg.rf.d6700fe2afbdb4eda26a823721963a68.txt"
+   },
+   {
+    "stem": "frame_0045_20260505_150431_976",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0045_20260505_150431_976.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0045_20260505_150431_976_jpg.rf.d66b0d2e6d86f3a248c8d0f514187953.txt"
+   },
+   {
+    "stem": "frame_0047_20260505_150437_705",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0047_20260505_150437_705.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0047_20260505_150437_705_jpg.rf.7e6aa13315b911afed9ac8d56d1fe225.txt"
+   },
+   {
+    "stem": "frame_0048_20260505_150443_370",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0048_20260505_150443_370.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0048_20260505_150443_370_jpg.rf.872a9c7dca96adb20934c86f1268441c.txt"
+   },
+   {
+    "stem": "frame_0050_20260505_150451_592",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0050_20260505_150451_592.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0050_20260505_150451_592_jpg.rf.ccfb99b854f55870155836ee135aa8c1.txt"
+   },
+   {
+    "stem": "frame_0051_20260505_150455_162",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0051_20260505_150455_162.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0051_20260505_150455_162_jpg.rf.0223f8cb332f6a2d85e6d20d4a2cfca5.txt"
+   },
+   {
+    "stem": "frame_0052_20260505_150458_185",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0052_20260505_150458_185.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0052_20260505_150458_185_jpg.rf.25e4dbe832e80f93e5e34eb7148eb8f4.txt"
+   },
+   {
+    "stem": "frame_0054_20260505_150503_301",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0054_20260505_150503_301.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0054_20260505_150503_301_jpg.rf.a93bed11e09af8f691b3214515e115e2.txt"
+   },
+   {
+    "stem": "frame_0059_20260505_150524_604",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0059_20260505_150524_604.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0059_20260505_150524_604_jpg.rf.c8a602fd33bc119592df90d9f35d03ec.txt"
+   },
+   {
+    "stem": "frame_0060_20260505_150528_169",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0060_20260505_150528_169.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0060_20260505_150528_169_jpg.rf.1c6ab5f157aacd28080df7e39b895309.txt"
+   },
+   {
+    "stem": "frame_0061_20260505_150531_962",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0061_20260505_150531_962.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0061_20260505_150531_962_jpg.rf.26345c8e2f9e73a512dd9a878f102b0a.txt"
+   },
+   {
+    "stem": "frame_0062_20260505_150535_414",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0062_20260505_150535_414.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0062_20260505_150535_414_jpg.rf.548c1de99d78d90a8205060ac19ceec3.txt"
+   },
+   {
+    "stem": "frame_0063_20260505_150539_753",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0063_20260505_150539_753.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0063_20260505_150539_753_jpg.rf.55ce44a69cff87ea106620e9ec1563e2.txt"
+   },
+   {
+    "stem": "frame_0064_20260505_150542_619",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0064_20260505_150542_619.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0064_20260505_150542_619_jpg.rf.ffd69036457fe97c41a2985f7d5b69d9.txt"
+   },
+   {
+    "stem": "frame_0065_20260505_150546_539",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0065_20260505_150546_539.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0065_20260505_150546_539_jpg.rf.4e55efadbbac88390d298afbe8480758.txt"
+   },
+   {
+    "stem": "frame_0066_20260505_150550_977",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0066_20260505_150550_977.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0066_20260505_150550_977_jpg.rf.60c51d520a26f5826157706ff8b7cbb2.txt"
+   },
+   {
+    "stem": "frame_0067_20260505_150555_067",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0067_20260505_150555_067.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0067_20260505_150555_067_jpg.rf.4df15db6472458e8752f2a287befd73b.txt"
+   },
+   {
+    "stem": "frame_0069_20260505_150604_680",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0069_20260505_150604_680.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0069_20260505_150604_680_jpg.rf.29f04af42f1b379534f87b8b1224a483.txt"
+   },
+   {
+    "stem": "frame_0071_20260505_150609_162",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0071_20260505_150609_162.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0071_20260505_150609_162_jpg.rf.8d6feecb5f5a68753908b378ca8bec5a.txt"
+   },
+   {
+    "stem": "frame_0073_20260505_150614_250",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0073_20260505_150614_250.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0073_20260505_150614_250_jpg.rf.165713367ab09fdc22d7c9baf21b490a.txt"
+   },
+   {
+    "stem": "frame_0075_20260505_150621_433",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0075_20260505_150621_433.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0075_20260505_150621_433_jpg.rf.4a95e66a4bac8ff19e5f25bfe95a8698.txt"
+   },
+   {
+    "stem": "frame_0076_20260505_150623_306",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0076_20260505_150623_306.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0076_20260505_150623_306_jpg.rf.33eff1d2499d15bd0afca4637edebb49.txt"
+   },
+   {
+    "stem": "frame_0078_20260505_150626_474",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0078_20260505_150626_474.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0078_20260505_150626_474_jpg.rf.e99abd5eafa93b75cae7d562a3695c28.txt"
+   },
+   {
+    "stem": "frame_0079_20260505_150630_571",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0079_20260505_150630_571.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0079_20260505_150630_571_jpg.rf.e7c835c790139171e8f79b14d4d532de.txt"
+   },
+   {
+    "stem": "frame_0080_20260505_150634_394",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0080_20260505_150634_394.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0080_20260505_150634_394_jpg.rf.a1c05217504c43e12e6818e7f52270d5.txt"
+   },
+   {
+    "stem": "frame_0081_20260505_150637_450",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0081_20260505_150637_450.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0081_20260505_150637_450_jpg.rf.99c4e79835ea6ff1a2cf81fa242c89e5.txt"
+   },
+   {
+    "stem": "frame_0082_20260505_150640_586",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0082_20260505_150640_586.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0082_20260505_150640_586_jpg.rf.8f819432123d7a14eaa825926e296265.txt"
+   },
+   {
+    "stem": "frame_0083_20260505_150643_178",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0083_20260505_150643_178.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0083_20260505_150643_178_jpg.rf.9dee0f8a73aea39d117348ef0a34afbc.txt"
+   },
+   {
+    "stem": "frame_0084_20260505_150646_505",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0084_20260505_150646_505.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0084_20260505_150646_505_jpg.rf.755cc793922ebfa6dc4d277c2bc5fced.txt"
+   },
+   {
+    "stem": "frame_0085_20260505_150649_163",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0085_20260505_150649_163.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0085_20260505_150649_163_jpg.rf.ba8fcf22ad1c2c6e4dbf54c8909ebf63.txt"
+   },
+   {
+    "stem": "frame_0086_20260505_150651_991",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0086_20260505_150651_991.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0086_20260505_150651_991_jpg.rf.1977722554855377ab33dda5d6d3b1e4.txt"
+   },
+   {
+    "stem": "frame_0092_20260505_150711_322",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0092_20260505_150711_322.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0092_20260505_150711_322_jpg.rf.ce2c31898ee3945d4863c9bb3f52a5e2.txt"
+   },
+   {
+    "stem": "frame_0093_20260505_150715_406",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0093_20260505_150715_406.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0093_20260505_150715_406_jpg.rf.c9ce4ef7da7ce7beb8eff759b9fe474e.txt"
+   },
+   {
+    "stem": "frame_0094_20260505_150719_194",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0094_20260505_150719_194.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0094_20260505_150719_194_jpg.rf.875cdd776f293b144521f1f1dba1dc2b.txt"
+   },
+   {
+    "stem": "frame_0098_20260505_150735_674",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0098_20260505_150735_674.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0098_20260505_150735_674_jpg.rf.2862fe98e0f79c67f869e31213cf329f.txt"
+   },
+   {
+    "stem": "frame_0099_20260505_150743_849",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0099_20260505_150743_849.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0099_20260505_150743_849_jpg.rf.62397ccc29b5d71892cb617b8a40ced1.txt"
+   },
+   {
+    "stem": "frame_0100_20260505_150750_120",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0100_20260505_150750_120.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\train\\labels\\frame_0100_20260505_150750_120_jpg.rf.db85479b0b1e6681c47a583008427348.txt"
+   }
+  ],
+  "valid": [
+   {
+    "stem": "frame_0013_20260505_150228_551",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0013_20260505_150228_551.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\valid\\labels\\frame_0013_20260505_150228_551_jpg.rf.39ada4b4918d67c482ec8701794181a2.txt"
+   },
+   {
+    "stem": "frame_0014_20260505_150232_290",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0014_20260505_150232_290.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\valid\\labels\\frame_0014_20260505_150232_290_jpg.rf.b1f50f4d27d13fdb87f4df290ed30513.txt"
+   },
+   {
+    "stem": "frame_0018_20260505_150249_396",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0018_20260505_150249_396.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\valid\\labels\\frame_0018_20260505_150249_396_jpg.rf.8c5cab3f222e0086d7dc432a61bff1b0.txt"
+   },
+   {
+    "stem": "frame_0019_20260505_150253_684",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0019_20260505_150253_684.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\valid\\labels\\frame_0019_20260505_150253_684_jpg.rf.9563db5f3c1a94e8846e2338bf0e5d3a.txt"
+   },
+   {
+    "stem": "frame_0031_20260505_150346_196",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0031_20260505_150346_196.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\valid\\labels\\frame_0031_20260505_150346_196_jpg.rf.6445a150687b0fb6b854184e68b51427.txt"
+   },
+   {
+    "stem": "frame_0036_20260505_150357_906",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0036_20260505_150357_906.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\valid\\labels\\frame_0036_20260505_150357_906_jpg.rf.22cd16f0925212e08499cfeab853704f.txt"
+   },
+   {
+    "stem": "frame_0040_20260505_150410_388",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0040_20260505_150410_388.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\valid\\labels\\frame_0040_20260505_150410_388_jpg.rf.6a38510c701d0e74ec72119773e17ce0.txt"
+   },
+   {
+    "stem": "frame_0049_20260505_150447_418",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0049_20260505_150447_418.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\valid\\labels\\frame_0049_20260505_150447_418_jpg.rf.dc28edfad60653bc3e114c5418a07ea5.txt"
+   },
+   {
+    "stem": "frame_0053_20260505_150500_715",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0053_20260505_150500_715.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\valid\\labels\\frame_0053_20260505_150500_715_jpg.rf.99bc76df699e10fcd65fe1a728c5592d.txt"
+   },
+   {
+    "stem": "frame_0057_20260505_150517_818",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0057_20260505_150517_818.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\valid\\labels\\frame_0057_20260505_150517_818_jpg.rf.098c28fe67e6a25cf0c09438958f7eb4.txt"
+   },
+   {
+    "stem": "frame_0058_20260505_150521_643",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0058_20260505_150521_643.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\valid\\labels\\frame_0058_20260505_150521_643_jpg.rf.8a6261928afe502f2281ec7331bc7a38.txt"
+   },
+   {
+    "stem": "frame_0068_20260505_150559_698",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0068_20260505_150559_698.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\valid\\labels\\frame_0068_20260505_150559_698_jpg.rf.66b4b292ea1329d2cc766fa0e6ea1322.txt"
+   },
+   {
+    "stem": "frame_0070_20260505_150606_921",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0070_20260505_150606_921.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\valid\\labels\\frame_0070_20260505_150606_921_jpg.rf.896b9a745fec707ab0739cffcfbd71fd.txt"
+   },
+   {
+    "stem": "frame_0072_20260505_150611_691",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0072_20260505_150611_691.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\valid\\labels\\frame_0072_20260505_150611_691_jpg.rf.e00d35a7ef742aae76b04d2a34f035bb.txt"
+   },
+   {
+    "stem": "frame_0088_20260505_150656_762",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0088_20260505_150656_762.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\valid\\labels\\frame_0088_20260505_150656_762_jpg.rf.f2e729ebbd1cc39b2d3c4826871bfe19.txt"
+   },
+   {
+    "stem": "frame_0089_20260505_150702_123",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0089_20260505_150702_123.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\valid\\labels\\frame_0089_20260505_150702_123_jpg.rf.b420771186da12d85e793e10352b3f61.txt"
+   },
+   {
+    "stem": "frame_0095_20260505_150723_306",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0095_20260505_150723_306.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\valid\\labels\\frame_0095_20260505_150723_306_jpg.rf.d2c13930eeef664fe21e6806c2d0e338.txt"
+   },
+   {
+    "stem": "frame_0096_20260505_150728_697",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0096_20260505_150728_697.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\valid\\labels\\frame_0096_20260505_150728_697_jpg.rf.443c65a375e0e74721fdb3436655f306.txt"
+   },
+   {
+    "stem": "frame_0097_20260505_150732_377",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0097_20260505_150732_377.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\valid\\labels\\frame_0097_20260505_150732_377_jpg.rf.ddebb01b5bcc856497e82d599c35500f.txt"
+   }
+  ],
+  "test": [
+   {
+    "stem": "frame_0011_20260505_150220_355",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0011_20260505_150220_355.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\test\\labels\\frame_0011_20260505_150220_355_jpg.rf.5a92e9f4e4056a02a5ce35d694ccc478.txt"
+   },
+   {
+    "stem": "frame_0021_20260505_150308_236",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0021_20260505_150308_236.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\test\\labels\\frame_0021_20260505_150308_236_jpg.rf.7c9b5f1a49d5f20983d0c811d47acafc.txt"
+   },
+   {
+    "stem": "frame_0037_20260505_150403_939",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0037_20260505_150403_939.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\test\\labels\\frame_0037_20260505_150403_939_jpg.rf.542f379ddf311b6de86d1d62a73a8fe3.txt"
+   },
+   {
+    "stem": "frame_0043_20260505_150421_859",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0043_20260505_150421_859.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\test\\labels\\frame_0043_20260505_150421_859_jpg.rf.2c67e644609a5476e8f512d71d665a73.txt"
+   },
+   {
+    "stem": "frame_0046_20260505_150434_899",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0046_20260505_150434_899.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\test\\labels\\frame_0046_20260505_150434_899_jpg.rf.12ec89ac678130c7c6d90faf9ab1ab37.txt"
+   },
+   {
+    "stem": "frame_0055_20260505_150506_487",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0055_20260505_150506_487.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\test\\labels\\frame_0055_20260505_150506_487_jpg.rf.3f34e4d79477f8d6bc87cb60481c584f.txt"
+   },
+   {
+    "stem": "frame_0056_20260505_150514_137",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0056_20260505_150514_137.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\test\\labels\\frame_0056_20260505_150514_137_jpg.rf.25b90b9eea723a2a61d8d288e03789ca.txt"
+   },
+   {
+    "stem": "frame_0074_20260505_150616_825",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0074_20260505_150616_825.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\test\\labels\\frame_0074_20260505_150616_825_jpg.rf.2a610916c3a8adcf7feb94690f0be551.txt"
+   },
+   {
+    "stem": "frame_0087_20260505_150655_162",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0087_20260505_150655_162.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\test\\labels\\frame_0087_20260505_150655_162_jpg.rf.9926f9591f4648c7089887da116afc95.txt"
+   },
+   {
+    "stem": "frame_0091_20260505_150708_586",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_145834\\frame_0091_20260505_150708_586.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d6\\test\\labels\\frame_0091_20260505_150708_586_jpg.rf.6a69a087acee0a3491bcb5c069c8c1c7.txt"
+   }
+  ]
+ },
+ "d16": {
+  "train": [
+   {
+    "stem": "frame_0002_20260505_195000_371",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0002_20260505_195000_371.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0002_20260505_195000_371_jpg.rf.342950718e36322254b726f998c88754.txt"
+   },
+   {
+    "stem": "frame_0002_20260506_060405_712",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0002_20260506_060405_712.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0002_20260506_060405_712_jpg.rf.e52cbf656506f54a2eaf714812c56e27.txt"
+   },
+   {
+    "stem": "frame_0003_20260505_195009_026",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0003_20260505_195009_026.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0003_20260505_195009_026_jpg.rf.dc9ad3a05c126c526fe408c0d22af70a.txt"
+   },
+   {
+    "stem": "frame_0004_20260505_195016_995",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0004_20260505_195016_995.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0004_20260505_195016_995_jpg.rf.43e10f4455f2b8c4c66df3e095685706.txt"
+   },
+   {
+    "stem": "frame_0004_20260506_060422_448",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0004_20260506_060422_448.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0004_20260506_060422_448_jpg.rf.a01a18c5ec039d3f10add249bc64f15d.txt"
+   },
+   {
+    "stem": "frame_0005_20260505_195023_780",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0005_20260505_195023_780.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0005_20260505_195023_780_jpg.rf.004a7205330efa577ace6e4723523ef3.txt"
+   },
+   {
+    "stem": "frame_0005_20260506_060430_976",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0005_20260506_060430_976.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0005_20260506_060430_976_jpg.rf.404adb7f40a95afb5571aa1e29d369c6.txt"
+   },
+   {
+    "stem": "frame_0006_20260506_060438_097",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0006_20260506_060438_097.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0006_20260506_060438_097_jpg.rf.21aa5c66ba40acc1d71b4079af418448.txt"
+   },
+   {
+    "stem": "frame_0007_20260506_060447_938",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0007_20260506_060447_938.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0007_20260506_060447_938_jpg.rf.4f437ca02373d12b558c8089e1792af5.txt"
+   },
+   {
+    "stem": "frame_0008_20260505_195044_948",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0008_20260505_195044_948.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0008_20260505_195044_948_jpg.rf.6d3d099ccbfe872a6787b0986c71c924.txt"
+   },
+   {
+    "stem": "frame_0008_20260506_060454_032",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0008_20260506_060454_032.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0008_20260506_060454_032_jpg.rf.4e9fed5811bf740e29f0c490a9dfc950.txt"
+   },
+   {
+    "stem": "frame_0009_20260505_195055_243",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0009_20260505_195055_243.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0009_20260505_195055_243_jpg.rf.1973f8a3f66ec2ce0ddf5fb9c1a22627.txt"
+   },
+   {
+    "stem": "frame_0009_20260506_060459_968",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0009_20260506_060459_968.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0009_20260506_060459_968_jpg.rf.4ed0546bfea87594e607d2663e63a6d7.txt"
+   },
+   {
+    "stem": "frame_0012_20260505_195123_749",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0012_20260505_195123_749.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0012_20260505_195123_749_jpg.rf.62e58a412b2b2b2b06479e8724c34d14.txt"
+   },
+   {
+    "stem": "frame_0012_20260506_060516_881",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0012_20260506_060516_881.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0012_20260506_060516_881_jpg.rf.1bd90fbd08bfde025d58eaf800b51b28.txt"
+   },
+   {
+    "stem": "frame_0013_20260505_195127_907",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0013_20260505_195127_907.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0013_20260505_195127_907_jpg.rf.821f7f68ed85ed89db6941bdf8d02912.txt"
+   },
+   {
+    "stem": "frame_0013_20260506_060520_880",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0013_20260506_060520_880.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0013_20260506_060520_880_jpg.rf.1f55d573b19520c24190a256be886679.txt"
+   },
+   {
+    "stem": "frame_0014_20260505_195138_915",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0014_20260505_195138_915.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0014_20260505_195138_915_jpg.rf.0daba7a03f349e60eff261bdcecbcc93.txt"
+   },
+   {
+    "stem": "frame_0015_20260505_195144_883",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0015_20260505_195144_883.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0015_20260505_195144_883_jpg.rf.8cc443b0b75d20e1b201c1f147d1218c.txt"
+   },
+   {
+    "stem": "frame_0015_20260506_060529_121",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0015_20260506_060529_121.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0015_20260506_060529_121_jpg.rf.5a7e35fd7a5ce75eb6dc8b4eae4f6d39.txt"
+   },
+   {
+    "stem": "frame_0016_20260505_195200_722",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0016_20260505_195200_722.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0016_20260505_195200_722_jpg.rf.e299c4498b4f9059ce3c0d1298d6a442.txt"
+   },
+   {
+    "stem": "frame_0017_20260505_195209_387",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0017_20260505_195209_387.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0017_20260505_195209_387_jpg.rf.5200f859d4ec88871d8a551340cda137.txt"
+   },
+   {
+    "stem": "frame_0017_20260506_060538_097",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0017_20260506_060538_097.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0017_20260506_060538_097_jpg.rf.14f90850f03adab57328450c31fbb696.txt"
+   },
+   {
+    "stem": "frame_0018_20260505_195218_274",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0018_20260505_195218_274.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0018_20260505_195218_274_jpg.rf.b207a2e82ca384d9e18786d09843ff1c.txt"
+   },
+   {
+    "stem": "frame_0018_20260506_060542_768",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0018_20260506_060542_768.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0018_20260506_060542_768_jpg.rf.a83f23e1874047a3dbccb9cdd0f510f7.txt"
+   },
+   {
+    "stem": "frame_0019_20260505_195225_969",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0019_20260505_195225_969.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0019_20260505_195225_969_jpg.rf.c8f7fbe5a506f067f5bc2ae9b96bd3db.txt"
+   },
+   {
+    "stem": "frame_0019_20260506_060546_640",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0019_20260506_060546_640.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0019_20260506_060546_640_jpg.rf.b379c10fc7a7559f84bdfb3c928566e5.txt"
+   },
+   {
+    "stem": "frame_0020_20260505_195233_092",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0020_20260505_195233_092.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0020_20260505_195233_092_jpg.rf.e0dd1bb3101ad81a17a3cf9e8d79ccc2.txt"
+   },
+   {
+    "stem": "frame_0020_20260506_060551_596",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0020_20260506_060551_596.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0020_20260506_060551_596_jpg.rf.8946b40e4095e451d5f6abb5b4c5df68.txt"
+   },
+   {
+    "stem": "frame_0023_20260505_195258_099",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0023_20260505_195258_099.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0023_20260505_195258_099_jpg.rf.56de205ae6f83877584f1ab207644887.txt"
+   },
+   {
+    "stem": "frame_0023_20260506_060700_080",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0023_20260506_060700_080.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0023_20260506_060700_080_jpg.rf.d74033b99a69338ce2abd5110ca21e62.txt"
+   },
+   {
+    "stem": "frame_0024_20260506_060715_649",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0024_20260506_060715_649.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0024_20260506_060715_649_jpg.rf.c966610e9e44f3eada1da0628b458903.txt"
+   },
+   {
+    "stem": "frame_0025_20260506_060729_200",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0025_20260506_060729_200.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0025_20260506_060729_200_jpg.rf.fe0422594d421e824e42da74da7fafb2.txt"
+   },
+   {
+    "stem": "frame_0026_20260505_195332_100",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0026_20260505_195332_100.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0026_20260505_195332_100_jpg.rf.f1c73ad7759953ea0391763767945e1d.txt"
+   },
+   {
+    "stem": "frame_0026_20260506_060740_930",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0026_20260506_060740_930.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0026_20260506_060740_930_jpg.rf.9a892bd69dcead9c021721bfdcbb4acf.txt"
+   },
+   {
+    "stem": "frame_0027_20260506_060750_444",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0027_20260506_060750_444.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0027_20260506_060750_444_jpg.rf.3600179907760ff9296b73cfb9023946.txt"
+   },
+   {
+    "stem": "frame_0028_20260505_195357_251",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0028_20260505_195357_251.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0028_20260505_195357_251_jpg.rf.5df7c9a9202294e54f956df952879f3e.txt"
+   },
+   {
+    "stem": "frame_0028_20260506_060756_370",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0028_20260506_060756_370.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0028_20260506_060756_370_jpg.rf.b3a2dd58a456e4e2f130034089bc69ec.txt"
+   },
+   {
+    "stem": "frame_0029_20260505_195406_514",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0029_20260505_195406_514.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0029_20260505_195406_514_jpg.rf.be9d32771300bf5f0907cfc3b3aa58ec.txt"
+   },
+   {
+    "stem": "frame_0029_20260506_060804_482",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0029_20260506_060804_482.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0029_20260506_060804_482_jpg.rf.5338a6eb423a3ee63666e45b3eb2bd64.txt"
+   },
+   {
+    "stem": "frame_0030_20260505_195414_419",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0030_20260505_195414_419.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0030_20260505_195414_419_jpg.rf.4291d67d1286938f75ae6ebe0700295f.txt"
+   },
+   {
+    "stem": "frame_0031_20260505_195447_409",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0031_20260505_195447_409.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0031_20260505_195447_409_jpg.rf.3536b9dd8bcccdb375a1ae88e63a6115.txt"
+   },
+   {
+    "stem": "frame_0031_20260506_060819_010",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0031_20260506_060819_010.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0031_20260506_060819_010_jpg.rf.f80867256a335c3a3ead154166f1f1e9.txt"
+   },
+   {
+    "stem": "frame_0033_20260506_060834_592",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0033_20260506_060834_592.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0033_20260506_060834_592_jpg.rf.731f80f11f295f2e9d9c82a1dc5e1de0.txt"
+   },
+   {
+    "stem": "frame_0034_20260505_195522_131",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0034_20260505_195522_131.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0034_20260505_195522_131_jpg.rf.972744d9b34a3c1979777ca53b704781.txt"
+   },
+   {
+    "stem": "frame_0035_20260505_195527_587",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0035_20260505_195527_587.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0035_20260505_195527_587_jpg.rf.f6a7a3f678fd1698a58eb7c4c89bff3d.txt"
+   },
+   {
+    "stem": "frame_0035_20260506_060845_088",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0035_20260506_060845_088.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0035_20260506_060845_088_jpg.rf.696e25059167cc8623413f17e9c9315a.txt"
+   },
+   {
+    "stem": "frame_0036_20260505_195532_930",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0036_20260505_195532_930.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0036_20260505_195532_930_jpg.rf.5960de578daa6457092c450ad74cfc76.txt"
+   },
+   {
+    "stem": "frame_0036_20260506_060848_944",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0036_20260506_060848_944.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0036_20260506_060848_944_jpg.rf.5e836c95b34f00f3810baea1265a8ab8.txt"
+   },
+   {
+    "stem": "frame_0037_20260506_060903_856",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0037_20260506_060903_856.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0037_20260506_060903_856_jpg.rf.74626b2d9c15443e4cec216812aff28c.txt"
+   },
+   {
+    "stem": "frame_0038_20260505_195544_468",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0038_20260505_195544_468.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0038_20260505_195544_468_jpg.rf.e27254acb949f67160843b1e23aba7f4.txt"
+   },
+   {
+    "stem": "frame_0038_20260506_060907_582",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0038_20260506_060907_582.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0038_20260506_060907_582_jpg.rf.b1d432cc86a2ffc69f1a4f1f90df3df7.txt"
+   },
+   {
+    "stem": "frame_0039_20260505_195550_579",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0039_20260505_195550_579.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0039_20260505_195550_579_jpg.rf.42de07cbc318d203e689ff536a6c2fa3.txt"
+   },
+   {
+    "stem": "frame_0040_20260505_195559_875",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0040_20260505_195559_875.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0040_20260505_195559_875_jpg.rf.4399723a4c511ae6b1a2c251a2a10876.txt"
+   },
+   {
+    "stem": "frame_0040_20260506_060916_033",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0040_20260506_060916_033.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0040_20260506_060916_033_jpg.rf.673acf904d492a56138cf79fceb62aa9.txt"
+   },
+   {
+    "stem": "frame_0041_20260505_195614_089",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0041_20260505_195614_089.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0041_20260505_195614_089_jpg.rf.f2e71ffb27e98d2c2583ea49bed79515.txt"
+   },
+   {
+    "stem": "frame_0042_20260506_060934_744",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0042_20260506_060934_744.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0042_20260506_060934_744_jpg.rf.390f14f59416d53e81c2430c075b5b82.txt"
+   },
+   {
+    "stem": "frame_0043_20260505_195623_091",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0043_20260505_195623_091.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0043_20260505_195623_091_jpg.rf.be91e332896cd35e13654446e2fe9f09.txt"
+   },
+   {
+    "stem": "frame_0043_20260506_060942_801",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0043_20260506_060942_801.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0043_20260506_060942_801_jpg.rf.8159037305099a5d413733e3c2d0be59.txt"
+   },
+   {
+    "stem": "frame_0044_20260505_195630_495",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0044_20260505_195630_495.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0044_20260505_195630_495_jpg.rf.c31b7c3b483328d77ba726a55082ef6f.txt"
+   },
+   {
+    "stem": "frame_0044_20260506_060949_424",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0044_20260506_060949_424.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0044_20260506_060949_424_jpg.rf.28af9f340b04ac6ed904aecbf8c643a5.txt"
+   },
+   {
+    "stem": "frame_0045_20260505_195637_699",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0045_20260505_195637_699.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0045_20260505_195637_699_jpg.rf.3d9aa20cdbd923a6824221752867607a.txt"
+   },
+   {
+    "stem": "frame_0045_20260506_061000_673",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0045_20260506_061000_673.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0045_20260506_061000_673_jpg.rf.18e5d3d104d917e4ec8d186a90174d8b.txt"
+   },
+   {
+    "stem": "frame_0046_20260506_061014_944",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0046_20260506_061014_944.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0046_20260506_061014_944_jpg.rf.43e48969babbcd84b27b70b3b67bcf4d.txt"
+   },
+   {
+    "stem": "frame_0047_20260505_195645_508",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0047_20260505_195645_508.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0047_20260505_195645_508_jpg.rf.31e22df8cb9c941525405df16c62c326.txt"
+   },
+   {
+    "stem": "frame_0048_20260505_195650_243",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0048_20260505_195650_243.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0048_20260505_195650_243_jpg.rf.cb731734927b05e87948035c8750cfff.txt"
+   },
+   {
+    "stem": "frame_0049_20260506_061036_608",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0049_20260506_061036_608.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0049_20260506_061036_608_jpg.rf.6f85fe12c579046430ae609d3e42a84b.txt"
+   },
+   {
+    "stem": "frame_0050_20260505_195702_609",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0050_20260505_195702_609.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0050_20260505_195702_609_jpg.rf.1d8a1cd7f0f506f3fcc462888723cb8f.txt"
+   },
+   {
+    "stem": "frame_0050_20260506_061042_912",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0050_20260506_061042_912.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0050_20260506_061042_912_jpg.rf.b96ca3aeca598cc328e9ec630489d65c.txt"
+   },
+   {
+    "stem": "frame_0051_20260506_061047_776",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0051_20260506_061047_776.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0051_20260506_061047_776_jpg.rf.dc848b3428474bcb617cf61dc3f6b640.txt"
+   },
+   {
+    "stem": "frame_0052_20260505_195725_454",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0052_20260505_195725_454.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0052_20260505_195725_454_jpg.rf.4032ded4cfdd3bc3fc683af27985435f.txt"
+   },
+   {
+    "stem": "frame_0052_20260506_061051_841",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0052_20260506_061051_841.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0052_20260506_061051_841_jpg.rf.8f06983b5331a14889155ce7e5473e33.txt"
+   },
+   {
+    "stem": "frame_0053_20260505_195735_859",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0053_20260505_195735_859.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0053_20260505_195735_859_jpg.rf.d830092b210be0f8d239ed2cb0080ad1.txt"
+   },
+   {
+    "stem": "frame_0053_20260506_061056_576",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0053_20260506_061056_576.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0053_20260506_061056_576_jpg.rf.d6cafe3b21c987d3de604edc987ac410.txt"
+   },
+   {
+    "stem": "frame_0054_20260505_195744_639",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0054_20260505_195744_639.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0054_20260505_195744_639_jpg.rf.238b3fa300d8a2746af9a637ec4be0c4.txt"
+   },
+   {
+    "stem": "frame_0054_20260506_061102_609",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0054_20260506_061102_609.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0054_20260506_061102_609_jpg.rf.d39060982b37715cfc913e05f1328ec7.txt"
+   },
+   {
+    "stem": "frame_0055_20260505_195756_177",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0055_20260505_195756_177.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0055_20260505_195756_177_jpg.rf.1e2b2dc19564d6991a013dbc2b7f437f.txt"
+   },
+   {
+    "stem": "frame_0055_20260506_061106_416",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0055_20260506_061106_416.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0055_20260506_061106_416_jpg.rf.078a16ab6fb790914f34aeb43cd33bec.txt"
+   },
+   {
+    "stem": "frame_0056_20260505_195803_405",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0056_20260505_195803_405.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0056_20260505_195803_405_jpg.rf.b60036769e3c56aa55b57fe2f175a373.txt"
+   },
+   {
+    "stem": "frame_0056_20260506_061114_683",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0056_20260506_061114_683.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0056_20260506_061114_683_jpg.rf.3deac187d2a62969c3cedc59925a0333.txt"
+   },
+   {
+    "stem": "frame_0057_20260505_195811_059",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0057_20260505_195811_059.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0057_20260505_195811_059_jpg.rf.f965177f0e6469bba1bab0a8fcf5f42a.txt"
+   },
+   {
+    "stem": "frame_0057_20260506_061118_962",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0057_20260506_061118_962.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0057_20260506_061118_962_jpg.rf.d44aa0b70c004a47dcc07d0eee9ab555.txt"
+   },
+   {
+    "stem": "frame_0058_20260505_195818_018",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0058_20260505_195818_018.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0058_20260505_195818_018_jpg.rf.29d7008f26dae724a6a64cab7a75baed.txt"
+   },
+   {
+    "stem": "frame_0059_20260505_195828_515",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0059_20260505_195828_515.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0059_20260505_195828_515_jpg.rf.36a69988499491d84825e1dc99bca6f5.txt"
+   },
+   {
+    "stem": "frame_0060_20260506_061132_767",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0060_20260506_061132_767.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0060_20260506_061132_767_jpg.rf.5387f31ae990a4f17d29b18dbb1f03a3.txt"
+   },
+   {
+    "stem": "frame_0061_20260506_061219_352",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0061_20260506_061219_352.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0061_20260506_061219_352_jpg.rf.2c045a3cb31a4ac36353bcfe4579debc.txt"
+   },
+   {
+    "stem": "frame_0062_20260505_195903_299",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0062_20260505_195903_299.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0062_20260505_195903_299_jpg.rf.c66868bae20894003065bd9a8f16d2da.txt"
+   },
+   {
+    "stem": "frame_0062_20260506_061336_385",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0062_20260506_061336_385.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0062_20260506_061336_385_jpg.rf.839a0c7cd5775ab5fdc2589d18edd219.txt"
+   },
+   {
+    "stem": "frame_0063_20260506_061342_131",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0063_20260506_061342_131.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0063_20260506_061342_131_jpg.rf.8eb1aaec48bffcbee63a5ad0703f3a0d.txt"
+   },
+   {
+    "stem": "frame_0064_20260505_195916_900",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0064_20260505_195916_900.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0064_20260505_195916_900_jpg.rf.074fce610d6ff2335f8f6007df851584.txt"
+   },
+   {
+    "stem": "frame_0065_20260505_195926_018",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0065_20260505_195926_018.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0065_20260505_195926_018_jpg.rf.7dbea32254e27b9829f78db97e55085d.txt"
+   },
+   {
+    "stem": "frame_0066_20260505_195930_561",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0066_20260505_195930_561.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0066_20260505_195930_561_jpg.rf.ac7c6a6008862ef0a5c78d516bd88417.txt"
+   },
+   {
+    "stem": "frame_0067_20260506_061418_368",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0067_20260506_061418_368.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0067_20260506_061418_368_jpg.rf.55aa217b308d3809b4cdd7f9d561ce45.txt"
+   },
+   {
+    "stem": "frame_0068_20260505_195943_203",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0068_20260505_195943_203.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0068_20260505_195943_203_jpg.rf.bb6b737076751d8b0aee315f4d2e00e9.txt"
+   },
+   {
+    "stem": "frame_0069_20260505_195946_741",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0069_20260505_195946_741.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0069_20260505_195946_741_jpg.rf.d54a53743d32a82421f21915c4acd6dd.txt"
+   },
+   {
+    "stem": "frame_0070_20260506_061445_662",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0070_20260506_061445_662.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0070_20260506_061445_662_jpg.rf.32422f0b5e16a01b3f98bdaac1887474.txt"
+   },
+   {
+    "stem": "frame_0071_20260505_200008_179",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0071_20260505_200008_179.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0071_20260505_200008_179_jpg.rf.3b20bd24356539e9c980bd816daab3b5.txt"
+   },
+   {
+    "stem": "frame_0072_20260506_061457_117",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0072_20260506_061457_117.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0072_20260506_061457_117_jpg.rf.d5ccc66212e12c99a1df07ad50f48779.txt"
+   },
+   {
+    "stem": "frame_0073_20260505_200021_185",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0073_20260505_200021_185.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0073_20260505_200021_185_jpg.rf.82f81eb0b836b0007a0df891063a6767.txt"
+   },
+   {
+    "stem": "frame_0074_20260505_200029_395",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0074_20260505_200029_395.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0074_20260505_200029_395_jpg.rf.e86396ad36b90a3f03b80450cce82db7.txt"
+   },
+   {
+    "stem": "frame_0074_20260506_061505_147",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0074_20260506_061505_147.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0074_20260506_061505_147_jpg.rf.5b72d558442c239804e1dcc5d94c6550.txt"
+   },
+   {
+    "stem": "frame_0075_20260506_061509_274",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0075_20260506_061509_274.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0075_20260506_061509_274_jpg.rf.e29ead96ea1b37a89ed5a2257b631c5b.txt"
+   },
+   {
+    "stem": "frame_0076_20260505_200049_925",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0076_20260505_200049_925.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0076_20260505_200049_925_jpg.rf.31338164aa97b20073f0240d61920e11.txt"
+   },
+   {
+    "stem": "frame_0077_20260505_200101_123",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0077_20260505_200101_123.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0077_20260505_200101_123_jpg.rf.1f29681c570574b35d01a8af14023928.txt"
+   },
+   {
+    "stem": "frame_0078_20260505_200111_554",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0078_20260505_200111_554.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0078_20260505_200111_554_jpg.rf.03a4bd94d73f80be2f20a888b70f7948.txt"
+   },
+   {
+    "stem": "frame_0078_20260506_061527_402",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0078_20260506_061527_402.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0078_20260506_061527_402_jpg.rf.ee8e9295d758fef3845cacb13af08fd0.txt"
+   },
+   {
+    "stem": "frame_0079_20260505_200129_330",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0079_20260505_200129_330.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0079_20260505_200129_330_jpg.rf.bdc80f6fca0a4f8ea2219cbaf8e0462b.txt"
+   },
+   {
+    "stem": "frame_0079_20260506_061531_062",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0079_20260506_061531_062.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0079_20260506_061531_062_jpg.rf.5b807181ec5bbfae341b156cf51998d3.txt"
+   },
+   {
+    "stem": "frame_0080_20260505_200139_859",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0080_20260505_200139_859.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0080_20260505_200139_859_jpg.rf.641670652e4d94b598af1bd8693e2a31.txt"
+   },
+   {
+    "stem": "frame_0080_20260506_061536_904",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0080_20260506_061536_904.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0080_20260506_061536_904_jpg.rf.d865aaa1d046c7c2f969f21432d1c87c.txt"
+   },
+   {
+    "stem": "frame_0082_20260505_200159_237",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0082_20260505_200159_237.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0082_20260505_200159_237_jpg.rf.c5e40be756bd73771c9ea3d23d710e1b.txt"
+   },
+   {
+    "stem": "frame_0082_20260506_061554_854",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0082_20260506_061554_854.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0082_20260506_061554_854_jpg.rf.b72a27aebd7bbd320dba2190e10bc619.txt"
+   },
+   {
+    "stem": "frame_0083_20260505_200206_273",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0083_20260505_200206_273.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0083_20260505_200206_273_jpg.rf.10a18cdde4cfddb516d9dfbe33c6b149.txt"
+   },
+   {
+    "stem": "frame_0084_20260506_061607_669",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0084_20260506_061607_669.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0084_20260506_061607_669_jpg.rf.968686ad0c96ee5c88d193d48b8eee74.txt"
+   },
+   {
+    "stem": "frame_0085_20260505_200227_188",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0085_20260505_200227_188.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0085_20260505_200227_188_jpg.rf.4d2333c46ea48f6e234ad69146be95e9.txt"
+   },
+   {
+    "stem": "frame_0086_20260505_200231_795",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0086_20260505_200231_795.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0086_20260505_200231_795_jpg.rf.7da88f9c331f20aa4fa7e3f30bef8e83.txt"
+   },
+   {
+    "stem": "frame_0086_20260506_061620_934",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0086_20260506_061620_934.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0086_20260506_061620_934_jpg.rf.29f3b091594930e76aa25a2a3ef1673d.txt"
+   },
+   {
+    "stem": "frame_0087_20260505_200237_075",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0087_20260505_200237_075.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0087_20260505_200237_075_jpg.rf.1dc87ebd6ecb96bf7b712738bdb76290.txt"
+   },
+   {
+    "stem": "frame_0087_20260506_061627_603",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0087_20260506_061627_603.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0087_20260506_061627_603_jpg.rf.2331fd214df6cffb9e7fb75e34a1a253.txt"
+   },
+   {
+    "stem": "frame_0088_20260505_200241_491",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0088_20260505_200241_491.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0088_20260505_200241_491_jpg.rf.6a97f1728719c2ea6ff32d88892262f2.txt"
+   },
+   {
+    "stem": "frame_0088_20260506_061636_386",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0088_20260506_061636_386.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0088_20260506_061636_386_jpg.rf.55d0231d62298ef62637243d0fd371a3.txt"
+   },
+   {
+    "stem": "frame_0089_20260506_061644_162",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0089_20260506_061644_162.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0089_20260506_061644_162_jpg.rf.13a3cba2ef0dcfbb0eade551270b8e6d.txt"
+   },
+   {
+    "stem": "frame_0090_20260505_200251_250",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0090_20260505_200251_250.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0090_20260505_200251_250_jpg.rf.c73e961e9c608e0984f301004d2422ac.txt"
+   },
+   {
+    "stem": "frame_0090_20260506_061652_927",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0090_20260506_061652_927.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0090_20260506_061652_927_jpg.rf.91b38def6ccdaeb0871b90e6d2d404f1.txt"
+   },
+   {
+    "stem": "frame_0092_20260506_061702_290",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0092_20260506_061702_290.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0092_20260506_061702_290_jpg.rf.1d297ddaa8cf62607ae29b91fbee920b.txt"
+   },
+   {
+    "stem": "frame_0093_20260505_200328_211",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0093_20260505_200328_211.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0093_20260505_200328_211_jpg.rf.168fbc27dbdcb624e37b92a8452cbdef.txt"
+   },
+   {
+    "stem": "frame_0093_20260506_061706_544",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0093_20260506_061706_544.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0093_20260506_061706_544_jpg.rf.6966257264668334666ddcc61c2e550b.txt"
+   },
+   {
+    "stem": "frame_0095_20260505_200349_826",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0095_20260505_200349_826.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0095_20260505_200349_826_jpg.rf.8da1b1a927fcd529aa9edf3da74a158e.txt"
+   },
+   {
+    "stem": "frame_0095_20260506_061719_426",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0095_20260506_061719_426.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0095_20260506_061719_426_jpg.rf.4e0a8765c5ed574e85700a96557b02cc.txt"
+   },
+   {
+    "stem": "frame_0096_20260505_200358_577",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0096_20260505_200358_577.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0096_20260505_200358_577_jpg.rf.696b32cb608981cfe5518659f0a8301a.txt"
+   },
+   {
+    "stem": "frame_0098_20260505_200412_033",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0098_20260505_200412_033.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0098_20260505_200412_033_jpg.rf.ece059f3a6592d9ed2c6da9f2e149812.txt"
+   },
+   {
+    "stem": "frame_0099_20260506_061752_876",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0099_20260506_061752_876.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0099_20260506_061752_876_jpg.rf.79136c5f145e984f4635ac63a46c85a8.txt"
+   },
+   {
+    "stem": "frame_0101_20260505_200440_628",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0101_20260505_200440_628.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0101_20260505_200440_628_jpg.rf.b6def0772e8f9f245eb46cbb99e64fab.txt"
+   },
+   {
+    "stem": "frame_0101_20260506_061813_468",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0101_20260506_061813_468.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0101_20260506_061813_468_jpg.rf.0ea045cf00f60c56d6ae3ec80a38b4de.txt"
+   },
+   {
+    "stem": "frame_0102_20260506_061825_482",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0102_20260506_061825_482.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0102_20260506_061825_482_jpg.rf.28f60ecb8dc62795ab39d3fc14cc6e15.txt"
+   },
+   {
+    "stem": "frame_0103_20260505_200447_203",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0103_20260505_200447_203.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0103_20260505_200447_203_jpg.rf.358e676cea85a28187b8aaa2969fa904.txt"
+   },
+   {
+    "stem": "frame_0104_20260505_200451_635",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0104_20260505_200451_635.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0104_20260505_200451_635_jpg.rf.831d1aa7eae29b1da97437e70aa3f632.txt"
+   },
+   {
+    "stem": "frame_0104_20260506_061838_471",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0104_20260506_061838_471.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0104_20260506_061838_471_jpg.rf.0bc406d91bd5ee02270a9835a754463a.txt"
+   },
+   {
+    "stem": "frame_0105_20260505_200502_087",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0105_20260505_200502_087.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0105_20260505_200502_087_jpg.rf.b793c555e1d79efedb62ab9c326feb64.txt"
+   },
+   {
+    "stem": "frame_0106_20260506_061853_304",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0106_20260506_061853_304.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0106_20260506_061853_304_jpg.rf.f3d1bbed947addfec679910ab8fdc1a3.txt"
+   },
+   {
+    "stem": "frame_0107_20260505_200516_371",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0107_20260505_200516_371.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0107_20260505_200516_371_jpg.rf.5493e9334dd10a15022d58ee896a54b1.txt"
+   },
+   {
+    "stem": "frame_0107_20260506_061859_493",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0107_20260506_061859_493.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0107_20260506_061859_493_jpg.rf.89546a27c4dd22d0027b12c232aa0007.txt"
+   },
+   {
+    "stem": "frame_0109_20260505_200527_552",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0109_20260505_200527_552.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0109_20260505_200527_552_jpg.rf.b9fd93767a044b4228c8cd82a709ee0b.txt"
+   },
+   {
+    "stem": "frame_0109_20260506_061910_453",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0109_20260506_061910_453.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0109_20260506_061910_453_jpg.rf.d9f0d45ecfa2d60855808883fd93bae4.txt"
+   },
+   {
+    "stem": "frame_0110_20260506_061921_764",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0110_20260506_061921_764.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0110_20260506_061921_764_jpg.rf.151b91442aa18aa645f2585c675337ab.txt"
+   },
+   {
+    "stem": "frame_0111_20260505_200535_139",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0111_20260505_200535_139.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0111_20260505_200535_139_jpg.rf.c86ee7cc0f8bc7bcd1a7e689c409f927.txt"
+   },
+   {
+    "stem": "frame_0111_20260506_061932_531",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0111_20260506_061932_531.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0111_20260506_061932_531_jpg.rf.3aec296daec945eadd22d7a081cf70fd.txt"
+   },
+   {
+    "stem": "frame_0112_20260505_200557_123",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0112_20260505_200557_123.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0112_20260505_200557_123_jpg.rf.9a00a64c580a51f9912a2accdc55debd.txt"
+   },
+   {
+    "stem": "frame_0112_20260506_061936_490",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0112_20260506_061936_490.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0112_20260506_061936_490_jpg.rf.be070473ca72a14b5f236c4c8d84931b.txt"
+   },
+   {
+    "stem": "frame_0113_20260505_200602_772",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0113_20260505_200602_772.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0113_20260505_200602_772_jpg.rf.dff56b4f810726729a0cf08c28f64f97.txt"
+   },
+   {
+    "stem": "frame_0113_20260506_061940_643",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0113_20260506_061940_643.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0113_20260506_061940_643_jpg.rf.0c4751ab48ec58c6f0390e2492087a34.txt"
+   },
+   {
+    "stem": "frame_0114_20260506_061945_316",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0114_20260506_061945_316.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0114_20260506_061945_316_jpg.rf.83a28a569e89ae56adbf09e61a095fa9.txt"
+   },
+   {
+    "stem": "frame_0115_20260505_200624_035",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0115_20260505_200624_035.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0115_20260505_200624_035_jpg.rf.cf72f22d486b35692550943ed95bdc36.txt"
+   },
+   {
+    "stem": "frame_0116_20260505_200631_668",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0116_20260505_200631_668.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0116_20260505_200631_668_jpg.rf.c07ce4433ec97f1a131eb44a5848c0e0.txt"
+   },
+   {
+    "stem": "frame_0116_20260506_062004_205",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0116_20260506_062004_205.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0116_20260506_062004_205_jpg.rf.408a734a2823d9bd65e2b5dd25458aca.txt"
+   },
+   {
+    "stem": "frame_0117_20260505_200640_995",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0117_20260505_200640_995.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0117_20260505_200640_995_jpg.rf.62deb22cd189233d44846f2446d4613f.txt"
+   },
+   {
+    "stem": "frame_0117_20260506_062008_031",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0117_20260506_062008_031.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0117_20260506_062008_031_jpg.rf.17597f71434f0a41cca0fe4a002d9a5d.txt"
+   },
+   {
+    "stem": "frame_0118_20260505_200647_507",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0118_20260505_200647_507.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0118_20260505_200647_507_jpg.rf.3f01415b1f2e906c8f320c7646217aca.txt"
+   },
+   {
+    "stem": "frame_0118_20260506_062012_135",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0118_20260506_062012_135.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0118_20260506_062012_135_jpg.rf.bb9fe00a929129f83fccf1471085428d.txt"
+   },
+   {
+    "stem": "frame_0119_20260506_062015_694",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0119_20260506_062015_694.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0119_20260506_062015_694_jpg.rf.886b16bb60067cf7b1f36070d378bdb2.txt"
+   },
+   {
+    "stem": "frame_0120_20260505_200906_899",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0120_20260505_200906_899.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0120_20260505_200906_899_jpg.rf.7fb865e8d9f5a9568b064375da41e483.txt"
+   },
+   {
+    "stem": "frame_0120_20260506_062019_616",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0120_20260506_062019_616.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0120_20260506_062019_616_jpg.rf.ca7dad4beecef4ad85e3dafdfd8dc62f.txt"
+   },
+   {
+    "stem": "frame_0121_20260505_200916_849",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0121_20260505_200916_849.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0121_20260505_200916_849_jpg.rf.b2350b0240c4ef00e740f6375bfbc305.txt"
+   },
+   {
+    "stem": "frame_0122_20260506_062046_745",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0122_20260506_062046_745.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0122_20260506_062046_745_jpg.rf.bae6fc9d98af1f880460b5300565145d.txt"
+   },
+   {
+    "stem": "frame_0124_20260505_200942_660",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0124_20260505_200942_660.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0124_20260505_200942_660_jpg.rf.f2814875ace776037cb7b20839858baa.txt"
+   },
+   {
+    "stem": "frame_0124_20260506_062101_804",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0124_20260506_062101_804.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0124_20260506_062101_804_jpg.rf.4f499ebb56e4d08b42f9e3c1fb6cce46.txt"
+   },
+   {
+    "stem": "frame_0125_20260505_201028_212",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0125_20260505_201028_212.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0125_20260505_201028_212_jpg.rf.8665f479e2c2f015e6659fecaec69194.txt"
+   },
+   {
+    "stem": "frame_0125_20260506_062108_824",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0125_20260506_062108_824.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0125_20260506_062108_824_jpg.rf.0cba11ebd0dc2176d96daabe3d6f1ba1.txt"
+   },
+   {
+    "stem": "frame_0126_20260505_201032_051",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0126_20260505_201032_051.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0126_20260505_201032_051_jpg.rf.8bb36cb8f176adb4cabc4c05758f08af.txt"
+   },
+   {
+    "stem": "frame_0127_20260505_201036_167",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0127_20260505_201036_167.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0127_20260505_201036_167_jpg.rf.d6b605d0e4f22f90c2be2c23ed8e472c.txt"
+   },
+   {
+    "stem": "frame_0127_20260506_062119_899",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0127_20260506_062119_899.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0127_20260506_062119_899_jpg.rf.4b4a73e85d087e00fe42a1d783d8e819.txt"
+   },
+   {
+    "stem": "frame_0128_20260505_201040_435",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0128_20260505_201040_435.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0128_20260505_201040_435_jpg.rf.7cad3b0136792c240c9c953621ae3ac4.txt"
+   },
+   {
+    "stem": "frame_0128_20260506_062138_839",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0128_20260506_062138_839.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0128_20260506_062138_839_jpg.rf.b8eb0c4870ee62191d0965b30af1f87d.txt"
+   },
+   {
+    "stem": "frame_0129_20260505_201048_099",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0129_20260505_201048_099.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0129_20260505_201048_099_jpg.rf.1e145920d78a3052059965050ec54df2.txt"
+   },
+   {
+    "stem": "frame_0130_20260505_201057_889",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0130_20260505_201057_889.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0130_20260505_201057_889_jpg.rf.ee8c78a576b72ef2f80d7ac545b00f46.txt"
+   },
+   {
+    "stem": "frame_0130_20260506_062205_925",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0130_20260506_062205_925.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0130_20260506_062205_925_jpg.rf.30b0635b91d3911cb8bcdcb775f32c23.txt"
+   },
+   {
+    "stem": "frame_0131_20260505_201104_531",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0131_20260505_201104_531.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0131_20260505_201104_531_jpg.rf.b1590018c324313174f43d140c47fcdb.txt"
+   },
+   {
+    "stem": "frame_0131_20260506_062218_532",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0131_20260506_062218_532.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0131_20260506_062218_532_jpg.rf.8b1950ec6cc6a87e87e8d9a134c3e255.txt"
+   },
+   {
+    "stem": "frame_0132_20260505_201108_677",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0132_20260505_201108_677.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0132_20260505_201108_677_jpg.rf.45cd72bfe5d04f8a6426d2d984b76be4.txt"
+   },
+   {
+    "stem": "frame_0132_20260506_062222_037",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0132_20260506_062222_037.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0132_20260506_062222_037_jpg.rf.fe69360c384dc820fa5d92aabc7a8b38.txt"
+   },
+   {
+    "stem": "frame_0133_20260505_201112_403",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0133_20260505_201112_403.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0133_20260505_201112_403_jpg.rf.669c84278b97573361a63461563f9dd2.txt"
+   },
+   {
+    "stem": "frame_0133_20260506_062225_509",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0133_20260506_062225_509.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0133_20260506_062225_509_jpg.rf.4f95774ca7b126d7bd503bd02c09fb7f.txt"
+   },
+   {
+    "stem": "frame_0135_20260505_201130_725",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0135_20260505_201130_725.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0135_20260505_201130_725_jpg.rf.bc5792f69ba78886ddca463a56bf90ed.txt"
+   },
+   {
+    "stem": "frame_0135_20260506_062233_954",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0135_20260506_062233_954.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0135_20260506_062233_954_jpg.rf.88c5fbb16fec459777e631ebbcca6a02.txt"
+   },
+   {
+    "stem": "frame_0136_20260505_201142_546",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0136_20260505_201142_546.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0136_20260505_201142_546_jpg.rf.9b0b52b6a45c0c8102c31d0eb5fe2439.txt"
+   },
+   {
+    "stem": "frame_0136_20260506_062246_498",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0136_20260506_062246_498.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0136_20260506_062246_498_jpg.rf.d9395be3cf77355d90741dde032ffd5a.txt"
+   },
+   {
+    "stem": "frame_0137_20260505_201157_059",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0137_20260505_201157_059.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0137_20260505_201157_059_jpg.rf.bdbcf551f8b88f0ff46961c2eb53aefa.txt"
+   },
+   {
+    "stem": "frame_0137_20260506_062250_082",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0137_20260506_062250_082.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0137_20260506_062250_082_jpg.rf.b7cc95a3a2b5808204500e4227400ac9.txt"
+   },
+   {
+    "stem": "frame_0138_20260506_062255_016",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0138_20260506_062255_016.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0138_20260506_062255_016_jpg.rf.c164e83e88bc96ad90bdfb59a4fccdbf.txt"
+   },
+   {
+    "stem": "frame_0139_20260505_201207_828",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0139_20260505_201207_828.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0139_20260505_201207_828_jpg.rf.b1e290a4172df9628160f1a19cb51a9f.txt"
+   },
+   {
+    "stem": "frame_0139_20260506_062259_410",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0139_20260506_062259_410.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0139_20260506_062259_410_jpg.rf.20a58850a252d699ad53b0d58b063d89.txt"
+   },
+   {
+    "stem": "frame_0140_20260505_201212_836",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0140_20260505_201212_836.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0140_20260505_201212_836_jpg.rf.eeb42e20b5e6055b5cf4eac38c8dbc4b.txt"
+   },
+   {
+    "stem": "frame_0141_20260506_062330_445",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0141_20260506_062330_445.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0141_20260506_062330_445_jpg.rf.107c6d0a2c813d7c780d75fafda31145.txt"
+   },
+   {
+    "stem": "frame_0142_20260505_201236_180",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0142_20260505_201236_180.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0142_20260505_201236_180_jpg.rf.9c58bed53225fdb41e5955fa787a0be0.txt"
+   },
+   {
+    "stem": "frame_0143_20260505_201243_989",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0143_20260505_201243_989.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0143_20260505_201243_989_jpg.rf.c9f2d7f21fa5ea3858a108f7a3930cfe.txt"
+   },
+   {
+    "stem": "frame_0144_20260506_062349_723",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0144_20260506_062349_723.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0144_20260506_062349_723_jpg.rf.e17dd0c0d94c35dab758ac0eee504f4c.txt"
+   },
+   {
+    "stem": "frame_0145_20260506_062356_267",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0145_20260506_062356_267.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0145_20260506_062356_267_jpg.rf.26b2e8f6d8a0b9bca87417ac15b12312.txt"
+   },
+   {
+    "stem": "frame_0146_20260506_062402_778",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0146_20260506_062402_778.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0146_20260506_062402_778_jpg.rf.492f08308eb21eef4c0c18066e44d9c4.txt"
+   },
+   {
+    "stem": "frame_0147_20260505_201311_795",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0147_20260505_201311_795.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0147_20260505_201311_795_jpg.rf.6759b647befdf4766ac0384b8ae73990.txt"
+   },
+   {
+    "stem": "frame_0147_20260506_062412_587",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0147_20260506_062412_587.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0147_20260506_062412_587_jpg.rf.b8b2744809fba32c3e323d8a664a8605.txt"
+   },
+   {
+    "stem": "frame_0148_20260505_201316_083",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0148_20260505_201316_083.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0148_20260505_201316_083_jpg.rf.1cd27e4d18a25748a213815bdaff4c13.txt"
+   },
+   {
+    "stem": "frame_0148_20260506_062420_539",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0148_20260506_062420_539.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0148_20260506_062420_539_jpg.rf.7795831bfdab985a6e807f435dbf317f.txt"
+   },
+   {
+    "stem": "frame_0149_20260505_201320_035",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0149_20260505_201320_035.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0149_20260505_201320_035_jpg.rf.fb86a032311773d50bcfe5d1f2094d94.txt"
+   },
+   {
+    "stem": "frame_0149_20260506_062428_057",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0149_20260506_062428_057.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0149_20260506_062428_057_jpg.rf.d857abf5d30bf9382a1b9f5252c0444d.txt"
+   },
+   {
+    "stem": "frame_0150_20260505_201323_571",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0150_20260505_201323_571.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0150_20260505_201323_571_jpg.rf.24ad4569435f22468de02a741abb3f5a.txt"
+   },
+   {
+    "stem": "frame_0150_20260506_062435_111",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0150_20260506_062435_111.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0150_20260506_062435_111_jpg.rf.81dd0c536810b97b279c1bc9097e93d0.txt"
+   },
+   {
+    "stem": "frame_0151_20260505_201327_809",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0151_20260505_201327_809.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0151_20260505_201327_809_jpg.rf.9dbd2e8cf35c5ffe1e245e96a13b4beb.txt"
+   },
+   {
+    "stem": "frame_0151_20260506_062439_815",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0151_20260506_062439_815.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0151_20260506_062439_815_jpg.rf.c57c514fe084f661a0e7d5e4c2d4a50e.txt"
+   },
+   {
+    "stem": "frame_0152_20260505_201332_468",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0152_20260505_201332_468.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0152_20260505_201332_468_jpg.rf.1e9e6fdd633caaac81b8108a9c983bb3.txt"
+   },
+   {
+    "stem": "frame_0152_20260506_062444_289",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0152_20260506_062444_289.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0152_20260506_062444_289_jpg.rf.78b6ea623591db5561a08e0d24ec3b32.txt"
+   },
+   {
+    "stem": "frame_0153_20260506_062448_087",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0153_20260506_062448_087.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0153_20260506_062448_087_jpg.rf.acb4088a328e1ef59c7137bf53bb70c7.txt"
+   },
+   {
+    "stem": "frame_0155_20260506_062455_255",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0155_20260506_062455_255.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0155_20260506_062455_255_jpg.rf.d88680248d7bc01fd8358085883adee1.txt"
+   },
+   {
+    "stem": "frame_0156_20260506_062504_899",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0156_20260506_062504_899.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0156_20260506_062504_899_jpg.rf.453e8802c9dd8e24373cc52c21974358.txt"
+   },
+   {
+    "stem": "frame_0157_20260506_062508_543",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0157_20260506_062508_543.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0157_20260506_062508_543_jpg.rf.061c9b87f889080af031fd372b645a31.txt"
+   },
+   {
+    "stem": "frame_0158_20260506_062512_405",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0158_20260506_062512_405.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0158_20260506_062512_405_jpg.rf.3f7a632a76b7857fd31bc825fc5e404d.txt"
+   },
+   {
+    "stem": "frame_0160_20260506_062520_270",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0160_20260506_062520_270.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\train\\labels\\frame_0160_20260506_062520_270_jpg.rf.59636539d36ada9c880eb5ae2fc973b5.txt"
+   }
+  ],
+  "valid": [
+   {
+    "stem": "frame_0001_20260505_194950_880",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0001_20260505_194950_880.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0001_20260505_194950_880_jpg.rf.4ac8b8e7e768f6312f5147c57e88d5a2.txt"
+   },
+   {
+    "stem": "frame_0001_20260506_060355_940",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0001_20260506_060355_940.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0001_20260506_060355_940_jpg.rf.2b74bfc9db028793dbf2caae34267d43.txt"
+   },
+   {
+    "stem": "frame_0003_20260506_060413_164",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0003_20260506_060413_164.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0003_20260506_060413_164_jpg.rf.f7cf0689563b087b7fbd307023c086a4.txt"
+   },
+   {
+    "stem": "frame_0006_20260505_195030_978",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0006_20260505_195030_978.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0006_20260505_195030_978_jpg.rf.b794520d8de126cb69a604fe414d8a59.txt"
+   },
+   {
+    "stem": "frame_0010_20260506_060505_976",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0010_20260506_060505_976.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0010_20260506_060505_976_jpg.rf.cc3368608114b3bf86424fd99456fc12.txt"
+   },
+   {
+    "stem": "frame_0011_20260506_060512_307",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0011_20260506_060512_307.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0011_20260506_060512_307_jpg.rf.78dd4a6a069c762b926e60d58a15d203.txt"
+   },
+   {
+    "stem": "frame_0016_20260506_060535_296",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0016_20260506_060535_296.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0016_20260506_060535_296_jpg.rf.c15b864b38a05db74123cfdebb1835df.txt"
+   },
+   {
+    "stem": "frame_0021_20260506_060604_064",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0021_20260506_060604_064.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0021_20260506_060604_064_jpg.rf.92bfd3a3ced6ffa2a07c478198f9a99f.txt"
+   },
+   {
+    "stem": "frame_0022_20260505_195247_122",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0022_20260505_195247_122.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0022_20260505_195247_122_jpg.rf.50167929f15b265040a44fff111b9637.txt"
+   },
+   {
+    "stem": "frame_0022_20260506_060651_154",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0022_20260506_060651_154.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0022_20260506_060651_154_jpg.rf.89b13dc82956da48686ad7ca38817903.txt"
+   },
+   {
+    "stem": "frame_0025_20260505_195314_114",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0025_20260505_195314_114.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0025_20260505_195314_114_jpg.rf.6df681a6184fe71ebff3a7f17b59adb1.txt"
+   },
+   {
+    "stem": "frame_0027_20260505_195351_089",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0027_20260505_195351_089.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0027_20260505_195351_089_jpg.rf.1c9e4ce65f1673b02f8df89563e93ade.txt"
+   },
+   {
+    "stem": "frame_0032_20260505_195456_819",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0032_20260505_195456_819.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0032_20260505_195456_819_jpg.rf.1105253c2ab576a629d90015095ea420.txt"
+   },
+   {
+    "stem": "frame_0032_20260506_060825_055",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0032_20260506_060825_055.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0032_20260506_060825_055_jpg.rf.f5bb1e2da2111e5dff9ac873fb8d988e.txt"
+   },
+   {
+    "stem": "frame_0033_20260505_195514_867",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0033_20260505_195514_867.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0033_20260505_195514_867_jpg.rf.050123774e3aa9eb89233f15f60643e2.txt"
+   },
+   {
+    "stem": "frame_0034_20260506_060838_177",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0034_20260506_060838_177.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0034_20260506_060838_177_jpg.rf.fe7f43ebff4e16d7391d6d218b0dfecf.txt"
+   },
+   {
+    "stem": "frame_0039_20260506_060912_129",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0039_20260506_060912_129.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0039_20260506_060912_129_jpg.rf.4cd0c965ff0cfd9dc9a9b2caaba95318.txt"
+   },
+   {
+    "stem": "frame_0041_20260506_060929_520",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0041_20260506_060929_520.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0041_20260506_060929_520_jpg.rf.b11a985c9c5debe5ef63f2689e065ade.txt"
+   },
+   {
+    "stem": "frame_0042_20260505_195619_955",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0042_20260505_195619_955.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0042_20260505_195619_955_jpg.rf.ef292adecdd39d2abac8befb50b96d8a.txt"
+   },
+   {
+    "stem": "frame_0046_20260505_195641_813",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0046_20260505_195641_813.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0046_20260505_195641_813_jpg.rf.5a9c1302d9d3aad5034526fdfcb80354.txt"
+   },
+   {
+    "stem": "frame_0048_20260506_061029_760",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0048_20260506_061029_760.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0048_20260506_061029_760_jpg.rf.28ee5ccdeaeea6998d64fcf65716a36e.txt"
+   },
+   {
+    "stem": "frame_0049_20260505_195656_131",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0049_20260505_195656_131.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0049_20260505_195656_131_jpg.rf.d5b67025299ad2b358b6959d4051a3fc.txt"
+   },
+   {
+    "stem": "frame_0051_20260505_195713_086",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0051_20260505_195713_086.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0051_20260505_195713_086_jpg.rf.1b3fea5522cb3212930201b4ad2de713.txt"
+   },
+   {
+    "stem": "frame_0058_20260506_061122_944",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0058_20260506_061122_944.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0058_20260506_061122_944_jpg.rf.aff2926d40e381208acd3ce2160e77a8.txt"
+   },
+   {
+    "stem": "frame_0060_20260505_195836_421",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0060_20260505_195836_421.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0060_20260505_195836_421_jpg.rf.341bc3c6254f851279f00decb526da19.txt"
+   },
+   {
+    "stem": "frame_0063_20260505_195912_561",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0063_20260505_195912_561.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0063_20260505_195912_561_jpg.rf.389ab5f4c09f181a26c1048cd6d93014.txt"
+   },
+   {
+    "stem": "frame_0065_20260506_061402_401",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0065_20260506_061402_401.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0065_20260506_061402_401_jpg.rf.b981efcdae43029842df0ab11840858c.txt"
+   },
+   {
+    "stem": "frame_0067_20260505_195938_625",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0067_20260505_195938_625.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0067_20260505_195938_625_jpg.rf.63a8072a5493031803b1fb2b8d446959.txt"
+   },
+   {
+    "stem": "frame_0071_20260506_061453_134",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0071_20260506_061453_134.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0071_20260506_061453_134_jpg.rf.286db455d91583334e4ea57c270bca43.txt"
+   },
+   {
+    "stem": "frame_0073_20260506_061501_146",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0073_20260506_061501_146.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0073_20260506_061501_146_jpg.rf.06e81be0f57a09dd57426fc702257efb.txt"
+   },
+   {
+    "stem": "frame_0076_20260506_061517_995",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0076_20260506_061517_995.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0076_20260506_061517_995_jpg.rf.0e53d6a0bac0ccb3f02d03c881740991.txt"
+   },
+   {
+    "stem": "frame_0077_20260506_061523_211",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0077_20260506_061523_211.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0077_20260506_061523_211_jpg.rf.816577094cae46f3ccf63e2dd2fc0233.txt"
+   },
+   {
+    "stem": "frame_0081_20260505_200151_320",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0081_20260505_200151_320.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0081_20260505_200151_320_jpg.rf.7ea7346e6cd9e5c9a23682e4e3de4e21.txt"
+   },
+   {
+    "stem": "frame_0083_20260506_061601_304",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0083_20260506_061601_304.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0083_20260506_061601_304_jpg.rf.008d326a7e1a048f2b8ee71d2c5c3957.txt"
+   },
+   {
+    "stem": "frame_0084_20260505_200222_657",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0084_20260505_200222_657.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0084_20260505_200222_657_jpg.rf.7c2fa02073d3ab40cf1c4b1aec5e2483.txt"
+   },
+   {
+    "stem": "frame_0085_20260506_061613_269",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0085_20260506_061613_269.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0085_20260506_061613_269_jpg.rf.6a79f37647348755f5f9ac3d2c40bb7f.txt"
+   },
+   {
+    "stem": "frame_0089_20260505_200245_731",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0089_20260505_200245_731.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0089_20260505_200245_731_jpg.rf.7090fcec1772471edab1231550390d21.txt"
+   },
+   {
+    "stem": "frame_0091_20260505_200314_756",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0091_20260505_200314_756.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0091_20260505_200314_756_jpg.rf.827bf46af4c62595f519c5e3a2facbed.txt"
+   },
+   {
+    "stem": "frame_0091_20260506_061658_433",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0091_20260506_061658_433.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0091_20260506_061658_433_jpg.rf.c87862d9e45e4c33d4dccd85f91578a6.txt"
+   },
+   {
+    "stem": "frame_0094_20260505_200338_739",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0094_20260505_200338_739.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0094_20260505_200338_739_jpg.rf.8211c0bc2548982ccddf49514370643d.txt"
+   },
+   {
+    "stem": "frame_0096_20260506_061733_629",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0096_20260506_061733_629.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0096_20260506_061733_629_jpg.rf.b76d91e0ff3954cd8bd7567eac9aee99.txt"
+   },
+   {
+    "stem": "frame_0097_20260505_200405_426",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0097_20260505_200405_426.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0097_20260505_200405_426_jpg.rf.b5d49c90b102ca98d01f5bd5b9c2c71f.txt"
+   },
+   {
+    "stem": "frame_0099_20260505_200423_598",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0099_20260505_200423_598.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0099_20260505_200423_598_jpg.rf.abf7fe240fe031dbf9f4be493a461efa.txt"
+   },
+   {
+    "stem": "frame_0100_20260505_200434_291",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0100_20260505_200434_291.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0100_20260505_200434_291_jpg.rf.4158778cab9611fd323285ffab3bbb89.txt"
+   },
+   {
+    "stem": "frame_0100_20260506_061758_140",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0100_20260506_061758_140.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0100_20260506_061758_140_jpg.rf.a7d1bf28e3bb1c7b4f867e5c9254cd8a.txt"
+   },
+   {
+    "stem": "frame_0103_20260506_061831_514",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0103_20260506_061831_514.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0103_20260506_061831_514_jpg.rf.8d349c2700f015dc51d850acd0c8ef6b.txt"
+   },
+   {
+    "stem": "frame_0106_20260505_200505_731",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0106_20260505_200505_731.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0106_20260505_200505_731_jpg.rf.021ae4bc18e4f03ecda05c659bb13d47.txt"
+   },
+   {
+    "stem": "frame_0108_20260505_200523_028",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0108_20260505_200523_028.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0108_20260505_200523_028_jpg.rf.a042a85f1e2b6e56ad59d644e20a419d.txt"
+   },
+   {
+    "stem": "frame_0108_20260506_061904_935",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0108_20260506_061904_935.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0108_20260506_061904_935_jpg.rf.b20eb9e655d8672407d2a7a41d3eed7a.txt"
+   },
+   {
+    "stem": "frame_0110_20260505_200531_603",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0110_20260505_200531_603.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0110_20260505_200531_603_jpg.rf.ffa10a4f856bdd9a7de897486ca44827.txt"
+   },
+   {
+    "stem": "frame_0114_20260505_200612_627",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0114_20260505_200612_627.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0114_20260505_200612_627_jpg.rf.c2f070fb1affcfc7193b1a3f25d4563c.txt"
+   },
+   {
+    "stem": "frame_0115_20260506_061951_171",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0115_20260506_061951_171.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0115_20260506_061951_171_jpg.rf.6f702e54778b0a42a962853cd063d025.txt"
+   },
+   {
+    "stem": "frame_0122_20260505_200924_737",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0122_20260505_200924_737.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0122_20260505_200924_737_jpg.rf.1c2935a3dd020fac5f0e8db874192378.txt"
+   },
+   {
+    "stem": "frame_0123_20260505_200929_524",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0123_20260505_200929_524.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0123_20260505_200929_524_jpg.rf.ea43b6482e3c06aaa27946244a54ed5d.txt"
+   },
+   {
+    "stem": "frame_0126_20260506_062114_556",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0126_20260506_062114_556.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0126_20260506_062114_556_jpg.rf.dc6b7865c50bf5c3850291d8f84da1e2.txt"
+   },
+   {
+    "stem": "frame_0129_20260506_062145_655",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0129_20260506_062145_655.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0129_20260506_062145_655_jpg.rf.9388fbf20286fea920902a7928e84c30.txt"
+   },
+   {
+    "stem": "frame_0134_20260505_201122_146",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0134_20260505_201122_146.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0134_20260505_201122_146_jpg.rf.19dbb9d421e89229dc515d70360739d7.txt"
+   },
+   {
+    "stem": "frame_0140_20260506_062313_422",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0140_20260506_062313_422.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0140_20260506_062313_422_jpg.rf.21783c0f6c36b816cbc1dd5b006d7a13.txt"
+   },
+   {
+    "stem": "frame_0141_20260505_201223_092",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0141_20260505_201223_092.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0141_20260505_201223_092_jpg.rf.8a2f40dae7490443af44bf898af21d69.txt"
+   },
+   {
+    "stem": "frame_0143_20260506_062343_760",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0143_20260506_062343_760.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0143_20260506_062343_760_jpg.rf.8ed31656e572529885914bbb10fb934e.txt"
+   },
+   {
+    "stem": "frame_0145_20260505_201253_141",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0145_20260505_201253_141.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0145_20260505_201253_141_jpg.rf.f171934aaa841c43dbab225fde4c5aa4.txt"
+   },
+   {
+    "stem": "frame_0146_20260505_201257_479",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0146_20260505_201257_479.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\valid\\labels\\frame_0146_20260505_201257_479_jpg.rf.93dadba972529c1d8183b39a2d3720ac.txt"
+   }
+  ],
+  "test": [
+   {
+    "stem": "frame_0007_20260505_195038_195",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0007_20260505_195038_195.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\test\\labels\\frame_0007_20260505_195038_195_jpg.rf.7547203422fd9bb2f067902aaa38447e.txt"
+   },
+   {
+    "stem": "frame_0010_20260505_195109_907",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0010_20260505_195109_907.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\test\\labels\\frame_0010_20260505_195109_907_jpg.rf.1ff98cac25dbbd06d8c69a9db0834e3e.txt"
+   },
+   {
+    "stem": "frame_0011_20260505_195117_971",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0011_20260505_195117_971.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\test\\labels\\frame_0011_20260505_195117_971_jpg.rf.ce7481370fa5bb45b0653a8f74d9a659.txt"
+   },
+   {
+    "stem": "frame_0014_20260506_060525_235",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0014_20260506_060525_235.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\test\\labels\\frame_0014_20260506_060525_235_jpg.rf.761e7a8664f73a6076d4d9db01bda145.txt"
+   },
+   {
+    "stem": "frame_0021_20260505_195239_842",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0021_20260505_195239_842.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\test\\labels\\frame_0021_20260505_195239_842_jpg.rf.bfa942eb90e92dbb8865ae06764dff3e.txt"
+   },
+   {
+    "stem": "frame_0024_20260505_195305_364",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0024_20260505_195305_364.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\test\\labels\\frame_0024_20260505_195305_364_jpg.rf.318e4ddc3c461f9a1474d1691b005642.txt"
+   },
+   {
+    "stem": "frame_0047_20260506_061020_928",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0047_20260506_061020_928.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\test\\labels\\frame_0047_20260506_061020_928_jpg.rf.b1737b7684b2c63575fca3cc0b5ef1a1.txt"
+   },
+   {
+    "stem": "frame_0059_20260506_061128_817",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0059_20260506_061128_817.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\test\\labels\\frame_0059_20260506_061128_817_jpg.rf.ec0e2b00f6e3bada79bd6c14595a15c9.txt"
+   },
+   {
+    "stem": "frame_0061_20260505_195855_363",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0061_20260505_195855_363.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\test\\labels\\frame_0061_20260505_195855_363_jpg.rf.1db13644b4683fcd72bd851aa8f6d1d2.txt"
+   },
+   {
+    "stem": "frame_0064_20260506_061354_771",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0064_20260506_061354_771.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\test\\labels\\frame_0064_20260506_061354_771_jpg.rf.37e12f02cb80737ccb44abfe40e7a2c9.txt"
+   },
+   {
+    "stem": "frame_0066_20260506_061410_986",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0066_20260506_061410_986.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\test\\labels\\frame_0066_20260506_061410_986_jpg.rf.5939d181d75166f3dbf2b2b77c4a25a5.txt"
+   },
+   {
+    "stem": "frame_0068_20260506_061430_944",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0068_20260506_061430_944.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\test\\labels\\frame_0068_20260506_061430_944_jpg.rf.8f03d32fb9ae0a710785763b9672c5a5.txt"
+   },
+   {
+    "stem": "frame_0069_20260506_061438_847",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0069_20260506_061438_847.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\test\\labels\\frame_0069_20260506_061438_847_jpg.rf.980445f487877833bcb736d2e7b2405d.txt"
+   },
+   {
+    "stem": "frame_0070_20260505_195957_451",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0070_20260505_195957_451.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\test\\labels\\frame_0070_20260505_195957_451_jpg.rf.3483a7c947807bb49b2d7a75cdf433a5.txt"
+   },
+   {
+    "stem": "frame_0072_20260505_200014_067",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0072_20260505_200014_067.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\test\\labels\\frame_0072_20260505_200014_067_jpg.rf.97a0138847d3caf0a35067de32116429.txt"
+   },
+   {
+    "stem": "frame_0075_20260505_200042_178",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0075_20260505_200042_178.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\test\\labels\\frame_0075_20260505_200042_178_jpg.rf.2c91c33c8da55aac2af5286e465a88c3.txt"
+   },
+   {
+    "stem": "frame_0081_20260506_061547_847",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0081_20260506_061547_847.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\test\\labels\\frame_0081_20260506_061547_847_jpg.rf.eae9a11f57e84558bcd9fedef0bd1de9.txt"
+   },
+   {
+    "stem": "frame_0094_20260506_061713_087",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0094_20260506_061713_087.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\test\\labels\\frame_0094_20260506_061713_087_jpg.rf.3cb1dde263441fbf1e6b5250e441c913.txt"
+   },
+   {
+    "stem": "frame_0097_20260506_061738_430",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0097_20260506_061738_430.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\test\\labels\\frame_0097_20260506_061738_430_jpg.rf.ff621d16cf5a7f1463aec10a04f1804c.txt"
+   },
+   {
+    "stem": "frame_0098_20260506_061747_084",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0098_20260506_061747_084.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\test\\labels\\frame_0098_20260506_061747_084_jpg.rf.cfb0e615d97d4d4ce30250fe8ca4c255.txt"
+   },
+   {
+    "stem": "frame_0105_20260506_061846_387",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0105_20260506_061846_387.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\test\\labels\\frame_0105_20260506_061846_387_jpg.rf.933f50346cb3b3b34af15747c07ff638.txt"
+   },
+   {
+    "stem": "frame_0119_20260505_200859_379",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0119_20260505_200859_379.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\test\\labels\\frame_0119_20260505_200859_379_jpg.rf.364efdd61b17dac27b20641162242b5a.txt"
+   },
+   {
+    "stem": "frame_0121_20260506_062039_038",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0121_20260506_062039_038.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\test\\labels\\frame_0121_20260506_062039_038_jpg.rf.9a5c5d5ce256d113c041fe915d914b2c.txt"
+   },
+   {
+    "stem": "frame_0123_20260506_062052_908",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0123_20260506_062052_908.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\test\\labels\\frame_0123_20260506_062052_908_jpg.rf.651e6c12d2561029da0ddec650277c10.txt"
+   },
+   {
+    "stem": "frame_0134_20260506_062229_403",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0134_20260506_062229_403.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\test\\labels\\frame_0134_20260506_062229_403_jpg.rf.f4a2a3ed3db95812316f3e109c8788c8.txt"
+   },
+   {
+    "stem": "frame_0138_20260505_201204_419",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0138_20260505_201204_419.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\test\\labels\\frame_0138_20260505_201204_419_jpg.rf.295519a79774b3720987cd37b921577e.txt"
+   },
+   {
+    "stem": "frame_0142_20260506_062337_423",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0142_20260506_062337_423.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\test\\labels\\frame_0142_20260506_062337_423_jpg.rf.f23b38e29fa56c09722399dda81eb1d6.txt"
+   },
+   {
+    "stem": "frame_0144_20260505_201247_602",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-05_194941\\frame_0144_20260505_201247_602.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\test\\labels\\frame_0144_20260505_201247_602_jpg.rf.9c896d85da9b0a2b143fad5d36008aeb.txt"
+   },
+   {
+    "stem": "frame_0154_20260506_062451_767",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0154_20260506_062451_767.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\test\\labels\\frame_0154_20260506_062451_767_jpg.rf.fa4f79f924fab9e2ef60a4765c1ded8b.txt"
+   },
+   {
+    "stem": "frame_0159_20260506_062516_309",
+    "raw": "C:\\Users\\chapm\\Dice Code\\capture_sessions\\2026-05-06_055945\\frame_0159_20260506_062516_309.jpg",
+    "label": "C:\\Users\\chapm\\Dice Code\\training\\datasets\\d16\\test\\labels\\frame_0159_20260506_062516_309_jpg.rf.52b1834f2e03bf1f9024410ba3529229.txt"
+   }
+  ]
+ }
+}

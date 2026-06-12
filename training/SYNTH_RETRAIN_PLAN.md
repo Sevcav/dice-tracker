@@ -79,3 +79,77 @@ adjacency-deduction layer.
 - Camera alignment is always the first step of a live session (built in).
 - Train only on IR frames (color deviation < 6; helper in dice_tracker).
 - No guessing — every accuracy claim comes from the eval harness.
+
+---
+
+## STATUS — updated 2026-06-12 (build session)
+
+Built and QC'd (all in `training/` unless noted):
+
+- `crop_common.py` — shared geometry. Key verified facts: the Roboflow
+  640x640 exports are a PURE CENTER CROP of the raw 1280x720 frames
+  (`export = raw[40:680, 320:960]`); labels are SYMBOL-REGION POLYGONS
+  (block symbol ring / d6 pip cluster / d16 number glyphs), not die
+  boxes; d6+d16 exports carry augmented copies — only pixel-verified
+  originals are used (`synth_assets/originals_index.json`).
+  Per-session tray drift found (May 5 sessions ~33px low, May 6 worse):
+  `session_alignments()` warps every session into the calibrated
+  tray_roi space (ECC on median backgrounds, dual-seeded).
+- `auto_label_rejects.py` (deliverable 1) — 17 frames auto-labeled,
+  26 queued in `datasets/auto_labeled/manual_queue.txt`.
+- `synth_dice.py` (deliverable 2) — backgrounds are per-session MEDIAN
+  stacks (no inpainting needed — fixed camera makes the median a clean
+  empty tray); die cutouts via background subtraction + convex hull;
+  pow weighted 3x, wall band 50%/corner 30%, no flips (symbols are
+  chiral); d16 pasted as whole dice carrying 3 glyph labels.
+- `build_crop_dataset.py` — `datasets/combined_crop`: 386 real +
+  17 auto + 2150 synth train / 112 real valid / 56 real test.
+  Valid/test are REAL ONLY. IR threshold used is 8.0 in-tray (the
+  production DAY_MODE_DEVIATION) — the plan's "< 6" predates the
+  in-tray recalibration and would discard the whole d6 session
+  (median 7.2, not day mode).
+- `val_per_type.py` — per-type mean mAP@50 vs the 92% bar.
+- Deliverable 5 (crop-matched inference) — `models/<stem>.onnx.json`
+  sidecar (`{"tray_crop": true}`, written by train_all.py);
+  `dice_tracker.predict_detections()` crops to the tray ROI and shifts
+  boxes back to full-frame coords; eval_harness uses the same helper
+  (`--model combined_crop`). Sidecar-less models run full-frame as
+  before; production `combined.onnx` untouched.
+- Deliverable 6 (D16 adjacency) — `derive_d16_adjacency.py` mined the
+  table from 458 labeled dice (16/16 pairs, 24-33 votes, no conflicts):
+  TWO RINGS in consecutive order (1..8, 9..16), top N flanked by ring
+  neighbors N±1; opposite faces sum to 17 across rings. Implemented in
+  `d16_geometry.py` (project root) + dice_tracker integration:
+  impossible-read warnings active; top-face deduction is GATED by
+  `ADJACENCY_VERIFIED = False` until physically verified (procedure in
+  the module footer). BONUS: the mining exposed ~7 mislabeled glyphs in
+  6 frames (geometrically impossible triples) — excluded via
+  `crop_common.EXCLUDE_STEMS`; relabel them in Roboflow when convenient.
+
+**TRAINED + BAR PASSED (2026-06-12).** `models/combined_crop.onnx`
+(+ `.onnx.json` sidecar), early-stopped ~epoch 53. Per-type mean mAP@50
+vs the full-frame combined baseline:
+
+| type  | crop VAL | crop TEST | full-frame baseline |
+|-------|----------|-----------|---------------------|
+| block | 94.1%    | 99.5%     | 92.4%               |
+| d6    | 98.4%    | 99.5%     | 98.4%               |
+| d16   | 92.7%    | 94.1%     | 87.4%               |
+
+(Weak-looking val classes — pow 0.876, D16_8 0.713 — are ~0.99 on the
+test split: small-sample noise, ~14 val instances per class.)
+
+Remaining (user, in order):
+1. ~~Verify the D16 table against the physical dice~~ DONE 2026-06-12 —
+   user confirmed by rolled spot-checks; `ADJACENCY_VERIFIED = True`,
+   deduction layer fully active.
+2. At rig: d16 baseline eval with the CURRENT model first
+   (`python eval_harness.py --type d16 --model combined`), then block +
+   d16 with the new model (`--model combined_crop`), ~25 rolls each.
+3. Deploy only if the live eval beats the baselines (block per-die
+   82.6-89.6%, pow recall ~60%): copy combined_crop.onnx over
+   models/combined.onnx AND combined_crop.onnx.json over
+   combined.onnx.json.
+4. When convenient: relabel the 6 bad d16 frames in Roboflow
+   (`crop_common.EXCLUDE_STEMS`) and clear the manual queue
+   (`datasets/auto_labeled/manual_queue.txt`).
