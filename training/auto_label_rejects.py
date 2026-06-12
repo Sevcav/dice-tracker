@@ -71,8 +71,13 @@ def main():
             continue
 
         truth = meta.get("truth")
-        if truth is None or meta.get("count_mismatch"):
-            why = "no ground truth" if truth is None else "count mismatch"
+        if truth is None or meta.get("count_mismatch") \
+                or meta.get("truth_mode") == "value":
+            # value-mode d16 records pair die-union boxes with rolled
+            # VALUES, not face labels — only a human can box the glyphs
+            why = ("no ground truth" if truth is None
+                   else "count mismatch" if meta.get("count_mismatch")
+                   else "d16 value-mode truth")
             queued.append(f"{meta_path}  ({why})")
             continue
 

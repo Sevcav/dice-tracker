@@ -24,9 +24,11 @@ Flow per roll:
 Ground-truth entry (labels separated by space or comma, LEFT -> RIGHT):
     block:  pow/po/w  push/pu/u  both_down/bd/b  player_down/pd  stumble/st/s
     d6:     1 2 3 4 5 6          (6 = the BB logo face)
-    d16:    1 .. 16   — NOTE: the d16 model detects individual FACES
-            (up to 3 boxes per die: top + visible sides). Enter the number
-            painted on each BOXED face, left to right, not just the top.
+    d16:    the ROLLED VALUE, one number per die (usually one die, so
+            just e.g. "12"). The harness clusters the model's face boxes
+            into dice and runs the d16_geometry adjacency layer to get a
+            VALUE read — you score the value, not individual face boxes.
+            Face-level detail is saved automatically for retraining.
     ENTER   accept the model's read as fully correct (fast path)
     r       discard this roll (cocked die, die against wall, bad roll)
     q       finish session, print + save the report
@@ -59,6 +61,8 @@ from pathlib import Path
 import cv2
 import supervision as sv
 from ultralytics import YOLO
+
+import d16_geometry
 
 from dice_tracker import (
     CAMERA_INDEX, CONF_THRESHOLD, COUNT_STABLE_FRAMES, DAY_MODE_DEVIATION,
@@ -314,7 +318,12 @@ def main():
     vocab = ([n for n in class_names if n in TYPE_FACES[dice_type]]
              or class_names)
     aliases = build_alias_map(dice_type, vocab)
-    print(f"Truth vocabulary: {vocab}")
+    if dice_type == "d16":
+        # value mode: truth is the rolled value 1..16, one per die
+        aliases = {str(n): str(n) for n in range(1, 17)}
+        print("Truth vocabulary: rolled value 1-16, one number per die")
+    else:
+        print(f"Truth vocabulary: {vocab}")
 
     cap = cv2.VideoCapture(args.camera)
     cap.set(cv2.CAP_PROP_FRAME_WIDTH,  RESOLUTION[0])
@@ -423,26 +432,78 @@ def main():
             pred  = [d[2] for d in dice]
             confs = [round(d[3], 3) for d in dice]
             boxes = [d[4] for d in dice]
+            faces_detail = None
+            d16_notes: list[str] = []
+            if dice_type == "d16":
+                # VALUE scoring: the per-face-box protocol was unusable at
+                # the tray (glyph arcs don't run left-right and the rolled
+                # VALUE is what the product must get right). Cluster the
+                # face boxes into dice, run the verified adjacency layer,
+                # and score one value per die. Face-level detail is kept
+                # in the record for retraining.
+                faces_detail = {"labels": pred, "confidences": confs,
+                                "boxes": boxes}
+                verdicts = d16_geometry.analyze_roll(
+                    pred, [list(map(float, b)) for b in boxes], confs)
+                verdicts.sort(key=lambda v: sum(
+                    (boxes[i][0] + boxes[i][2]) / 2 for i in v["indices"])
+                    / len(v["indices"]))
+                die_pred, die_confs, die_boxes = [], [], []
+                for v in verdicts:
+                    bs = [boxes[i] for i in v["indices"]]
+                    die_boxes.append([min(b[0] for b in bs),
+                                      min(b[1] for b in bs),
+                                      max(b[2] for b in bs),
+                                      max(b[3] for b in bs)])
+                    die_pred.append(str(v["top"]))
+                    die_confs.append(round(max(confs[i]
+                                               for i in v["indices"]), 3))
+                    fs = ",".join(str(d16_geometry.face_value(
+                        faces_detail["labels"][i])) for i in v["indices"])
+                    note = f"faces {fs}"
+                    if v["status"] == "deduced":
+                        note += "; top deduced from sides"
+                    elif v["status"] == "impossible":
+                        note += "; IMPOSSIBLE combo - likely misread"
+                    d16_notes.append(note)
+                pred, confs, boxes = die_pred, die_confs, die_boxes
             dev   = color_deviation(frame)
 
-            # Freeze the display with [n] index overlays before input()
-            # blocks the UI loop.
-            for i, d in enumerate(dice):
-                cx, cy = int(d[0]), int(d[1])
-                cv2.putText(annotated, f"[{i+1}]", (cx - 18, cy + 45),
-                            cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
-            cv2.rectangle(annotated, (5, 5),
-                          (annotated.shape[1] - 5, annotated.shape[0] - 5),
+            # Freeze the display before input() blocks the UI loop. Built
+            # from the RAW frame — the live view's label bars cover the
+            # dice and make the glyphs unreadable exactly when the user
+            # needs to read them. Thin boxes + [n] beside each die; the
+            # model's read is in the console.
+            frozen = frame.copy()
+            for i, b in enumerate(boxes):
+                x1, y1, x2, y2 = b
+                cv2.rectangle(frozen, (x1, y1), (x2, y2), (0, 255, 0), 1)
+                mx = x2 + 6 if x2 + 60 < frozen.shape[1] else x1 - 52
+                cv2.putText(frozen, f"[{i+1}]", (mx, y2),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 255), 2)
+            cv2.rectangle(frozen, (5, 5),
+                          (frozen.shape[1] - 5, frozen.shape[0] - 5),
                           (0, 255, 0), 6)
-            hud_line(annotated, "SETTLED - enter ground truth in console",
+            hud_line(frozen, "SETTLED - enter ground truth in console",
                      50, color=(0, 255, 255))
-            cv2.imshow(win, annotated)
+            cv2.imshow(win, frozen)
             cv2.waitKey(30)
             cv2.waitKey(30)
 
-            print(f"Roll {len(rolls) + 1} - model read (LEFT->RIGHT):  "
-                  + "   ".join(f"[{i+1}] {p} ({int(c*100)}%)"
-                               for i, (p, c) in enumerate(zip(pred, confs))))
+            if dice_type == "d16":
+                print(f"Roll {len(rolls) + 1} - die VALUE read "
+                      "(LEFT->RIGHT):  "
+                      + "   ".join(f"[{i+1}] {p} ({int(c*100)}%; {n})"
+                                   for i, (p, c, n)
+                                   in enumerate(zip(pred, confs,
+                                                    d16_notes))))
+                print("  enter the ROLLED VALUE per die "
+                      "(e.g. 12) - not the side faces")
+            else:
+                print(f"Roll {len(rolls) + 1} - model read (LEFT->RIGHT):  "
+                      + "   ".join(f"[{i+1}] {p} ({int(c*100)}%)"
+                                   for i, (p, c)
+                                   in enumerate(zip(pred, confs))))
             truth = prompt_truth(pred, aliases)
 
             if truth == "quit":
@@ -466,6 +527,12 @@ def main():
                     "count_mismatch": count_mismatch,
                     "color_deviation": round(dev, 2),
                 }
+                if faces_detail is not None:
+                    # d16 value mode: per-glyph detail for retraining; the
+                    # top-level boxes are die unions paired with VALUES,
+                    # so auto_label_rejects must not pair them with truth
+                    roll["truth_mode"] = "value"
+                    roll["faces"] = faces_detail
                 if count_mismatch or not all(correct):
                     ts = time.strftime("%Y%m%d_%H%M%S")
                     miss = RETRAIN_DIR / dice_type / f"eval_miss_{ts}.jpg"
