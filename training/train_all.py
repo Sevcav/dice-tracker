@@ -86,8 +86,10 @@ DATASET_CONFIGS = {
         name="combined_crop",
         # written as models/combined_crop.onnx.json — dice_tracker and
         # eval_harness read it and crop inference frames to the tray ROI
-        # (training and inference geometry must match)
-        meta={"tray_crop": True},
+        # (training and inference geometry must match). pad_bottom keeps
+        # dice against the BOTTOM wall in view: their faces project below
+        # the ROI rect line (camera sits north of the tray).
+        meta={"tray_crop": True, "pad": 8, "pad_bottom": 40},
     ),
 }
 

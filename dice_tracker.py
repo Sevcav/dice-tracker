@@ -133,8 +133,20 @@ def predict_detections(model, frame, meta: dict, crop_rect) -> sv.Detections:
     ox = oy = 0
     src = frame
     if meta.get("tray_crop") and crop_rect is not None:
-        ox, oy, w, h = crop_rect
-        src = frame[oy:oy + h, ox:ox + w]
+        x, y, w, h = crop_rect
+        # The ROI rect hugs the tray rim; dice against the BOTTOM wall
+        # project their faces below the rect line (camera sits north of
+        # the tray), so the crop is padded — mostly downward — to keep
+        # the whole play area visible. The ~4% die-scale change vs the
+        # training crop is inside the training scale augmentation.
+        pad  = int(meta.get("pad", 0))
+        padb = int(meta.get("pad_bottom", 0))
+        H, W = frame.shape[:2]
+        ox = max(0, x - pad)
+        oy = max(0, y - pad)
+        x2 = min(W, x + w + pad)
+        y2 = min(H, y + h + pad + padb)
+        src = frame[oy:y2, ox:x2]
     results = model.predict(source=src, conf=CONF_THRESHOLD,
                             agnostic_nms=True, verbose=False)[0]
     detections = sv.Detections.from_ultralytics(results)

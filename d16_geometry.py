@@ -171,6 +171,10 @@ def analyze_roll(labels: list[str], boxes: list[list[float]],
     verdicts = []
     for cluster in cluster_faces([boxes[i] for i in idx]):
         gi = [idx[k] for k in cluster]
+        if len(gi) > 3:
+            # an extra oblique glyph got boxed — only 3 faces are
+            # physical, keep the most confident three
+            gi = sorted(gi, key=lambda i: -confidences[i])[:3]
         centers = [((boxes[i][0] + boxes[i][2]) / 2,
                     (boxes[i][1] + boxes[i][3]) / 2) for i in gi]
         if len(gi) == 3:
