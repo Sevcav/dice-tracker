@@ -48,14 +48,21 @@ full-frame model kept at `models/combined_fullframe_backup_20260611.onnx`.
 
 **Next priorities, in order:**
 
-1. **d16 full-rotation retrain** (no rig time needed): the d16 capture
-   was POSED — glyphs mostly upright — so live rolls show digits at
-   angles the model half-knows. Regenerate synth with `ROT_D16_MAX` =
-   180 (whole-unit spin is valid near-overhead), retrain, score offline
-   against the ~38 value-truth frames in `retrain_candidates/d16/` with
-   `training/score_banked_d16.py` BEFORE asking for rig time. Target:
-   push d16 live value accuracy from 65% toward block's level.
-2. **d6 live sanity** (~10 rolls, first play session is fine):
+1. **d16 full-rotation retrain — DONE 2026-06-13, DEPLOYED.** Regenerated
+   synth with `ROT_D16_MAX=180` (whole-unit spin, valid near-overhead),
+   retrained, passed both gates: val_per_type (block 93.6 / d6 99.2 /
+   d16 92.7) and `score_banked_d16` 24/38 (up from 20/38). Now the
+   production `combined.onnx`. Prior crop model backed up as
+   `models/combined_crop_v1_20260612.onnx`. **The next real d16 number
+   needs a fresh ~25-roll rig session** — 24/38 is on the old model's
+   MISS subset (hard set), a relative win, not absolute live accuracy.
+   Also needed a sliver-box fix in `write_yolo_boxes` (a 0px-tall glyph
+   crashed Ultralytics augmentation on Windows; `_scan_labels.py` finds
+   them).
+2. **d16 + d6 live eval on the new model** (~25 d16 rolls, ~10 d6):
+   `python eval_harness.py --type d16 --model combined` then `--type d6`.
+   d16 confirms the retrain held up live; d6 has never been live-evaled
+   on a crop model — also recalibrate its 0.60
    `python eval_harness.py --type d6 --model combined` — d6 has never
    been live-evaled on the crop model; also recalibrate its 0.60
    uncertainty threshold from that data.
