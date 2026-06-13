@@ -1,8 +1,8 @@
 # Session Hand-off — Blood Bowl Dice Tracker
 
-*Last updated: 2026-06-12 evening (synthetic-retrain work stream landed).
-Paste the prompt below into a new session, or just point the assistant
-at this file.*
+*Last updated: 2026-06-13 (d16 full-rotation retrain live-validated at
+85%; synthetic-data work stream complete). Paste the prompt below into a
+new session, or just point the assistant at this file.*
 
 ---
 
@@ -31,41 +31,42 @@ You are picking up the **Blood Bowl Dice Tracker** project at
   phone web app's game review.
 - **No guessing.** Measure with the eval harness / real data, or say so.
 
-**Current state (2026-06-12 evening):** the tray-crop retrain SHIPPED.
-Production `combined.onnx` is now the crop-trained 27-class YOLOv11n
-(synthetic copy-paste pipeline in `training/synth_dice.py` et al., full
-story in `training/SYNTH_RETRAIN_PLAN.md` STATUS section). Inference
-crops to the tray ROI via the `combined.onnx.json` sidecar (pad 8 /
-pad_bottom 40 — bottom-wall dice project below the ROI rect). LIVE eval
-results (eval_sessions/, 2026-06-12): **block 66/66 = 100% per-die, pow
-18/18** (was 83–90% / 60% pow); **d16 65% value accuracy vs 12%
-baseline** (~88% correct-or-flagged with the verified adjacency layer —
-`d16_geometry.py`, two consecutive rings 1-8/9-16, deduction + impossible-
-read warnings live). d16 eval scores the ROLLED VALUE now. Uncertainty
-thresholds are per-type (`CONF_UNCERTAIN`: block/d6 0.60, d16 0.80 —
-the crop model's confidence scale runs lower than the old one). Old
-full-frame model kept at `models/combined_fullframe_backup_20260611.onnx`.
+**Current state (2026-06-13):** the tray-crop retrain SHIPPED and the
+d16 full-rotation iteration is LIVE-VALIDATED. Production `combined.onnx`
+is the full-rotation crop-trained 27-class YOLOv11n (synthetic copy-paste
+pipeline in `training/synth_dice.py` et al., full story in
+`training/SYNTH_RETRAIN_PLAN.md` STATUS section). Inference crops to the
+tray ROI via the `combined.onnx.json` sidecar (pad 8 / pad_bottom 40 —
+bottom-wall dice project below the ROI rect). LIVE eval results
+(eval_sessions/): **block 66/66 = 100% per-die, pow 18/18** (was 83–90% /
+60% pow); **d16 22/26 = 85% value accuracy** (was 12% baseline → 65%
+first crop → 85% full-rotation), 0 count-mismatch. d16 eval scores the
+ROLLED VALUE via the verified adjacency layer (`d16_geometry.py`, two
+consecutive rings 1-8/9-16, deduction + impossible-read warnings live).
+Uncertainty thresholds are per-type (`CONF_UNCERTAIN`: block/d6 0.60,
+d16 0.80 — crop model confidences run lower than the old model). Backups:
+`models/combined_crop_v1_20260612.onnx` (first crop model),
+`models/combined_fullframe_backup_20260611.onnx` (pre-crop).
+
+**d16 remaining error mode (know this before iterating):** all live d16
+misses are now OFF-BY-ONE RING NEIGHBORS (12→11, 14→13, 1→2) — the model
+lands one rotational step from the true top, not wildly wrong. Confidence
+is flat (correct 0.82 vs wrong 0.82), so the 0.80 "?" marker won't catch
+them and the geometry can't either (an off-by-one neighbor is a legal
+face). The weak point is top-vs-side disambiguation, not glyph
+recognition. Mitigation in play: nudge-to-re-read; 85% is table-usable.
 
 **Next priorities, in order:**
 
-1. **d16 full-rotation retrain — DONE 2026-06-13, DEPLOYED.** Regenerated
-   synth with `ROT_D16_MAX=180` (whole-unit spin, valid near-overhead),
-   retrained, passed both gates: val_per_type (block 93.6 / d6 99.2 /
-   d16 92.7) and `score_banked_d16` 24/38 (up from 20/38). Now the
-   production `combined.onnx`. Prior crop model backed up as
-   `models/combined_crop_v1_20260612.onnx`. **The next real d16 number
-   needs a fresh ~25-roll rig session** — 24/38 is on the old model's
-   MISS subset (hard set), a relative win, not absolute live accuracy.
-   Also needed a sliver-box fix in `write_yolo_boxes` (a 0px-tall glyph
-   crashed Ultralytics augmentation on Windows; `_scan_labels.py` finds
-   them).
-2. **d16 + d6 live eval on the new model** (~25 d16 rolls, ~10 d6):
-   `python eval_harness.py --type d16 --model combined` then `--type d6`.
-   d16 confirms the retrain held up live; d6 has never been live-evaled
-   on a crop model — also recalibrate its 0.60
-   `python eval_harness.py --type d6 --model combined` — d6 has never
-   been live-evaled on the crop model; also recalibrate its 0.60
-   uncertainty threshold from that data.
+1. **d16 full-rotation retrain — DONE + LIVE-VALIDATED 2026-06-13.**
+   `ROT_D16_MAX=180`, passed val gates (block 93.6 / d6 99.2 / d16 92.7)
+   and live eval (85%, see Current state). Deployed. Needed a sliver-box
+   fix in `write_yolo_boxes` (a 0px-tall glyph crashed Ultralytics
+   augmentation on Windows; `training/_scan_labels.py` finds them).
+2. **d6 live sanity** (~10 rolls — d6 has NEVER been live-evaled on a
+   crop model): `python eval_harness.py --type d6 --model combined`.
+   Confirm no regression and recalibrate its provisional 0.60
+   uncertainty threshold from the data.
 3. **GPIO + OLED**: wire 4 arcade buttons, 4 LEDs, 2× SSD1309 SPI OLEDs
    (luma.oled; pins in DESIGN.md §6). OLED rendering = the three-state
    uncertainty logic on HUD/phone (now per-type thresholds).
