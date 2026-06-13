@@ -404,12 +404,30 @@ def main():
             label_states = []
 
         n_det = len(detections)
-        all_stable = (n_det > 0
-                      and all(s for _, _, s in label_states))
-        # Require the detection COUNT to hold steady before settling, so a
-        # die flickering in/out at the conf threshold can't be silently
-        # dropped from the read (16/50 rolls in the first eval session).
-        count_hist.append(n_det)
+        if dice_type == "d16":
+            # d16 settle gates on STABLE boxes only. A die shows 2-3 small
+            # glyph boxes and the marginal one flickers at the conf
+            # threshold — requiring the raw count to hold 10 frames means
+            # the roll never settles. Transient boxes are ignored (they
+            # reset nothing and are excluded from the read); a box that
+            # persists long enough to win the label vote joins the stable
+            # set, resets the window once, and settles WITH the read.
+            # 2-face reads are safe: the adjacency layer deduces the top.
+            stable_ids = [i for i, (_c, _cf, s) in enumerate(label_states)
+                          if s]
+            n_units = (len(d16_geometry.cluster_faces(
+                [list(map(float, detections.xyxy[i])) for i in stable_ids]))
+                if stable_ids else 0)
+            all_stable = len(stable_ids) > 0
+            count_hist.append((len(stable_ids), n_units))
+        else:
+            stable_ids = list(range(n_det))
+            all_stable = (n_det > 0
+                          and all(s for _, _, s in label_states))
+            # Require the detection COUNT to hold steady before settling,
+            # so a die flickering in/out at the conf threshold can't be
+            # silently dropped from the read (16/50 rolls, first eval).
+            count_hist.append(n_det)
         count_stable = (len(count_hist) == COUNT_STABLE_FRAMES
                         and len(set(count_hist)) == 1)
 
@@ -420,6 +438,7 @@ def main():
 
         if state == "watching" and all_stable and count_stable:
             # Sort dice left->right so console order matches the overlay.
+            # (d16: stable boxes only — transients are not part of the read)
             dice = sorted(
                 ((float(detections.xyxy[i][0] + detections.xyxy[i][2]) / 2,
                   float(detections.xyxy[i][1] + detections.xyxy[i][3]) / 2,
@@ -427,7 +446,7 @@ def main():
                                   str(label_states[i][0])),
                   label_states[i][1],
                   [int(v) for v in detections.xyxy[i]])
-                 for i in range(n_det)),
+                 for i in stable_ids),
                 key=lambda d: (d[0], d[1]))
             pred  = [d[2] for d in dice]
             confs = [round(d[3], 3) for d in dice]

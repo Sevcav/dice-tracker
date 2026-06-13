@@ -589,12 +589,28 @@ def main():
 
         n_det = len(detections)
         stable_count = sum(1 for _, _, s in label_states if s)
-        all_stable = (n_det > 0 and stable_count == n_det)
         # In auto mode the dice type is whatever the combined model sees
         detected_type = (majority_type(
             [model.names.get(c, str(c)) for c, _, _ in label_states])
             if current_type == "auto" else current_type)
-        count_hist.append(n_det)
+        if detected_type == "d16":
+            # d16 settle gates on STABLE boxes only: a die shows 2-3 small
+            # glyph boxes and the marginal one flickers at the conf
+            # threshold — requiring the raw count to hold for the full
+            # window means the roll never settles. Transients are ignored
+            # and excluded from the read; the adjacency layer makes a
+            # 2-face read safe (sides determine the top).
+            stable_ids = [i for i, (_c, _cf, s) in enumerate(label_states)
+                          if s]
+            n_units = (len(d16_geometry.cluster_faces(
+                [list(map(float, detections.xyxy[i])) for i in stable_ids]))
+                if stable_ids else 0)
+            all_stable = len(stable_ids) > 0
+            count_hist.append(("d16", len(stable_ids), n_units))
+        else:
+            stable_ids = list(range(n_det))
+            all_stable = (n_det > 0 and stable_count == n_det)
+            count_hist.append(n_det)
         count_stable = (len(count_hist) == COUNT_STABLE_FRAMES
                         and len(set(count_hist)) == 1)
 
@@ -603,22 +619,32 @@ def main():
             if all_stable and count_stable:
                 state = "settled"
                 last_settled_frame  = frame.copy()
-                last_settled_labels = list(label_states)
-                last_settled_dets   = detections
-                last_settled_centroids = current_centroids_by_tid(detections)
+                # d16: lock only the stable boxes — transients are not part
+                # of the read, and a vanishing transient must not trip the
+                # nudge-release either.
+                if detected_type == "d16" and len(stable_ids) < n_det:
+                    keep = np.array(stable_ids, dtype=int)
+                    last_settled_dets   = detections[keep]
+                    last_settled_labels = [label_states[i]
+                                           for i in stable_ids]
+                else:
+                    last_settled_dets   = detections
+                    last_settled_labels = list(label_states)
+                last_settled_centroids = current_centroids_by_tid(
+                    last_settled_dets)
                 flash_until = time.time() + 1.0   # initial settle flash
-                print(f"  [settled] {n_det} dice, labels: "
-                      f"{[model.names.get(c, c) for c, _, _ in label_states]}")
+                print(f"  [settled] {len(last_settled_labels)} dice, labels: "
+                      f"{[model.names.get(c, c) for c, _, _ in last_settled_labels]}")
                 # d16 geometric cross-check: the 3 face boxes of a die are
                 # physically married (adjacency table in d16_geometry).
                 last_settled_d16 = []
                 if detected_type == "d16":
                     last_settled_d16 = d16_geometry.analyze_roll(
                         [model.names.get(c, str(c))
-                         for c, _, _ in label_states],
-                        [list(map(float, detections.xyxy[i]))
-                         for i in range(len(detections))],
-                        [conf for _, conf, _ in label_states])
+                         for c, _, _ in last_settled_labels],
+                        [list(map(float, last_settled_dets.xyxy[i]))
+                         for i in range(len(last_settled_dets))],
+                        [conf for _, conf, _ in last_settled_labels])
                     for v in last_settled_d16:
                         if v["status"] == "impossible":
                             print(f"  [d16-check] IMPOSSIBLE read — "
