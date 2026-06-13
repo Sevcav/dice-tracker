@@ -299,9 +299,18 @@ def poly_bbox(pts: np.ndarray) -> tuple[float, float, float, float]:
 
 def write_yolo_boxes(path: Path, boxes: list[tuple[int, float, float, float, float]],
                      img_w: int, img_h: int):
-    """boxes = [(cls, x1, y1, x2, y2)] in pixel coords of the emitted image."""
+    """boxes = [(cls, x1, y1, x2, y2)] in pixel coords of the emitted image.
+    Boxes are clamped to the image and sliver boxes (<3px a side, e.g. a
+    glyph clipped to nothing at the crop edge) are dropped — degenerate
+    instances are a known source of flaky augmentation crashes."""
     lines = []
     for cls, x1, y1, x2, y2 in boxes:
+        x1 = min(max(x1, 0.0), float(img_w))
+        x2 = min(max(x2, 0.0), float(img_w))
+        y1 = min(max(y1, 0.0), float(img_h))
+        y2 = min(max(y2, 0.0), float(img_h))
+        if x2 - x1 < 3 or y2 - y1 < 3:
+            continue
         cx = (x1 + x2) / 2 / img_w
         cy = (y1 + y2) / 2 / img_h
         w  = (x2 - x1) / img_w

@@ -80,7 +80,12 @@ P_CORNER      = 0.30   # of wall placements, fraction forced into corners
 WALL_BAND_PX  = 35
 WALL_INSET    = 25     # tray_roi corners trace the wall RIM; the floor
                        # starts ~this many px further in (sloped walls)
-ROT_D16_MAX   = 12.0
+# Full-circle d16 rotation (2026-06-12, second iteration): the capture
+# sessions were POSED so glyphs are biased upright, but live rolls land
+# digits at any spin — the first crop model misread rotated digits
+# (9<->16, 8<->1). Spinning the WHOLE unit is physically valid from the
+# near-overhead camera and keeps the three glyph boxes married.
+ROT_D16_MAX   = 180.0
 SCALE_JITTER  = (0.95, 1.06)
 GAIN_CLAMP    = (0.70, 1.40)
 CROP_JITTER   = 12     # tray-crop origin jitter, px
