@@ -49,7 +49,7 @@ from ultralytics import YOLO
 
 import db
 import d16_geometry
-from dice_types import majority_type
+from dice_types import CLASS_TO_TYPE, majority_type
 
 ROOT       = Path(__file__).parent
 MODELS_DIR = ROOT / "training" / "models"
@@ -238,13 +238,26 @@ SETTLE_REQUIRES_ALL_STABLE = True   # green flash only when every die is stable
 # requirement; it was lost in the supervision port.)
 COUNT_STABLE_FRAMES = 10
 
-# Uncertainty marker threshold — calibrated from the 2026-06-11 eval
-# sessions (75 eval rolls): 8/10 wrong reads had confidence below 0.85,
-# only ~21% of correct reads did. Labels below this show orange with a "?"
-# so the player's eye is drawn to questionable dice BEFORE confirming
-# (nudge it to re-read). This is the on-screen precursor of the OLED
-# uncertainty markers.
-CONF_UNCERTAIN = 0.85
+# Uncertainty marker thresholds — PER DICE TYPE, recalibrated 2026-06-12
+# for the tray-crop combined model (its confidence scale runs lower than
+# the old full-frame model: block correct reads average 0.74 vs 0.90).
+# From the live eval sessions:
+#   block: 66/66 correct, conf p10=0.53 -> 0.60 keeps the historical ~20%
+#          flag-noise rate (no wrong reads observed to calibrate against)
+#   d16:   correct mean 0.86 vs wrong 0.69 -> 0.80 catches 67% of wrong
+#          reads while flagging only 12% of correct ones
+#   d6:    no live data with this model yet — block's distribution is the
+#          closest proxy; recalibrate after the first d6 session
+# Labels below the threshold show orange with a "?" so the player's eye
+# is drawn to questionable dice BEFORE confirming (nudge to re-read).
+# This is the on-screen precursor of the OLED uncertainty markers.
+CONF_UNCERTAIN = {"block": 0.60, "d6": 0.60, "d16": 0.80}
+CONF_UNCERTAIN_DEFAULT = 0.80
+
+
+def uncertain_threshold(label: str) -> float:
+    return CONF_UNCERTAIN.get(CLASS_TO_TYPE.get(label, ""),
+                              CONF_UNCERTAIN_DEFAULT)
 
 WEB_PORT = 5000
 
@@ -369,7 +382,7 @@ def draw_detections(frame, detections, model, label_states):
                if detections.tracker_id is not None else -1)
         cid, conf, stable = label_states[i]
         cls_name = model.names.get(cid, str(cid))
-        if stable and conf >= CONF_UNCERTAIN:
+        if stable and conf >= uncertain_threshold(cls_name):
             color = (0, 255, 255)        # yellow: stable + confident
             thickness = 3
             text = f"#{tid} {cls_name} {int(round(conf*100))}%"
@@ -754,7 +767,8 @@ def main():
                 "label": model.names.get(cid, str(cid)),
                 "conf": int(round(conf * 100)),
                 "stable": bool(stable),
-                "uncertain": bool(stable and conf < CONF_UNCERTAIN),
+                "uncertain": bool(stable and conf < uncertain_threshold(
+                    model.names.get(cid, str(cid)))),
             } for cid, conf, stable in label_states]
             recent = [(f"#{lr['roll_id']} {lr['player']} {lr['dice_type']}: "
                        + ", ".join(lr["results"])
@@ -819,7 +833,7 @@ def main():
                             and v["indices"]):
                         i = v["indices"][0]
                         if (i < len(results_str)
-                                and confs[i] < CONF_UNCERTAIN):
+                                and confs[i] < CONF_UNCERTAIN["d16"]):
                             old = results_str[i]
                             results_str[i] = f"D16_{v['deduced_top']}"
                             print(f"  [d16-check] corrected {old} -> "
