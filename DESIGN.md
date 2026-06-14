@@ -461,23 +461,31 @@ pins 6, 9, 14, 20, 25, 30, 34, 39.
 
 OLED VCC = **3V3 (pin 1)**, never 5V. GND = any ground pin above.
 
-#### Ground consolidation (decided 2026-06-14)
+#### Ground consolidation (decided 2026-06-14, final)
 
 ~10 ground wires (2 OLED + 4 button + 4 LED) all share one rail. All are
-**26–28 AWG Dupont-terminated**, so:
-- **WAGO 221 lever-nuts do NOT fit** — rated 24 AWG min; Dupont gauge is
-  too thin to seat reliably. (WAGO 243 "micro" fits 26–20 AWG but needs
-  the Dupont ends cut off — rejected to stay plug-in/no-solder.)
-- **Chosen: a 2.54mm (0.1") common-bus pin board.** One row of male
-  header pins tied to a common rail. One jumper from any Pi GND pin
-  energizes the rail; every black ground wire plugs onto a free pin.
-  Only ONE Pi ground pin consumed. No cutting, no soldering — matches the
-  all-Dupont harness. Buy: "2.54mm power distribution / common rail bus
-  board", ≥12 pins; a dual-rail version can also serve the two OLED 3V3
-  wires. Pitch MUST be 2.54mm (not 2.0mm) or Dupont won't seat.
-- Portability caveat: Dupont is friction-fit — tug-test each, and a dab
-  of hot glue over seated connectors (not the pins) guards against a pin
-  backing out when the rig is carried.
+**26–28 AWG Dupont-terminated**, and the constraints are: case is already
+set/printed (NO HAT — a GPIO terminal HAT stands too tall and covers the
+header), stay plug-in (no cutting Dupont ends, no soldering), plenty of
+internal room.
+
+- **CHOSEN: mini self-adhesive breadboard as a ground bus.** Stick it
+  inside the rig; jumper any Pi GND pin (6/9/14/20/25/30/34/39) into one
+  `-` power rail to make it common ground; plug all 10 ground Duponts
+  into that rail (~25 tie points, fits with room). One Pi GND pin used.
+  The other `+` rail can bus the two OLED **3V3** wires the same way
+  (jumper from pin 1). Pure plug-in, flat, fits the existing case.
+- **Rejected:**
+  - GPIO screw-terminal HAT — covers the 40-pin header and stands too
+    tall for the finished case; also needs Dupont ends cut to bare wire.
+  - WAGO 221 lever-nuts — rated 24 AWG min; Dupont (26–28 AWG) too thin
+    to seat. (WAGO 243 micro fits but needs cutting.)
+  - 2.54mm common-bus PIN board — would work and stays plug-in, but the
+    mini breadboard is cheaper/more flexible and we have the room.
+- Portability caveat: breadboard rails are light friction tie-points —
+  after seating, a dab of hot glue over the inserted wires (NOT solder,
+  not on the rail clips) stops them backing out when the rig travels.
+  Reversible with a peel.
 
 NOTE on the generated wiring images (wiring/): the labels are verified
 against THIS table, but the `wiring/gpio_wiring_diagram.png` v2 image has
