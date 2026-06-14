@@ -1,8 +1,8 @@
 # Session Hand-off — Blood Bowl Dice Tracker
 
-*Last updated: 2026-06-13 (d16 full-rotation retrain live-validated at
-85%; synthetic-data work stream complete). Paste the prompt below into a
-new session, or just point the assistant at this file.*
+*Last updated: 2026-06-13 (d16 full-rotation live-validated at 85%; d6
+perspective-tilt retrain deployed, live-verify pending). Paste the prompt
+below into a new session, or just point the assistant at this file.*
 
 ---
 
@@ -63,10 +63,20 @@ recognition. Mitigation in play: nudge-to-re-read; 85% is table-usable.
    and live eval (85%, see Current state). Deployed. Needed a sliver-box
    fix in `write_yolo_boxes` (a 0px-tall glyph crashed Ultralytics
    augmentation on Windows; `training/_scan_labels.py` finds them).
-2. **d6 live sanity** (~10 rolls — d6 has NEVER been live-evaled on a
-   crop model): `python eval_harness.py --type d6 --model combined`.
-   Confirm no regression and recalibrate its provisional 0.60
-   uncertainty threshold from the data.
+2. **d6 live sanity — PROVISIONAL DEPLOY, NEEDS LIVE VERIFY.** First d6
+   live eval (2026-06-13, full-rotation model): 16/18 = 89%, both misses
+   were 4pip read as off-by-one neighbors. Root cause: captures posed
+   FLAT, real rolls land tilted (a tilted 4 reads as 3/5). Fix shipped:
+   perspective-TILT augmentation in `synth_dice.py` (block/d6 only;
+   `P_TILT`/`TILT_FRAC`). Retrained + DEPLOYED as production
+   `combined.onnx` (val 4pip AP 0.93→0.98, no regression; fixed 1 of 2
+   banked 4pip misses — the other is a hard occlusion case tilt can't
+   cover). **This deploy is provisional: roll ~15 d6 next rig session**
+   (`python eval_harness.py --type d6 --model combined`) to confirm 4pip
+   improves live. If it doesn't: roll back to
+   `models/combined_crop_fullrot_20260613.onnx`, then either capture ~30
+   tilted d6 (covers occlusion too) or lower d6's `?` threshold to 0.75.
+   Also recalibrate the d6 0.60 threshold from the live data.
 3. **GPIO + OLED**: wire 4 arcade buttons, 4 LEDs, 2× SSD1309 SPI OLEDs
    (luma.oled; pins in DESIGN.md §6). OLED rendering = the three-state
    uncertainty logic on HUD/phone (now per-type thresholds).
