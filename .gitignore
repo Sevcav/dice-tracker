@@ -50,3 +50,7 @@ training/train_log*.txt
 training/train_err*.txt
 .DS_Store
 Thumbs.db
+
+# Wiring reference diagrams are deliverables (override *.png)
+!wiring/
+!wiring/*.png

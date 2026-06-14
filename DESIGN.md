@@ -429,6 +429,34 @@ will drive the physical OLEDs.
 - **GPIO allocation:** OLEDs ×2 = 6 pins; Buttons ×4 = 4 pins; LEDs ×4 = 4 pins. Total = 14 of 28 available GPIOs.
 - **Library:** luma.oled (pip install luma.oled) — native SSD1309 SPI support.
 
+#### LOCKED GPIO pin map (2026-06-13, BCM numbering)
+
+Verified software-clean (no SPI-bus collision; all plain GPIO with usable
+internal pull-ups). OLEDs share the SPI0 bus, distinguished by chip-select.
+
+| Function | BCM GPIO | Physical pin | Wiring |
+|---|---|---|---|
+| OLED SCLK (both) | GPIO 11 | 23 | SPI0 SCLK, shared |
+| OLED MOSI/DIN (both) | GPIO 10 | 19 | SPI0 MOSI, shared |
+| OLED DC (both) | GPIO 9 | 21 | shared |
+| OLED RES/RST (both) | GPIO 25 | 22 | shared |
+| OLED-1 CS (P1 side) | GPIO 8 | 24 | SPI0 CE0 |
+| OLED-2 CS (P2 side) | GPIO 7 | 26 | SPI0 CE1 |
+| OLED VCC (both) | 3V3 | 1 or 17 | shared |
+| OLED GND (both) | GND | 9/25/… | shared |
+| Button: P1 Confirm | GPIO 17 | 11 | switch → GND, internal pull-up |
+| Button: P2 Confirm | GPIO 27 | 13 | switch → GND, internal pull-up |
+| Button: Reject | GPIO 22 | 15 | switch → GND, internal pull-up |
+| Button: Undo | GPIO 23 | 16 | switch → GND, internal pull-up |
+| LED: P1 | GPIO 5 | 29 | red → GPIO, black → GND (inline R) |
+| LED: P2 | GPIO 6 | 31 | red → GPIO, black → GND (inline R) |
+| LED: Reject | GPIO 13 | 33 | red → GPIO, black → GND (inline R) |
+| LED: Undo | GPIO 19 | 35 | red → GPIO, black → GND (inline R) |
+
+Buttons: COM/NO only (NC unused). LEDs already have inline resistors —
+no external resistor. Convenient grounds: physical pins 6, 14, 20, 30,
+34, 39.
+
 ### Captive nut pocket dimensions (PETG, 0.28mm gap)
 
 | Nut | Circumscribed dia (Fusion polygon) | Flat-to-flat | Depth |
