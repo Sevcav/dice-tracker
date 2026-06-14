@@ -469,12 +469,21 @@ set/printed (NO HAT — a GPIO terminal HAT stands too tall and covers the
 header), stay plug-in (no cutting Dupont ends, no soldering), plenty of
 internal room.
 
-- **CHOSEN: mini self-adhesive breadboard as a ground bus.** Stick it
-  inside the rig; jumper any Pi GND pin (6/9/14/20/25/30/34/39) into one
-  `-` power rail to make it common ground; plug all 10 ground Duponts
-  into that rail (~25 tie points, fits with room). One Pi GND pin used.
-  The other `+` rail can bus the two OLED **3V3** wires the same way
-  (jumper from pin 1). Pure plug-in, flat, fits the existing case.
+- **CHOSEN PART: REXQualis/Ambberdr 400-point self-adhesive breadboard**
+  (Amazon's Choice, ~$7.19, 6-pack; 3.22×2.12×0.35"). Listing confirms
+  the three musts: "2 Positive & Negative Power Lines on both ends" (the
+  common bus), "Self-Adhesive Tape on the Back" (peel-stick mount), and
+  "20-29 AWG" wire support (covers the 26–28 AWG Dupont). 170-point minis
+  were REJECTED — they have no power rails (only 5-hole tie columns), so a
+  10-wire bus would need bridging multiple columns.
+  Wiring: stick it inside the rig; jumper any Pi GND pin
+  (6/9/14/20/25/30/34/39) into a `-` power line to make it common ground;
+  plug all 10 ground Duponts into it. One Pi GND pin used. The `+` line
+  buses the two OLED **3V3** wires the same way (jumper from pin 1).
+  Note: 400-pt rails are usually split into 2 segments/side — one short
+  jumper joins the halves if you ever need >1 segment (you won't for 10).
+  NEED ONE F/M jumper for the Pi-pin→rail link (female onto the Pi male
+  header pin, male into the breadboard).
 - **Rejected:**
   - GPIO screw-terminal HAT — covers the 40-pin header and stands too
     tall for the finished case; also needs Dupont ends cut to bare wire.
