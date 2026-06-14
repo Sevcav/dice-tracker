@@ -90,6 +90,17 @@ SCALE_JITTER  = (0.95, 1.06)
 GAIN_CLAMP    = (0.70, 1.40)
 CROP_JITTER   = 12     # tray-crop origin jitter, px
 
+# Perspective tilt (2026-06-13): the captures were posed FLAT (top-down),
+# but real rolls land tipped, foreshortening the top face into a
+# trapezoid — the cause of 4pip<->3/5pip confusion (a tilted 4 reads as a
+# 3). A mild homography simulates the foreshortening. NOTE: this warps
+# the flat top-face crop; it does NOT synthesize the side faces a truly
+# tilted die exposes (no 3D pixels for that) — it covers the
+# foreshortening half of the effect, not the occlusion half.
+# TILT_FRAC = max fractional inset of the two far corners (per axis).
+P_TILT      = 0.55     # fraction of pasted dice that get a tilt
+TILT_FRAC   = 0.22     # up to this much corner foreshortening
+
 
 # ── Geometry helpers ────────────────────────────────────────────────────────
 def edge_distances(quad: np.ndarray, p: np.ndarray) -> np.ndarray:
@@ -356,26 +367,58 @@ def place_dice(rng: random.Random, quad: np.ndarray, dice_R: list[float]):
     return spots
 
 
+def _tilt_homography(side: float, rng: random.Random) -> np.ndarray:
+    """3x3 perspective that foreshortens the patch toward one random edge
+    (a die tipped toward/away from the camera), about the patch center."""
+    f = rng.uniform(0.10, TILT_FRAC)
+    # pull two adjacent corners inward along one randomly chosen edge
+    edge = rng.randrange(4)
+    src = np.float32([[0, 0], [side, 0], [side, side], [0, side]])
+    dst = src.copy()
+    inset = f * side
+    # corners (a, b) of the chosen edge move inward perpendicular to it
+    pairs = [((0, 1), (0, 1)),   # top edge recedes -> pull TL,TR down+in
+             ((1, 2), (1, 0)),   # right edge
+             ((2, 3), (0, 1)),   # bottom edge
+             ((3, 0), (1, 0))]   # left edge
+    (ca, cb), axis = pairs[edge]
+    for c in (ca, cb):
+        if edge in (0, 2):       # horizontal edge -> squeeze in X toward center
+            dst[c][0] += inset if dst[c][0] < side / 2 else -inset
+        else:                    # vertical edge -> squeeze in Y
+            dst[c][1] += inset if dst[c][1] < side / 2 else -inset
+    return cv2.getPerspectiveTransform(src, dst)
+
+
 def paste_unit(canvas: np.ndarray, unit: dict, target: np.ndarray,
-               angle: float, scale: float):
-    """Rotate/scale the unit patch + its silhouette alpha, brightness-match
-    the die to the local background, alpha-blend onto the canvas.
+               angle: float, scale: float, tilt: bool = False,
+               rng: random.Random | None = None):
+    """Rotate/scale (+ optional perspective tilt) the unit patch + its
+    silhouette alpha, brightness-match the die to the local background,
+    alpha-blend onto the canvas.
     Returns [(cls, x1, y1, x2, y2)] face boxes in canvas coords."""
     patch = unit["patch"]
     side  = patch.shape[0]
     pc    = (side / 2.0, side / 2.0)
 
-    M = cv2.getRotationMatrix2D(pc, angle, scale)
-    warped = cv2.warpAffine(patch, M, (side, side), flags=cv2.INTER_LINEAR,
-                            borderMode=cv2.BORDER_REPLICATE)
-    alpha = cv2.warpAffine(unit["alpha"], M, (side, side),
-                           flags=cv2.INTER_LINEAR,
-                           borderMode=cv2.BORDER_CONSTANT, borderValue=0)
+    # affine (rotate+scale) lifted to 3x3, optionally composed with a
+    # perspective tilt — one homography for pixels AND label points
+    A = cv2.getRotationMatrix2D(pc, angle, scale)
+    H = np.vstack([A, [0, 0, 1]]).astype(np.float64)
+    if tilt and rng is not None:
+        H = _tilt_homography(side, rng) @ H
+
+    warped = cv2.warpPerspective(patch, H, (side, side),
+                                 flags=cv2.INTER_LINEAR,
+                                 borderMode=cv2.BORDER_REPLICATE)
+    alpha = cv2.warpPerspective(unit["alpha"], H, (side, side),
+                                flags=cv2.INTER_LINEAR,
+                                borderMode=cv2.BORDER_CONSTANT, borderValue=0)
 
     x0 = int(round(target[0] - side / 2))
     y0 = int(round(target[1] - side / 2))
-    H, W = canvas.shape[:2]
-    if x0 < 0 or y0 < 0 or x0 + side > W or y0 + side > H:
+    ch, cw = canvas.shape[:2]   # NOT H — H is the warp homography above
+    if x0 < 0 or y0 < 0 or x0 + side > cw or y0 + side > ch:
         return None    # placement guard should prevent this
     region = canvas[y0:y0 + side, x0:x0 + side]
 
@@ -397,7 +440,10 @@ def paste_unit(canvas: np.ndarray, unit: dict, target: np.ndarray,
 
     boxes = []
     for cls, pts in unit["faces"]:
-        tp = transform_pts(M, pts) + np.array([x0, y0])
+        tp = cv2.perspectiveTransform(
+            pts.reshape(-1, 1, 2).astype(np.float32),
+            H.astype(np.float32)
+        ).reshape(-1, 2) + np.array([x0, y0])
         boxes.append((cls, *poly_bbox(tp)))
     return boxes
 
@@ -449,7 +495,11 @@ def synthesize(units, bgs, counts: dict[str, int], qc: int,
                 if p is None:
                     continue
                 angle = rng.uniform(-rot_max, rot_max)
-                b = paste_unit(canvas, u, p, angle, s)
+                # tilt only block/d6 (flat single faces). d16's 3 married
+                # glyph faces sit on a 3D surface — warping the whole unit
+                # would break their geometry, and d16 is already at 85%.
+                tilt = dtype != "d16" and rng.random() < P_TILT
+                b = paste_unit(canvas, u, p, angle, s, tilt=tilt, rng=rng)
                 if b:
                     boxes.extend(b)
             if not boxes:
