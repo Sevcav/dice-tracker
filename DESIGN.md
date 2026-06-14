@@ -618,6 +618,7 @@ Dice Code/
 | Cable routing strategy | External clips for prototype, internal channels for production |
 | Aesthetic direction | Utilitarian for prototype; organic curves for production v2 |
 | Power bank shelf attachment method | Snap-fit, screw, or magnetic — TBD |
+| **Standalone on-rig touchscreen (no-phone mode)** | **DEFERRED to a post-bring-up upgrade (considered 2026-06-14).** Goal: rig usable with no phone. SOFTWARE is ~free — kiosk a browser at `localhost:5000`, the existing web app (live read, dice switching, BB3 roll record) is fully touch-operable, just a small kiosk launcher needed. BLOCKERS are physical: (1) sealed case has no 5" cutout → CAD rework + reprint; (2) two-player layout — one screen faces one direction vs the two per-player OLEDs, a UX rethink (operator-runs-both, or OLEDs stay for results + screen is shared control); (3) ~5V/2A draw hurts portable battery runtime; (4) screen + OLEDs overlap in purpose. PLAN: finish the current OLED+button+phone build and prove it end-to-end FIRST, then evaluate the touchscreen against a working rig. Candidate part seen: generic 5" 800×480 HDMI resistive touchscreen for Pi (~$30). Lowest-effort impl = kiosk the web app, do NOT rewrite the UI. |
 
 ---
 
