@@ -442,8 +442,8 @@ internal pull-ups). OLEDs share the SPI0 bus, distinguished by chip-select.
 | OLED RES/RST (both) | GPIO 25 | 22 | shared |
 | OLED-1 CS (P1 side) | GPIO 8 | 24 | SPI0 CE0 |
 | OLED-2 CS (P2 side) | GPIO 7 | 26 | SPI0 CE1 |
-| OLED VCC (both) | 3V3 | 1 or 17 | shared |
-| OLED GND (both) | GND | 9/25/… | shared |
+| OLED VCC (both) | 3V3 (NOT 5V) | 1 | shared; SSD1309 is a 3.3V part |
+| OLED GND (both) | GND | 6 (any GND) | shared rail |
 | Button: P1 Confirm | GPIO 17 | 11 | switch → GND, internal pull-up |
 | Button: P2 Confirm | GPIO 27 | 13 | switch → GND, internal pull-up |
 | Button: Reject | GPIO 22 | 15 | switch → GND, internal pull-up |
@@ -454,8 +454,16 @@ internal pull-ups). OLEDs share the SPI0 bus, distinguished by chip-select.
 | LED: Undo | GPIO 19 | 35 | red → GPIO, black → GND (inline R) |
 
 Buttons: COM/NO only (NC unused). LEDs already have inline resistors —
-no external resistor. Convenient grounds: physical pins 6, 14, 20, 30,
-34, 39.
+no external resistor. Convenient grounds (all the same rail): physical
+pins 6, 9, 14, 20, 25, 30, 34, 39.
+
+OLED VCC = **3V3 (pin 1)**, never 5V. GND = any ground pin above.
+
+NOTE on the generated wiring images (wiring/): the labels are verified
+against THIS table, but the `wiring/gpio_wiring_diagram.png` v2 image has
+one hallucinated label — "GND (Pin 7)". Physical **pin 7 is GPIO4, not a
+ground.** Ignore that label and its dangling wire. This table is the
+authoritative source, not the image.
 
 ### Captive nut pocket dimensions (PETG, 0.28mm gap)
 
