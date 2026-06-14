@@ -11,8 +11,8 @@ import time
 from collections import Counter
 
 import cv2
-import supervision as sv
-from ultralytics import YOLO
+
+import inference_backend as backend
 
 import d16_geometry
 from dice_tracker import (
@@ -29,7 +29,7 @@ def log(s):
     LOG.write(s + "\n")
 
 
-model = YOLO(str(MODELS_DIR / "combined_crop.onnx"), task="detect")
+model = backend.load_model(MODELS_DIR / "combined_crop.onnx")
 meta = load_model_meta("combined_crop")
 log(f"meta: {meta}")
 
@@ -42,7 +42,7 @@ crop_rect = tray_crop_rect(aw, ah)
 log(f"camera {aw}x{ah}, crop_rect {crop_rect}")
 
 tracker = make_tracker()
-smoother = sv.DetectionsSmoother(length=5)
+smoother = backend.make_smoother(5)
 stab = LabelStabilizer()
 
 t0 = time.time()

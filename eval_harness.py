@@ -59,10 +59,9 @@ from collections import Counter, defaultdict, deque
 from pathlib import Path
 
 import cv2
-import supervision as sv
-from ultralytics import YOLO
 
 import d16_geometry
+import inference_backend as backend
 
 from dice_tracker import (
     CAMERA_INDEX, CONF_THRESHOLD, COUNT_STABLE_FRAMES, DAY_MODE_DEVIATION,
@@ -307,7 +306,7 @@ def main():
     print(f"  Dice model evaluation — {dice_type} (model: {model_stem})")
     print("=" * 70)
 
-    model = YOLO(str(MODELS_DIR / f"{model_stem}.onnx"), task="detect")
+    model = backend.load_model(MODELS_DIR / f"{model_stem}.onnx")
     model_meta = load_model_meta(model_stem)
     if model_meta.get("tray_crop"):
         print("Model is tray-crop-trained — inference crops to the tray ROI")
@@ -364,7 +363,7 @@ def main():
         return
 
     tracker    = make_tracker()
-    smoother   = sv.DetectionsSmoother(length=SMOOTHER_LENGTH)
+    smoother   = backend.make_smoother(SMOOTHER_LENGTH)
     label_stab = LabelStabilizer()
 
     rolls: list[dict] = []
@@ -585,7 +584,7 @@ def main():
             if n_det == 0:
                 # tray is empty — reset the pipeline for the next roll
                 tracker    = make_tracker()
-                smoother   = sv.DetectionsSmoother(length=SMOOTHER_LENGTH)
+                smoother   = backend.make_smoother(SMOOTHER_LENGTH)
                 label_stab.reset()
                 count_hist.clear()
                 state = "watching"

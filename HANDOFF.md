@@ -74,11 +74,24 @@ recognition. Mitigation in play: nudge-to-re-read; 85% is table-usable.
    `models/combined_crop_fullrot_20260613.onnx`. The synthetic-data work
    stream is COMPLETE — live scoreboard: block 100%, d6 100%, d16 85%,
    pow 60%→100%, zero new dice captured.
-3. **GPIO + OLED**: wire 4 arcade buttons, 4 LEDs, 2× SSD1309 SPI OLEDs
-   (luma.oled; pins in DESIGN.md §6). OLED rendering = the three-state
-   uncertainty logic on HUD/phone (now per-type thresholds).
-4. **Pi port**: pure-onnxruntime inference path (ultralytics needs torch —
-   too heavy for Pi), mDNS for `dicetracker.local`.
+3. **GPIO + OLED + Pi port — CODE DONE 2026-06-14, awaiting first rig
+   bring-up.** Built:
+   - `onnx_backend.py` — torch-free inference (custom YOLOv11 decode,
+     agnostic NMS, IoU tracker + smoother). Bit-for-bit parity with the
+     ultralytics path on banked frames; full Pi pipeline (detect→track→
+     smooth→d16 geometry) verified via `DICE_BACKEND=onnx`.
+   - `inference_backend.py` — auto-selects ultralytics (PC) vs onnx (Pi);
+     `dice_tracker`/`eval_harness` refactored onto it, PC path unchanged.
+   - `hardware.py` — buttons (17/27/22/23) + LEDs (5/6/13/19) + dual
+     SSD1309 (SPI0 CE0/CE1) against the DESIGN.md locked map; no-op stub
+     off-Pi. Wired into the loop: a player's confirm button = set active
+     + confirm (one press); OLEDs mirror the live read.
+   - `requirements-pi.txt`, `deploy/setup_pi.sh`,
+     `deploy/dice-tracker.service`, `deploy/README.md`.
+   **FIRST BRING-UP NEEDS AN HDMI DISPLAY on the Pi** — the alignment
+   overlay + button input still go through the OpenCV window. Follow
+   `deploy/README.md`. **KNOWN NEXT STEP: fully-headless mode** (phone
+   alignment, no cv2 window) for tournament use without a monitor.
 5. When convenient: relabel the 6 bad d16 frames in Roboflow
    (`training/crop_common.py` EXCLUDE_STEMS) + the manual queue
    (`training/datasets/auto_labeled/manual_queue.txt`).

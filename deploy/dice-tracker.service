@@ -1,0 +1,19 @@
+[Unit]
+Description=Blood Bowl Dice Tracker
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=sevcav
+WorkingDirectory=/home/sevcav/dice-tracker
+# Uses the venv created by setup_pi.sh. --no-web off here so the phone UI
+# runs; add --headless once a no-GUI alignment path exists (see HANDOFF).
+ExecStart=/home/sevcav/dice-tracker/.venv/bin/python dice_tracker.py
+Restart=on-failure
+RestartSec=5
+# Camera + SPI need the right groups; sevcav should be in video,gpio,spi.
+SupplementaryGroups=video gpio spi
+
+[Install]
+WantedBy=multi-user.target

@@ -44,11 +44,11 @@ from pathlib import Path
 
 import cv2
 import numpy as np
-import supervision as sv
-from ultralytics import YOLO
 
 import db
 import d16_geometry
+import inference_backend as backend
+from inference_backend import predict_detections
 from dice_types import CLASS_TO_TYPE, majority_type
 
 ROOT       = Path(__file__).parent
@@ -121,39 +121,11 @@ def tray_crop_rect(actual_w: int, actual_h: int) -> tuple | None:
         return None
 
 
-def predict_detections(model, frame, meta: dict, crop_rect) -> sv.Detections:
-    """Run YOLO the way the model was trained — full frame, or cropped to
-    the tray ROI for tray-crop models (training and inference geometry
-    MUST match; a full-frame model on crops, or vice versa, silently
-    breaks: proven 2026-06-11). Returns detections in FULL-FRAME coords.
-
-    agnostic_nms=True: merge overlapping boxes ACROSS classes, not just
-    within a class — without it one physical die can produce two
-    overlapping boxes of different classes that both survive NMS."""
-    ox = oy = 0
-    src = frame
-    if meta.get("tray_crop") and crop_rect is not None:
-        x, y, w, h = crop_rect
-        # The ROI rect hugs the tray rim; dice against the BOTTOM wall
-        # project their faces below the rect line (camera sits north of
-        # the tray), so the crop is padded — mostly downward — to keep
-        # the whole play area visible. The ~4% die-scale change vs the
-        # training crop is inside the training scale augmentation.
-        pad  = int(meta.get("pad", 0))
-        padb = int(meta.get("pad_bottom", 0))
-        H, W = frame.shape[:2]
-        ox = max(0, x - pad)
-        oy = max(0, y - pad)
-        x2 = min(W, x + w + pad)
-        y2 = min(H, y + h + pad + padb)
-        src = frame[oy:y2, ox:x2]
-    results = model.predict(source=src, conf=CONF_THRESHOLD,
-                            agnostic_nms=True, verbose=False)[0]
-    detections = sv.Detections.from_ultralytics(results)
-    if (ox or oy) and len(detections) > 0:
-        detections.xyxy = detections.xyxy + np.array(
-            [ox, oy, ox, oy], dtype=detections.xyxy.dtype)
-    return detections
+# predict_detections is provided by inference_backend (re-exported above so
+# eval_harness's `from dice_tracker import predict_detections` keeps working).
+# It crops/pads to the tray ROI for crop-trained models and returns
+# full-frame coords — identical geometry on the ultralytics (PC) and
+# torch-free onnx (Pi) backends.
 
 
 def color_deviation(frame) -> float:
@@ -293,12 +265,8 @@ class LabelStabilizer:
 
 
 def make_tracker():
-    return sv.ByteTrack(
-        frame_rate=30,
-        lost_track_buffer=120,
-        minimum_consecutive_frames=3,
-        track_activation_threshold=0.30,
-    )
+    # ByteTrack (PC) or a numpy IoU tracker (Pi) — selected by the backend.
+    return backend.make_tracker()
 
 
 # ── Session state ───────────────────────────────────────────────────────────
@@ -444,26 +412,55 @@ def main():
         except Exception as e:
             print(f"Web UI disabled: {e}")
 
-    print(f"Models dir: {MODELS_DIR}")
-    models = {
-        "block": YOLO(str(MODELS_DIR / "block.onnx"), task="detect"),
-        "d6":    YOLO(str(MODELS_DIR / "d6.onnx"),    task="detect"),
-        "d16":   YOLO(str(MODELS_DIR / "d16.onnx"),   task="detect"),
-    }
-    model_meta = {k: load_model_meta(k) for k in models}
+    # Physical rig I/O (Pi only; a no-op stub on the PC). Button presses are
+    # translated into the SAME synthetic keystrokes the main loop already
+    # handles, so there is one code path for keyboard and buttons. A
+    # player's OWN confirm button sets them active AND confirms in one press
+    # (player attribution, per DESIGN.md): emit the player key then SPACE.
+    import queue as _queue
+    from hardware import Hardware
+    hw_keys: "_queue.Queue[int]" = _queue.Queue()
+    _BTN_KEYS = {"p1": [ord('1'), 32], "p2": [ord('2'), 32],
+                 "reject": [ord('r')], "undo": [8]}
+
+    def _on_button(name: str):
+        for k in _BTN_KEYS.get(name, []):
+            hw_keys.put(k)
+        print(f"  [button] {name}")
+
+    hw = Hardware(on_event=_on_button)
+    if hw.available:
+        print("Physical buttons/LEDs active (GPIO).")
+    if "--no-web" in sys.argv and not hw.available:
+        print("(no web, no GPIO — keyboard only)")
+
+    print(f"Models dir: {MODELS_DIR}  (backend: {backend.BACKEND})")
+    # Load whatever per-type models exist; the combined model is the
+    # production path. The dedicated block/d6/d16 ONNX are full-frame and
+    # optional (manual override on the PC) — on a fresh Pi only
+    # combined.onnx may be present, which is fine.
+    models = {}
+    model_meta = {}
+    for k in ("block", "d6", "d16"):
+        p = MODELS_DIR / f"{k}.onnx"
+        if p.exists():
+            models[k] = backend.load_model(p)
+            model_meta[k] = load_model_meta(k)
     # The combined 27-class model reads any dice type in one inference —
     # "auto" mode derives the dice type from the detected face labels, so
     # no manual switching is needed during play. Same Pi cost as a single
     # per-type model. Only enabled when the model file exists (i.e. has
     # been trained and passed the quality bar).
     if (MODELS_DIR / "combined.onnx").exists():
-        models["auto"] = YOLO(str(MODELS_DIR / "combined.onnx"),
-                              task="detect")
+        models["auto"] = backend.load_model(MODELS_DIR / "combined.onnx")
         model_meta["auto"] = load_model_meta("combined")
         if model_meta["auto"]["tray_crop"]:
             print("  combined model is tray-crop-trained — inference will "
                   "crop to the tray ROI")
-    current_type = "auto" if "auto" in models else "block"
+    if not models:
+        print("ERROR: no models found in", MODELS_DIR)
+        return
+    current_type = "auto" if "auto" in models else next(iter(models))
     print(f"Dice mode: {current_type}"
           + ("" if "auto" in models else "  (no combined.onnx — manual "
              "type switching via phone/keys)"))
@@ -520,7 +517,7 @@ def main():
     print()
 
     tracker    = make_tracker()
-    smoother   = sv.DetectionsSmoother(length=SMOOTHER_LENGTH)
+    smoother   = backend.make_smoother(SMOOTHER_LENGTH)
     label_stab = LabelStabilizer()
 
     # Roll-level state machine:
@@ -549,7 +546,7 @@ def main():
         nonlocal tracker, smoother, last_settled_dets, last_settled_labels, \
             last_settled_d16, state
         tracker = make_tracker()
-        smoother = sv.DetectionsSmoother(length=SMOOTHER_LENGTH)
+        smoother = backend.make_smoother(SMOOTHER_LENGTH)
         label_stab.reset()
         last_settled_dets   = None
         last_settled_labels = []
@@ -760,16 +757,15 @@ def main():
         }.get(state, "")
         hud_line(annotated, hint, actual_h - 20, color=(0, 255, 255), scale=0.6)
 
-        # Status feed for the phone UI: the live read (what the OLEDs will
-        # eventually show) plus recent roll history.
+        # Live read shared by the phone UI and the physical OLEDs.
+        dice_status = [{
+            "label": model.names.get(cid, str(cid)),
+            "conf": int(round(conf * 100)),
+            "stable": bool(stable),
+            "uncertain": bool(stable and conf < uncertain_threshold(
+                model.names.get(cid, str(cid)))),
+        } for cid, conf, stable in label_states]
         if web_control is not None:
-            dice_status = [{
-                "label": model.names.get(cid, str(cid)),
-                "conf": int(round(conf * 100)),
-                "stable": bool(stable),
-                "uncertain": bool(stable and conf < uncertain_threshold(
-                    model.names.get(cid, str(cid)))),
-            } for cid, conf, stable in label_states]
             recent = [(f"#{lr['roll_id']} {lr['player']} {lr['dice_type']}: "
                        + ", ".join(lr["results"])
                        + ("  [rejected]" if lr["rejected"] else ""))
@@ -782,8 +778,29 @@ def main():
                 rolls=len(session.rolls), dice=dice_status,
                 recent=recent, day_mode=day_mode)
 
+        # Physical OLEDs mirror the live read; LEDs signal state — both
+        # players' LEDs glow when a roll is settled (press your confirm),
+        # the active player's stays lit otherwise.
+        if hw.available:
+            hw.show(session.active_player, dice_status, state)
+            settled = (state == "settled")
+            hw.set_led("p1", settled or session.active_player == "P1")
+            hw.set_led("p2", settled or session.active_player == "P2")
+            hw.set_led("reject", settled)
+            hw.set_led("undo", bool(session.rolls))
+
         cv2.imshow(win, annotated)
         key = cv2.waitKey(1) & 0xFF
+
+        # Drain one queued button keystroke per frame when the keyboard is
+        # idle (255 = no key). Multi-key button actions (e.g. P1 = '1' then
+        # SPACE) drain across consecutive frames, which the state machine
+        # handles fine.
+        if key == 255 and not hw_keys.empty():
+            try:
+                key = hw_keys.get_nowait()
+            except Exception:
+                pass
 
         if key in (ord('q'), 27):
             if session.rolls:
@@ -918,6 +935,7 @@ def main():
 
     cap.release()
     cv2.destroyAllWindows()
+    hw.cleanup()
     print(f"Total rolls in session: {len(session.rolls)}")
     print("Done.")
 

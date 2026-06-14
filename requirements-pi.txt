@@ -1,0 +1,23 @@
+# Blood Bowl Dice Tracker — Raspberry Pi runtime (torch-free).
+#
+# The PC requirements pull in ultralytics + supervision, which depend on
+# torch — too heavy for the Pi. The Pi runs the torch-free path
+# (onnx_backend.py, selected automatically by inference_backend.py), so it
+# needs ONLY these:
+
+onnxruntime>=1.17          # pure-CPU inference (no GPU build on Pi)
+opencv-python>=4.8.0       # camera capture + preprocessing (or opencv-python-headless if no display)
+numpy>=1.24.0
+flask>=3.1.0               # phone web UI
+Pillow>=10.0.0             # OLED rendering
+PyYAML>=6.0
+
+# Physical rig I/O (apt is more reliable than pip for these on Pi OS):
+#   sudo apt install python3-gpiozero python3-luma.oled
+# or, in a venv:
+gpiozero>=2.0
+luma.oled>=3.12
+
+# NOT installed on the Pi (and must not be): torch, ultralytics, supervision.
+# If any of those import, inference_backend falls back to the PC path and
+# pulls torch — verify with:  python -c "import inference_backend as b; print(b.BACKEND)"  -> should print 'onnx'
