@@ -461,6 +461,24 @@ pins 6, 9, 14, 20, 25, 30, 34, 39.
 
 OLED VCC = **3V3 (pin 1)**, never 5V. GND = any ground pin above.
 
+#### Ground consolidation (decided 2026-06-14)
+
+~10 ground wires (2 OLED + 4 button + 4 LED) all share one rail. All are
+**26–28 AWG Dupont-terminated**, so:
+- **WAGO 221 lever-nuts do NOT fit** — rated 24 AWG min; Dupont gauge is
+  too thin to seat reliably. (WAGO 243 "micro" fits 26–20 AWG but needs
+  the Dupont ends cut off — rejected to stay plug-in/no-solder.)
+- **Chosen: a 2.54mm (0.1") common-bus pin board.** One row of male
+  header pins tied to a common rail. One jumper from any Pi GND pin
+  energizes the rail; every black ground wire plugs onto a free pin.
+  Only ONE Pi ground pin consumed. No cutting, no soldering — matches the
+  all-Dupont harness. Buy: "2.54mm power distribution / common rail bus
+  board", ≥12 pins; a dual-rail version can also serve the two OLED 3V3
+  wires. Pitch MUST be 2.54mm (not 2.0mm) or Dupont won't seat.
+- Portability caveat: Dupont is friction-fit — tug-test each, and a dab
+  of hot glue over seated connectors (not the pins) guards against a pin
+  backing out when the rig is carried.
+
 NOTE on the generated wiring images (wiring/): the labels are verified
 against THIS table, but the `wiring/gpio_wiring_diagram.png` v2 image has
 one hallucinated label — "GND (Pin 7)". Physical **pin 7 is GPIO4, not a
