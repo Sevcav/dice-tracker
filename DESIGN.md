@@ -469,8 +469,9 @@ set/printed (NO HAT — a GPIO terminal HAT stands too tall and covers the
 header), stay plug-in (no cutting Dupont ends, no soldering), plenty of
 internal room.
 
-- **CHOSEN PART: REXQualis/Ambberdr 400-point self-adhesive breadboard**
-  (Amazon's Choice, ~$7.19, 6-pack; 3.22×2.12×0.35"). Listing confirms
+- **ORDERED 2026-06-14: REXQualis/Ambberdr 400-point self-adhesive
+  breadboard** (Amazon's Choice, ~$7.19, 6-pack; 3.22×2.12×0.35"). This
+  is the committed ground/3V3-bus part. Listing confirms
   the three musts: "2 Positive & Negative Power Lines on both ends" (the
   common bus), "Self-Adhesive Tape on the Back" (peel-stick mount), and
   "20-29 AWG" wire support (covers the 26–28 AWG Dupont). 170-point minis
