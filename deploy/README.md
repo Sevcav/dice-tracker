@@ -16,12 +16,24 @@ Move the tracker off the bench PC onto the portable rig. The Pi runs the
 pin map (DESIGN.md). It is a silent no-op when gpiozero/luma are absent,
 so the same code runs on the PC.
 
-## First bring-up (with an HDMI display attached)
+## Headless operation (no monitor — the design)
 
-This first portable test uses a monitor on the Pi — you want to watch the
-feed while validating the rig, and the camera-alignment overlay + button
-input currently go through the OpenCV window. (Fully headless mode =
-alignment from the phone, no cv2 window = the documented next step.)
+The rig is a sealed box; the **phone is the only screen**. On the Pi,
+dice_tracker runs HEADLESS automatically (no `$DISPLAY` and/or the onnx
+backend) — no OpenCV window ever opens. Control + alignment happen on the
+phone, plus the physical GPIO buttons:
+
+- **Alignment:** open `http://dicetracker.local:5000/align` on the phone.
+  It shows the live camera feed with the green tray outline; adjust the
+  arm until they match, tap **Confirm alignment**. (Always step one — the
+  model only knows the calibrated perspective.)
+- **Live view + control:** the main phone page shows the live read and the
+  dice-type / player controls; Reject / Undo / Confirm are available from
+  the phone, and the arcade buttons do the same.
+- `--gui` forces the dev preview window on a PC with a display; `--headless`
+  forces headless anywhere.
+
+## First bring-up
 
 1. On the PC, push the latest code + the deployed model:
    ```
@@ -41,12 +53,14 @@ alignment from the phone, no cv2 window = the documented next step.)
    scp training/models/combined.onnx        sevcav@dicetracker.local:~/dice-tracker/training/models/
    scp training/models/combined.onnx.json   sevcav@dicetracker.local:~/dice-tracker/training/models/
    ```
-4. Run:
+4. Run (headless is automatic on the Pi):
    ```
    . .venv/bin/activate
    python dice_tracker.py
    ```
-   Phone UI: `http://dicetracker.local:5000/`
+   Then on the phone:
+   - `http://dicetracker.local:5000/align` → align the camera, Confirm
+   - `http://dicetracker.local:5000/` → live read + controls
 
 ## Autostart at boot (optional)
 

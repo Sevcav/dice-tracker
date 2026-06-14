@@ -53,7 +53,14 @@ class WebControl:
         self._lock = threading.Lock()
         self.requested_type: str | None = None
         self.requested_player: str | None = None
+        self.requested_action: str | None = None   # reject / undo / confirm
         self.status: dict = {}
+        # Headless support: the tracker pushes the latest JPEG here so the
+        # phone can show a live view (camera alignment + monitoring) without
+        # any monitor on the Pi. align_confirmed is set when the operator
+        # taps Confirm on the phone alignment screen.
+        self.latest_jpeg: bytes | None = None
+        self.align_confirmed: bool = False
 
     def request_type(self, dice_type: str):
         with self._lock:
@@ -63,12 +70,40 @@ class WebControl:
         with self._lock:
             self.requested_player = player
 
+    def request_action(self, action: str):
+        with self._lock:
+            self.requested_action = action
+
     def take_requests(self) -> tuple[str | None, str | None]:
         with self._lock:
             t, p = self.requested_type, self.requested_player
             self.requested_type = None
             self.requested_player = None
             return t, p
+
+    def take_action(self) -> str | None:
+        with self._lock:
+            a = self.requested_action
+            self.requested_action = None
+            return a
+
+    def set_frame(self, jpeg: bytes):
+        with self._lock:
+            self.latest_jpeg = jpeg
+
+    def get_frame(self) -> bytes | None:
+        with self._lock:
+            return self.latest_jpeg
+
+    def confirm_alignment(self):
+        with self._lock:
+            self.align_confirmed = True
+
+    def take_alignment(self) -> bool:
+        with self._lock:
+            v = self.align_confirmed
+            self.align_confirmed = False
+            return v
 
     def update_status(self, **kwargs):
         with self._lock:
@@ -472,6 +507,68 @@ setInterval(poll, 700); poll();
     @app.get("/api/status")
     def api_status():
         return control.get_status() if control is not None else {}
+
+    @app.post("/api/action")
+    def api_action():
+        a = (request.json or {}).get("action")
+        if control is not None and a in ("reject", "undo", "confirm"):
+            control.request_action(a)
+            return {"ok": True}
+        return {"ok": False}, 400
+
+    # ── Headless camera view + phone-driven alignment ───────────────────
+    # The rig has no monitor (sealed box); the phone is the only screen.
+    # The tracker pushes JPEG frames into WebControl; these routes serve
+    # them and let the operator confirm camera alignment from the phone.
+    @app.get("/stream.mjpg")
+    def stream_mjpg():
+        if control is None:
+            return Response(status=404)
+
+        def gen():
+            import time as _t
+            boundary = b"--frame"
+            while True:
+                jpg = control.get_frame()
+                if jpg is not None:
+                    yield (boundary + b"\r\nContent-Type: image/jpeg\r\n\r\n"
+                           + jpg + b"\r\n")
+                _t.sleep(0.05)   # ~20 fps cap
+
+        return Response(gen(),
+                        mimetype="multipart/x-mixed-replace; boundary=frame")
+
+    @app.route("/align")
+    def align():
+        body = """
+<h2>Camera alignment</h2>
+<p>Adjust the camera arm until the tray edges line up with the GREEN
+outline, then tap Confirm. (Alignment is always step one — the model only
+knows the calibrated tray perspective.)</p>
+<img id="feed" src="/stream.mjpg"
+     style="width:100%;max-width:640px;border:2px solid #444;border-radius:8px">
+<div style="margin-top:12px">
+  <button class="big" onclick="confirmAlign()">Confirm alignment</button>
+</div>
+<p id="msg" style="margin-top:10px;color:#6c6"></p>
+"""
+        script = """
+<script>
+function confirmAlign(){
+  fetch('/api/align_confirm',{method:'POST'})
+    .then(r=>r.json()).then(_=>{document.getElementById('msg').textContent
+      = 'Confirmed — starting session...';});
+}
+</script>
+"""
+        return _page(body, script)
+
+    @app.post("/api/align_confirm")
+    def api_align_confirm():
+        if control is not None:
+            control.confirm_alignment()
+            return {"ok": True}
+        return {"ok": False}, 400
 
     # ── Game review ─────────────────────────────────────────────────────
     @app.route("/games")

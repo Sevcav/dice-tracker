@@ -196,6 +196,58 @@ def alignment_check(cap, actual_w: int, actual_h: int) -> bool:
         cv2.waitKey(1)
     return proceed
 
+
+def _draw_align_overlay(frame, actual_w, actual_h):
+    """Draw the green tray-corner reference on a frame (shared by the GUI
+    and headless/phone alignment paths). Returns the annotated copy, or the
+    original if no tray_roi.json reference exists."""
+    try:
+        d = json.loads(TRAY_ROI_FILE.read_text())
+        sx = actual_w / d["frame_width"]
+        sy = actual_h / d["frame_height"]
+        pts = [(int(cx * sx), int(cy * sy)) for cx, cy in d["corners"]]
+    except Exception:
+        return frame
+    out = frame.copy()
+    for i in range(4):
+        p1, p2 = pts[i], pts[(i + 1) % 4]
+        cv2.line(out, p1, p2, (0, 255, 0), 3)
+        cv2.circle(out, p1, 8, (0, 255, 0), -1)
+    hud_line(out, "Match tray to GREEN outline, then Confirm on phone",
+             25, color=(0, 255, 0), scale=0.7)
+    return out
+
+
+def alignment_check_web(cap, actual_w, actual_h, web_control) -> bool:
+    """Headless alignment: stream the green-outline overlay to the phone
+    (/align) and wait for the operator to tap Confirm. No monitor needed —
+    the sealed rig's only screen is the phone. Returns True to proceed.
+
+    Falls through (returns True) if there's no tray_roi.json reference or
+    no web control to drive the phone UI."""
+    if web_control is None:
+        print("No web control — skipping alignment (headless).")
+        return True
+    if not TRAY_ROI_FILE.exists():
+        print("No tray_roi.json reference — skipping alignment check.")
+        return True
+    print("Headless alignment: open  /align  on the phone, match the tray")
+    print("to the green outline, then tap Confirm.")
+    web_control.take_alignment()   # clear any stale confirm
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            continue
+        overlay = _draw_align_overlay(frame, actual_w, actual_h)
+        ok, buf = cv2.imencode(".jpg", overlay,
+                               [cv2.IMWRITE_JPEG_QUALITY, 70])
+        if ok:
+            web_control.set_frame(buf.tobytes())
+        if web_control.take_alignment():
+            print("Alignment confirmed from phone.")
+            return True
+
+
 # ── Smoothing / settle settings ─────────────────────────────────────────────
 SMOOTHER_LENGTH    = 5
 LABEL_HISTORY_LEN  = 8
@@ -378,10 +430,38 @@ def hud_line(frame, text, y, color=(255, 255, 255), scale=0.55):
 
 
 # ── Main loop ───────────────────────────────────────────────────────────────
+def _has_display() -> bool:
+    """True only if an OpenCV GUI window can actually open. The production
+    Pi rig is a sealed box with NO monitor (phone is the only screen), so
+    this is normally False there."""
+    import os
+    if sys.platform.startswith("linux") and not os.environ.get("DISPLAY"):
+        return False
+    try:
+        probe = "._disp_probe"
+        cv2.namedWindow(probe, cv2.WINDOW_NORMAL)
+        cv2.destroyWindow(probe)
+        for _ in range(3):
+            cv2.waitKey(1)
+        return True
+    except Exception:
+        return False
+
+
 def main():
     print("=" * 70)
     print("  Blood Bowl Dice Tracker")
     print("=" * 70)
+
+    # Headless = no cv2 window; control + alignment via phone/GPIO only.
+    # Forced with --headless, and the default on the Pi (no display, or the
+    # torch-free onnx backend). --gui forces the dev preview window.
+    headless = ("--headless" in sys.argv
+                or (backend.BACKEND == "onnx" and "--gui" not in sys.argv)
+                or not _has_display())
+    if "--gui" in sys.argv:
+        headless = False
+    print(f"Display mode: {'HEADLESS (phone UI only)' if headless else 'GUI preview'}")
 
     session = Session()
     if "--load" in sys.argv:
@@ -499,15 +579,27 @@ def main():
             print("  Models are trained on IR frames — reads WILL degrade.")
             print("  Check the photoresistor light shield is seated properly.")
             print("!" * 70)
-            if input("  Continue anyway? [y/N] ").strip().lower() != "y":
+            # Headless rig has no console to answer a prompt — proceed with
+            # the warning (the live HUD/phone day-mode flag stays on, and
+            # the re-check fires every IR_CHECK_INTERVAL frames). Only the
+            # interactive GUI path blocks for a y/N.
+            if not headless and \
+                    input("  Continue anyway? [y/N] ").strip().lower() != "y":
                 cap.release()
                 print("Aborted — fix the light shield and restart.")
                 return
+            if headless:
+                print("  (headless: continuing; day-mode flag stays live)")
     print()
 
     # Camera alignment pre-flight — the rig moves between sessions and the
-    # model only knows the calibrated tray perspective.
-    if not alignment_check(cap, actual_w, actual_h):
+    # model only knows the calibrated tray perspective. Headless = confirm
+    # from the phone (/align); GUI = the on-screen overlay.
+    if headless:
+        aligned = alignment_check_web(cap, actual_w, actual_h, web_control)
+    else:
+        aligned = alignment_check(cap, actual_w, actual_h)
+    if not aligned:
         cap.release()
         print("Aborted at alignment check.")
         return
@@ -535,8 +627,9 @@ def main():
     count_hist: deque = deque(maxlen=COUNT_STABLE_FRAMES)
 
     win = "Dice Tracker - SPACE confirm, R reject, BKSP undo, S save, Q quit"
-    cv2.namedWindow(win, cv2.WINDOW_NORMAL)
-    cv2.resizeWindow(win, actual_w, actual_h)
+    if not headless:
+        cv2.namedWindow(win, cv2.WINDOW_NORMAL)
+        cv2.resizeWindow(win, actual_w, actual_h)
 
     last_time  = time.time()
     fps_smooth = 0.0
@@ -789,13 +882,37 @@ def main():
             hw.set_led("reject", settled)
             hw.set_led("undo", bool(session.rolls))
 
-        cv2.imshow(win, annotated)
-        key = cv2.waitKey(1) & 0xFF
+        if headless:
+            # No window: stream the annotated frame to the phone and pace
+            # the loop with a short sleep (waitKey is the GUI delay we'd
+            # otherwise rely on). Input comes from GPIO buttons + phone.
+            if web_control is not None and frame_count % 2 == 0:
+                ok, buf = cv2.imencode(".jpg", annotated,
+                                       [cv2.IMWRITE_JPEG_QUALITY, 70])
+                if ok:
+                    web_control.set_frame(buf.tobytes())
+            time.sleep(0.005)
+            key = 255
+        else:
+            cv2.imshow(win, annotated)
+            key = cv2.waitKey(1) & 0xFF
 
-        # Drain one queued button keystroke per frame when the keyboard is
-        # idle (255 = no key). Multi-key button actions (e.g. P1 = '1' then
-        # SPACE) drain across consecutive frames, which the state machine
-        # handles fine.
+        # Phone actions (reject / undo / confirm) -> the same synthetic keys
+        # the dispatch below already handles, so phone + buttons + keyboard
+        # share one path.
+        if web_control is not None:
+            act = web_control.take_action()
+            if act == "reject":
+                hw_keys.put(ord('r'))
+            elif act == "undo":
+                hw_keys.put(8)
+            elif act == "confirm":
+                hw_keys.put(32)
+
+        # Drain one queued keystroke (GPIO button or phone action) per frame
+        # when no physical keyboard key is pending (255 = none). Multi-key
+        # button actions (e.g. P1 = '1' then SPACE) drain across consecutive
+        # frames, which the state machine handles fine.
         if key == 255 and not hw_keys.empty():
             try:
                 key = hw_keys.get_nowait()
@@ -934,7 +1051,8 @@ def main():
             session.load()
 
     cap.release()
-    cv2.destroyAllWindows()
+    if not headless:
+        cv2.destroyAllWindows()
     hw.cleanup()
     print(f"Total rolls in session: {len(session.rolls)}")
     print("Done.")

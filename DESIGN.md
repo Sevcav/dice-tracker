@@ -29,7 +29,9 @@ mode** (`combined.onnx`): dice type is derived from the detected face
 labels per roll; per-type models remain as manual overrides (keys
 B/D/X, phone buttons). Pi cost unchanged — one nano inference per frame.
 
-**Session startup rule (locked 2026-06-11):** **Camera alignment is ALWAYS the first step of any camera session.** Moving the rig moves the camera, and the models only know the calibrated tray perspective in `tray_roi.json`. Both `dice_tracker.py` and `eval_harness.py` enforce this with a built-in startup overlay (match tray edges to the green outline → SPACE); standalone `align_camera.py` does the same for bench work. Never score, capture, or log rolls before alignment is confirmed.
+**Session startup rule (locked 2026-06-11):** **Camera alignment is ALWAYS the first step of any camera session.** Moving the rig moves the camera, and the models only know the calibrated tray perspective in `tray_roi.json`. Never score, capture, or log rolls before alignment is confirmed. On the PC (GUI) this is the on-screen green-outline overlay → SPACE; on the **headless Pi** it is the phone alignment screen (`/align`: live feed + green outline → Confirm). Standalone `align_camera.py` remains for bench work.
+
+**Headless rule (locked 2026-06-14):** **The production rig has NO monitor — it is a sealed box and the phone is the only screen.** `dice_tracker.py` runs headless automatically on the Pi (no `$DISPLAY` / torch-free onnx backend): no OpenCV window ever opens; alignment, live read, and Reject/Undo/Confirm are all on the phone, alongside the 4 GPIO buttons. The cv2 preview window is dev-only (`--gui` on a PC). Do not reintroduce a runtime dependency on an attached display.
 
 ---
 

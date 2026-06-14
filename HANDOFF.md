@@ -88,10 +88,16 @@ recognition. Mitigation in play: nudge-to-re-read; 85% is table-usable.
      + confirm (one press); OLEDs mirror the live read.
    - `requirements-pi.txt`, `deploy/setup_pi.sh`,
      `deploy/dice-tracker.service`, `deploy/README.md`.
-   **FIRST BRING-UP NEEDS AN HDMI DISPLAY on the Pi** — the alignment
-   overlay + button input still go through the OpenCV window. Follow
-   `deploy/README.md`. **KNOWN NEXT STEP: fully-headless mode** (phone
-   alignment, no cv2 window) for tournament use without a monitor.
+   - **HEADLESS (the design — sealed box, phone is the only screen):** on
+     the Pi dice_tracker runs with NO cv2 window automatically (no
+     `$DISPLAY` / onnx backend; `--gui` forces preview, `--headless`
+     forces off). Alignment is phone-driven — `webapp` `/align` streams
+     the live feed + green tray outline (MJPEG), operator taps Confirm
+     (`alignment_check_web`). Reject/Undo/Confirm available from the phone
+     (`/api/action`) and the GPIO buttons; both share the synthetic-key
+     dispatch. Day-mode prompt auto-proceeds headless (flag stays live).
+   First bring-up: follow `deploy/README.md` (git pull → setup_pi.sh →
+   scp model → `python dice_tracker.py` → align on phone).
 5. When convenient: relabel the 6 bad d16 frames in Roboflow
    (`training/crop_common.py` EXCLUDE_STEMS) + the manual queue
    (`training/datasets/auto_labeled/manual_queue.txt`).
