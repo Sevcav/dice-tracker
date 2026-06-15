@@ -461,10 +461,25 @@ pins 6, 9, 14, 20, 25, 30, 34, 39.
 
 OLED VCC = **3V3 (pin 1)**, never 5V. GND = any ground pin above.
 
-#### Ground consolidation (decided 2026-06-14, final)
+#### Ground consolidation (REVISED 2026-06-14 during wiring)
 
-~10 ground wires (2 OLED + 4 button + 4 LED) all share one rail. All are
-**26–28 AWG Dupont-terminated**, and the constraints are: case is already
+**ACTUAL APPROACH BEING WIRED: grounds go DIRECT to the Pi's 8 ground
+pins using 1-to-2 Dupont splitters — the breadboard is NOT needed for
+grounds.** 10 grounds (2 OLED + 4 button + 4 LED) vs 8 Pi ground pins
+(6, 9, 14, 20, 25, 30, 34, 39); the user has 1-to-2 splitters, so a few
+pins fan out to cover all 10. Rationale: for a sealed/portable rig,
+direct-to-header has fewer friction joints to shake loose than a
+breadboard rail, and the 8 ground pins have no other use. The ordered
+breadboard becomes optional (spare, or a 3V3 rail for the two OLED VCC).
+
+- **OLED grounds (both):** one Pi GND **pin 25** → 1-to-2 splitter →
+  both OLED GNDs (pin 25 sits in the OLED signal cluster 19/21/22/23).
+- **Buttons + LEDs (8 grounds):** spread across the remaining ground
+  pins (6/9/14/20/30/34/39) with splitters as needed.
+
+The breadboard option below is RETAINED as fallback / 3V3-rail use:
+
+~10 ground wires, all **26–28 AWG Dupont-terminated**; case is already
 set/printed (NO HAT — a GPIO terminal HAT stands too tall and covers the
 header), stay plug-in (no cutting Dupont ends, no soldering), plenty of
 internal room.
