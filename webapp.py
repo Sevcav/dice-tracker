@@ -61,6 +61,10 @@ class WebControl:
         # taps Confirm on the phone alignment screen.
         self.latest_jpeg: bytes | None = None
         self.align_confirmed: bool = False
+        # Phone tap-4-corners re-calibration: the phone posts 4 tray
+        # corners (in streamed-frame pixel coords); the tracker loop picks
+        # them up, rewrites tray_roi.json, and reloads the ROI live.
+        self.new_corners: list | None = None
 
     def request_type(self, dice_type: str):
         with self._lock:
@@ -98,6 +102,16 @@ class WebControl:
     def confirm_alignment(self):
         with self._lock:
             self.align_confirmed = True
+
+    def set_new_corners(self, corners: list, frame_w: int, frame_h: int):
+        with self._lock:
+            self.new_corners = (corners, frame_w, frame_h)
+
+    def take_new_corners(self):
+        with self._lock:
+            c = self.new_corners
+            self.new_corners = None
+            return c
 
     def take_alignment(self) -> bool:
         with self._lock:
@@ -550,19 +564,98 @@ setInterval(poll, 700); poll();
 <p>Adjust the camera arm until the tray edges line up with the GREEN
 outline, then tap Confirm. (Alignment is always step one — the model only
 knows the calibrated tray perspective.)</p>
-<img id="feed" src="/stream.mjpg"
-     style="width:100%;max-width:640px;border:2px solid #444;border-radius:8px">
-<div style="margin-top:12px">
+<p class="muted">Moved the camera? Tap <b>Re-set corners</b>, then tap the
+tray's 4 corners on the image in order: <b>top-left, top-right,
+bottom-right, bottom-left</b>. Save to recalibrate.</p>
+<div style="position:relative;display:inline-block;max-width:640px;width:100%">
+  <img id="feed" src="/stream.mjpg"
+       style="width:100%;display:block;border:2px solid #444;border-radius:8px">
+  <canvas id="ov" style="position:absolute;left:0;top:0;width:100%;height:100%;
+       pointer-events:none"></canvas>
+</div>
+<div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
   <button class="big" onclick="confirmAlign()">Confirm alignment</button>
+  <button class="big" onclick="startPick()">Re-set corners</button>
+  <button class="big" id="saveBtn" onclick="saveCorners()"
+          style="display:none">Save corners</button>
+  <button class="big" id="undoBtn" onclick="undoCorner()"
+          style="display:none">Undo last</button>
 </div>
 <p id="msg" style="margin-top:10px;color:#6c6"></p>
 """
         script = """
 <script>
+var feed=document.getElementById('feed'),ov=document.getElementById('ov'),
+    msg=document.getElementById('msg');
+var picking=false, pts=[];
+var LABELS=['top-left','top-right','bottom-right','bottom-left'];
+
+function fit(){ ov.width=feed.clientWidth; ov.height=feed.clientHeight; draw(); }
+window.addEventListener('resize',fit);
+feed.addEventListener('load',fit);
+
+function draw(){
+  var c=ov.getContext('2d'); c.clearRect(0,0,ov.width,ov.height);
+  if(!pts.length) return;
+  c.lineWidth=2; c.strokeStyle='#3f6'; c.fillStyle='#3f6';
+  c.beginPath();
+  for(var i=0;i<pts.length;i++){
+    var p=pts[i]; if(i===0)c.moveTo(p.x,p.y); else c.lineTo(p.x,p.y);
+  }
+  if(pts.length===4) c.closePath();
+  c.stroke();
+  for(var i=0;i<pts.length;i++){
+    var p=pts[i];
+    c.beginPath(); c.arc(p.x,p.y,5,0,7); c.fill();
+    c.fillStyle='#fff'; c.fillText(String(i+1),p.x+7,p.y-7); c.fillStyle='#3f6';
+  }
+}
+function startPick(){
+  picking=true; pts=[];
+  ov.style.pointerEvents='auto';
+  document.getElementById('saveBtn').style.display='none';
+  document.getElementById('undoBtn').style.display='inline-block';
+  msg.textContent='Tap corner 1: '+LABELS[0];
+  fit();
+}
+function undoCorner(){
+  pts.pop(); draw();
+  if(pts.length<4) document.getElementById('saveBtn').style.display='none';
+  msg.textContent = pts.length<4
+    ? 'Tap corner '+(pts.length+1)+': '+LABELS[pts.length]
+    : 'All 4 set — Save corners.';
+}
+ov.addEventListener('click',function(e){
+  if(!picking||pts.length>=4) return;
+  var r=ov.getBoundingClientRect();
+  pts.push({x:e.clientX-r.left, y:e.clientY-r.top});
+  draw();
+  if(pts.length<4){ msg.textContent='Tap corner '+(pts.length+1)+': '
+        +LABELS[pts.length]; }
+  else { msg.textContent='All 4 set — Save corners.';
+        document.getElementById('saveBtn').style.display='inline-block'; }
+});
+function saveCorners(){
+  if(pts.length!==4){msg.textContent='Tap all 4 corners first.';return;}
+  // Map displayed coords -> the stream's native pixel size.
+  var sx=feed.naturalWidth/feed.clientWidth,
+      sy=feed.naturalHeight/feed.clientHeight;
+  var c=pts.map(function(p){return [Math.round(p.x*sx),Math.round(p.y*sy)];});
+  fetch('/api/align_corners',{method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({corners:c,
+          frame_width:feed.naturalWidth, frame_height:feed.naturalHeight})})
+    .then(r=>r.json()).then(function(d){
+      if(d.ok){ picking=false; ov.style.pointerEvents='none';
+        document.getElementById('saveBtn').style.display='none';
+        document.getElementById('undoBtn').style.display='none';
+        msg.textContent='Saved. Green outline updated — Confirm to start.';
+      } else { msg.textContent='Save failed: '+(d.error||'?'); }
+    });
+}
 function confirmAlign(){
   fetch('/api/align_confirm',{method:'POST'})
-    .then(r=>r.json()).then(_=>{document.getElementById('msg').textContent
-      = 'Confirmed — starting session...';});
+    .then(r=>r.json()).then(_=>{msg.textContent='Confirmed — starting...';});
 }
 </script>
 """
@@ -574,6 +667,20 @@ function confirmAlign(){
             control.confirm_alignment()
             return {"ok": True}
         return {"ok": False}, 400
+
+    @app.post("/api/align_corners")
+    def api_align_corners():
+        if control is None:
+            return {"ok": False, "error": "no control"}, 400
+        data = request.get_json(silent=True) or {}
+        corners = data.get("corners")
+        fw = data.get("frame_width")
+        fh = data.get("frame_height")
+        if (not isinstance(corners, list) or len(corners) != 4
+                or not fw or not fh):
+            return {"ok": False, "error": "need 4 corners + frame size"}, 400
+        control.set_new_corners(corners, int(fw), int(fh))
+        return {"ok": True}
 
     # ── Game review ─────────────────────────────────────────────────────
     @app.route("/games")

@@ -219,6 +219,25 @@ def _draw_align_overlay(frame, actual_w, actual_h):
     return out
 
 
+def _save_tray_roi_corners(corners, frame_w, frame_h):
+    """Rewrite tray_roi.json from 4 phone-tapped corners. Stores the
+    quad (for the green overlay) AND its axis-aligned bounding box
+    (x/y/w/h — the inference crop the model is trained on). frame_w/h are
+    the pixel size the corners were tapped in, saved as frame_width/height
+    so the scale-on-load math stays correct at any capture resolution."""
+    xs = [c[0] for c in corners]
+    ys = [c[1] for c in corners]
+    x, y = min(xs), min(ys)
+    w, h = max(xs) - x, max(ys) - y
+    data = {
+        "x": int(x), "y": int(y), "w": int(w), "h": int(h),
+        "frame_width": int(frame_w), "frame_height": int(frame_h),
+        "corners": [[int(c[0]), int(c[1])] for c in corners],
+    }
+    TRAY_ROI_FILE.write_text(json.dumps(data, indent=2))
+    print(f"[align] tray_roi.json updated from phone: bbox=({x},{y},{w},{h})")
+
+
 def alignment_check_web(cap, actual_w, actual_h, web_control) -> bool:
     """Headless alignment: stream the green-outline overlay to the phone
     (/align) and wait for the operator to tap Confirm. No monitor needed —
@@ -235,10 +254,20 @@ def alignment_check_web(cap, actual_w, actual_h, web_control) -> bool:
     print("Headless alignment: open  /align  on the phone, match the tray")
     print("to the green outline, then tap Confirm.")
     web_control.take_alignment()   # clear any stale confirm
+    web_control.take_new_corners()  # clear any stale corner post
     while True:
         ret, frame = cap.read()
         if not ret:
             continue
+        # Phone re-set the tray corners? Rewrite tray_roi.json so the very
+        # next overlay (and the crop ROI once we proceed) reflects them.
+        nc = web_control.take_new_corners()
+        if nc is not None:
+            corners, fw, fh = nc
+            try:
+                _save_tray_roi_corners(corners, fw, fh)
+            except Exception as e:
+                print(f"[align] failed to save corners: {e}")
         overlay = _draw_align_overlay(frame, actual_w, actual_h)
         ok, buf = cv2.imencode(".jpg", overlay,
                                [cv2.IMWRITE_JPEG_QUALITY, 70])
@@ -617,6 +646,10 @@ def main():
         cap.release()
         print("Aborted at alignment check.")
         return
+    # Alignment may have rewritten tray_roi.json (phone tap-4-corners), so
+    # recompute the inference crop from the just-saved ROI — otherwise the
+    # model would still crop the pre-recalibration region.
+    crop_rect = tray_crop_rect(actual_w, actual_h)
     print("Controls:")
     print("  1/2: active player    B/D/X: model    SPACE: confirm    BKSP: undo")
     print("  R: reject + save for retrain    S: save session    Q: quit")
