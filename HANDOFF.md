@@ -1,9 +1,9 @@
 # Session Hand-off — Blood Bowl Dice Tracker
 
-*Last updated: 2026-06-13 (synthetic-data work stream COMPLETE: live
-block 100% / d6 100% / d16 85%, pow 60%→100%, zero new dice captured).
-Paste the prompt below into a new session, or just point the assistant
-at this file.*
+*Last updated: 2026-06-15 (LIVE RIG BRING-UP underway on the Pi — dice
+reading off-camera headless; mid-fixing d16 settle + LED dim. See "Live
+rig bring-up" section below for exact resume point). Paste the prompt
+below into a new session, or just point the assistant at this file.*
 
 ---
 
@@ -32,7 +32,67 @@ You are picking up the **Blood Bowl Dice Tracker** project at
   phone web app's game review.
 - **No guessing.** Measure with the eval harness / real data, or say so.
 
-**Current state (2026-06-13):** the tray-crop retrain SHIPPED and the
+## ⭐ LIVE RIG BRING-UP (2026-06-15) — RESUME HERE
+
+The portable Pi rig is wired and the software is RUNNING ON IT headless.
+Dice read live off the camera through the full torch-free stack. We are
+in the polish/debug phase of the first real run.
+
+**The Pi:** hostname `dicetracker`, user `sevcav`, **IP 192.168.68.85**
+(DHCP — may shift; re-find via router or `ping dicetracker.local`).
+SSH: `ssh sevcav@192.168.68.85`.
+
+**Run the rig (every restart — venv does NOT persist across cd/new SSH):**
+```
+cd ~/dice-tracker
+. .venv/bin/activate
+python dice_tracker.py
+```
+Headless: it prints the web URL, runs the IR self-check, then waits for
+phone alignment. **On the phone (same WiFi):** open the rig URL — the nav
+bar has **Align / Live / Games** buttons. Tap **Align**, match tray to the
+green outline, **Confirm**, then it goes live. **Games** = the BB3 record
+(per-die counts + per-roll fix dropdown).
+
+**To deploy a code change:** PC commits+pushes → on Pi: Ctrl-C, `git pull`,
+restart, re-align. (Pi pulls from github.com/Sevcav/dice-tracker.)
+
+**Verified working on the real Pi:** torch-free backend (`backend OK:
+onnx`, 27 classes), all 4 buttons (fire correct names), all 4 LEDs, both
+OLEDs (isolation tests `deploy/oled1_test.py`/`oled2_test.py`), USB camera
+`/dev/video0`, live dice reading.
+
+**Fixes pushed 2026-06-15, NEED FINAL LIVE CONFIRM (do this first):**
+1. **d16 settle fix** — it wasn't settling (gated on flickering glyph-box
+   count that thrashed 2↔3, resetting the 10-frame window forever). Now
+   gates on the DICE/cluster count + ≥2 stable faces. **Roll a d16, let it
+   rest: it should settle (~0.5s) and show ONE top value.** If it still
+   won't settle, run `DICE_DEBUG=1 python dice_tracker.py` and read me the
+   `[d16-dbg] stable_faces=.. units=.. count_stable=..` lines.
+2. **d16 single value** — at settle, live display + the logged roll +
+   `/games` tally now show ONE deduced top value per die, not 3 glyph
+   faces. (Recognition was always correct — e.g. rolled 1 → faces {8,2,1}
+   is the right ring triple for top 1; the bug was never settling.)
+3. **LED dimming** — `hardware.py` `LED_BRIGHTNESS=0.2` (PWMLED). Confirm
+   it's comfortable; edit the constant 0.1–0.35 to taste.
+
+**Open items (after the above):** OLED physical-swap check (which screen
+faces which player — both show identical content, doesn't block); case
+wire-bulge (cage needs a relief cut or reprint to close — wiring is
+heavier than designed); a full ~25-roll live d16 + d6 eval once settle is
+solid; the ELECROW 7" touchscreen accessory (standalone, kiosk the web app
+at localhost:5000 — DESIGN.md §8, post-bring-up).
+
+**Deploy gotchas seen (so next session doesn't relearn):** `training/
+models/` is gitignored so `git pull` won't create it — `mkdir -p` then
+`scp combined.onnx` + `combined.onnx.json` from the PC. A stale Pi local
+edit may block `git pull` (`git checkout -- <file>` to clear). `setup_pi.sh`
+fixed for Trixie (libatlas→libopenblas0). Windows-committed `.sh` may need
+`sed -i 's/\r$//'`.
+
+---
+
+**Prior milestone — synthetic-data work stream (2026-06-13):** the tray-crop retrain SHIPPED and the
 d16 full-rotation iteration is LIVE-VALIDATED. Production `combined.onnx`
 is the full-rotation crop-trained 27-class YOLOv11n (synthetic copy-paste
 pipeline in `training/synth_dice.py` et al., full story in
@@ -74,8 +134,9 @@ recognition. Mitigation in play: nudge-to-re-read; 85% is table-usable.
    `models/combined_crop_fullrot_20260613.onnx`. The synthetic-data work
    stream is COMPLETE — live scoreboard: block 100%, d6 100%, d16 85%,
    pow 60%→100%, zero new dice captured.
-3. **GPIO + OLED + Pi port — CODE DONE 2026-06-14, awaiting first rig
-   bring-up.** Built:
+3. **GPIO + OLED + Pi port — CODE DONE 2026-06-14, NOW LIVE ON THE PI
+   (2026-06-15, see top "LIVE RIG BRING-UP" section — this is the active
+   work).** Built:
    - `onnx_backend.py` — torch-free inference (custom YOLOv11 decode,
      agnostic NMS, IoU tracker + smoother). Bit-for-bit parity with the
      ultralytics path on banked frames; full Pi pipeline (detect→track→

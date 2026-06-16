@@ -1,13 +1,19 @@
 # Blood Bowl Dice Tracker — Design Document
 
-**Last updated:** June 12, 2026
-**Status:** Full pipeline working end-to-end on the PC bench rig. Combined
-27-class YOLOv11n deployed — **auto dice-type detection** (no manual
-switching; phone/keys remain as override). Settle-race bug fixed
-(COUNT_STABLE_FRAMES — missed-dice rolls 32% → 8%). Startup pre-flights:
-IR-mode self-check + camera-alignment overlay in both `dice_tracker.py`
-and `eval_harness.py`. Real accuracy numbers exist (block per-die ~83-87%;
-pow is the weak class at ~60% recall — fix is the tray-crop retrain).
+**Last updated:** June 15, 2026
+**Status:** **LIVE ON THE PORTABLE PI RIG (headless).** The synthetic-data
+retrain shipped (live: block 100% / d6 100% / d16 85%, pow 60%→100%) and
+the whole system now runs on the Pi off-camera through the torch-free ONNX
+backend — buttons, LEDs, dual OLEDs all confirmed. Currently polishing the
+first live run (d16 settle fix + LED dimming, pushed 2026-06-15, awaiting
+final live confirm). **See HANDOFF.md "LIVE RIG BRING-UP" for the exact
+resume point.** Models: production `combined.onnx` = full-rotation
+tray-crop 27-class YOLOv11n + `combined.onnx.json` sidecar (tray_crop,
+pad 8 / pad_bottom 40). Pi: `dicetracker`@192.168.68.85, user `sevcav`,
+run via `cd ~/dice-tracker && . .venv/bin/activate && python dice_tracker.py`.
+
+*(Prior bench-rig status, still true: auto dice-type detection, settle-race
+fix COUNT_STABLE_FRAMES, IR self-check + alignment pre-flights.)*
 SQLite database + phone web app live: dice-type control, live read
 display, post-game corrections (dropdowns), CSV export, and the
 **BB3-style end-of-game dice record** with icons drawn from the actual
