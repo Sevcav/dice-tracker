@@ -79,12 +79,16 @@ class Hardware:
 
         if _OLED_OK:
             try:
-                # both displays on SPI0, differentiated by chip-select
+                # both displays on SPI0, differentiated by chip-select.
+                # RST (GPIO25) is SHARED. Only the FIRST device may drive
+                # it; if BOTH pulse RST, building device 1 (P2) resets
+                # device 0 (P1) right after it init'd, blanking P1 on the
+                # rig. Second device passes gpio_RST=None.
                 self._oleds = [
                     ssd1309(spi(port=0, device=0, gpio_DC=OLED_PINS["dc"],
                                 gpio_RST=OLED_PINS["res"])),
                     ssd1309(spi(port=0, device=1, gpio_DC=OLED_PINS["dc"],
-                                gpio_RST=OLED_PINS["res"])),
+                                gpio_RST=None)),
                 ]
                 self._font = ImageFont.load_default()
             except Exception as e:
