@@ -59,6 +59,48 @@ sudo systemctl stop dice-tracker   # stop it (e.g. to run by hand)
 journalctl -u dice-tracker -f      # watch live logs
 ```
 
+## Phone workflows (no PC)
+
+Three tabs: **Align**, **Live**, **Games**. Hard-refresh after a service
+restart (phones cache the page).
+
+### Align (startup only)
+
+Alignment runs ONCE at startup, before the live session. The Align tab
+shows the camera + green tray outline only during that step; once a
+session is live it shows a "session running" notice (the live image is on
+the **Live** tab — that's expected, not a bug).
+
+- Adjust the arm so the tray matches the green outline -> **Confirm**.
+- Camera moved (e.g. new case)? Tap **Re-set corners**, then tap the
+  tray's 4 corners in order **top-left, top-right, bottom-right,
+  bottom-left** -> **Save corners** -> **Confirm**. This rewrites
+  `tray_roi.json` (overlay quad + the axis-aligned crop the model uses).
+  It does NOT dewarp the image — re-square the camera for best accuracy.
+- To re-align mid-session: `sudo systemctl restart dice-tracker`, then
+  re-do alignment before confirming.
+
+### IR mode (must be IR — always)
+
+Models are trained on IR (monochrome) frames. The rig forces IR via the
+photoresistor lens cap / light shield.
+
+- **Day-mode warning ON = a real problem** (shield not sealing / too
+  bright). No warning = IR = good.
+- Check on the **Live** tab (monochrome = IR) or in the logs:
+  `journalctl -u dice-tracker -f` -> `[ok] camera back in IR mode` /
+  `[WARNING] camera flipped to DAY mode`.
+- The first few frames after camera plug-in are always day-mode color
+  while it drops into IR — ignore the startup blip.
+
+### Games (clear test data)
+
+- **Games** tab -> per-game **delete** (removes the game + its rolls), or
+  **Clear all games** at the top to wipe everything.
+- The game currently being recorded shows **active** instead of delete and
+  is protected from both delete and Clear all.
+- Clear out bring-up/test games here before a real tournament.
+
 ## OLED tests (deploy/)
 
 ```bash
