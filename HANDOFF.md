@@ -57,28 +57,37 @@ bar has **Align / Live / Games** buttons. Tap **Align**, match tray to the
 green outline, **Confirm**, then it goes live. **Games** = the BB3 record
 (per-die counts + per-roll fix dropdown).
 
-**To deploy a code change:** PC commits+pushes → on Pi: Ctrl-C, `git pull`,
-restart, re-align. (Pi pulls from github.com/Sevcav/dice-tracker.)
+**To deploy a code change:** PC commits+pushes → on Pi: stop the tracker,
+`git pull`, restart, re-align. (Pi pulls from github.com/Sevcav/dice-tracker.)
 
-**Verified working on the real Pi:** torch-free backend (`backend OK:
+**To STOP the running tracker:** Ctrl-C (now reliable — installs a SIGINT
+handler; prints `[stopping] Ctrl-C received`). If it ever hangs, the
+always-works backup is a **second SSH session** → `pkill -f dice_tracker.py`.
+
+**Verified working LIVE on the real Pi:** torch-free backend (`backend OK:
 onnx`, 27 classes), all 4 buttons (fire correct names), all 4 LEDs, both
 OLEDs (isolation tests `deploy/oled1_test.py`/`oled2_test.py`), USB camera
-`/dev/video0`, live dice reading.
+`/dev/video0`, **live dice reading INCLUDING d16 settling to ONE value.**
 
-**Fixes pushed 2026-06-15, NEED FINAL LIVE CONFIRM (do this first):**
-1. **d16 settle fix** — it wasn't settling (gated on flickering glyph-box
-   count that thrashed 2↔3, resetting the 10-frame window forever). Now
-   gates on the DICE/cluster count + ≥2 stable faces. **Roll a d16, let it
-   rest: it should settle (~0.5s) and show ONE top value.** If it still
-   won't settle, run (venv active first):
-   `DICE_DEBUG=1 python dice_tracker.py` and read me the
-   `[d16-dbg] stable_faces=.. units=.. count_stable=..` lines.
-2. **d16 single value** — at settle, live display + the logged roll +
-   `/games` tally now show ONE deduced top value per die, not 3 glyph
-   faces. (Recognition was always correct — e.g. rolled 1 → faces {8,2,1}
-   is the right ring triple for top 1; the bug was never settling.)
-3. **LED dimming** — `hardware.py` `LED_BRIGHTNESS=0.2` (PWMLED). Confirm
-   it's comfortable; edit the constant 0.1–0.35 to taste.
+**Fixes pushed 2026-06-15 — last few NEED A LIVE CONFIRM on next restart:**
+1. **d16 settle** ✅ CONFIRMED LIVE — now settles + shows ONE top value.
+   (Was gating on flickering glyph-box count; now gates on DICE/cluster
+   count + ≥2 stable faces. `DICE_DEBUG=1` prints `[d16-dbg]` lines if it
+   ever won't settle again.)
+2. **d16 single value** ✅ — settle display + logged roll + `/games` tally
+   show ONE deduced top value per die, not 3 glyph faces. (Recognition was
+   always right — rolled 1 → faces {8,2,1} is the correct ring triple.)
+3. **Settle speed — FPS-ADAPTIVE (pending live confirm).** Settle felt
+   ~2s on the Pi because `COUNT_STABLE_FRAMES=10` is a FRAME count and the
+   Pi runs ~5fps vs PC ~30fps. Startup now measures real capture fps and
+   sets `settle_frames = max(4, round(SETTLE_SECONDS * fps))`; **tune feel
+   via `SETTLE_SECONDS` (=0.5) at top of `dice_tracker.py`.** Startup
+   prints `Capture ~X fps -> settle needs N frames` — READ THAT BACK. If
+   it settles while a die still wobbles, raise SETTLE_SECONDS to 0.6–0.7.
+4. **Ctrl-C stop (pending live confirm)** — SIGINT handler; see "To STOP"
+   above.
+5. **LED dimming (pending confirm)** — `hardware.py` `LED_BRIGHTNESS=0.2`
+   (PWMLED). Edit 0.1–0.35 to taste.
 
 **Open items (after the above):** OLED physical-swap check (which screen
 faces which player — both show identical content, doesn't block); case
