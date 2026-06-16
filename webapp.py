@@ -123,9 +123,13 @@ _BASE = """
 <style>
   body { font-family: system-ui, sans-serif; margin: 0; background: #111;
          color: #eee; }
-  header { background: #1d3557; padding: 10px 14px; display: flex;
-           gap: 14px; align-items: baseline; }
-  header a { color: #a8dadc; text-decoration: none; font-weight: 600; }
+  header { background: #1d3557; padding: 8px 10px; display: flex;
+           gap: 8px; align-items: stretch;
+           position: sticky; top: 0; z-index: 10; }
+  header a { color: #a8dadc; text-decoration: none; font-weight: 600;
+           flex: 1; text-align: center; padding: 12px 6px;
+           border-radius: 8px; background: #16243f; font-size: 1.05rem; }
+  header a:active { background: #2a4a7a; }
   main { padding: 14px; max-width: 720px; margin: 0 auto; }
   h1 { font-size: 1.2rem; } h2 { font-size: 1.05rem; margin-top: 1.4em; }
   .btnrow { display: flex; gap: 10px; flex-wrap: wrap; margin: 10px 0; }
@@ -178,6 +182,7 @@ _BASE = """
            border-radius: 10px; padding: 10px 14px; margin: 10px 0; }
 </style></head><body>
 <header>
+  <a href="{{ url_for('align') }}">Align</a>
   <a href="{{ url_for('live') }}">Live</a>
   <a href="{{ url_for('games') }}">Games</a>
 </header>
