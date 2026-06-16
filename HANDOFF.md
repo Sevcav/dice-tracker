@@ -42,7 +42,10 @@ in the polish/debug phase of the first real run.
 (DHCP — may shift; re-find via router or `ping dicetracker.local`).
 SSH: `ssh sevcav@192.168.68.85`.
 
-**Run the rig (every restart — venv does NOT persist across cd/new SSH):**
+**Run the rig — ALWAYS these 3 lines in order, every restart.** The
+`. .venv/bin/activate` is MANDATORY; without it you get
+`ModuleNotFoundError: No module named 'cv2'`. The venv does NOT persist
+across `cd` or a new SSH session, so re-activate every time:
 ```
 cd ~/dice-tracker
 . .venv/bin/activate
@@ -67,7 +70,8 @@ OLEDs (isolation tests `deploy/oled1_test.py`/`oled2_test.py`), USB camera
    count that thrashed 2↔3, resetting the 10-frame window forever). Now
    gates on the DICE/cluster count + ≥2 stable faces. **Roll a d16, let it
    rest: it should settle (~0.5s) and show ONE top value.** If it still
-   won't settle, run `DICE_DEBUG=1 python dice_tracker.py` and read me the
+   won't settle, run (venv active first):
+   `DICE_DEBUG=1 python dice_tracker.py` and read me the
    `[d16-dbg] stable_faces=.. units=.. count_stable=..` lines.
 2. **d16 single value** — at settle, live display + the logged roll +
    `/games` tally now show ONE deduced top value per die, not 3 glyph
