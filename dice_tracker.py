@@ -962,7 +962,8 @@ def main():
                 player=session.active_player,
                 p1_name=session.player1_name, p2_name=session.player2_name,
                 rolls=len(session.rolls), dice=dice_status,
-                recent=recent, day_mode=day_mode)
+                recent=recent, day_mode=day_mode,
+                active_game_id=game_id)
 
         # Physical OLEDs mirror the live read; LEDs signal state — both
         # players' LEDs glow when a roll is settled (press your confirm),

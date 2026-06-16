@@ -719,24 +719,68 @@ function confirmAlign(){
         return {"ok": True}
 
     # ── Game review ─────────────────────────────────────────────────────
+    def _active_game_id():
+        """The game the live tracker is currently logging to (or None) —
+        published into status each frame; protected from deletion."""
+        if control is None:
+            return None
+        return control.get_status().get("active_game_id")
+
     @app.route("/games")
     def games():
         rows = db.list_games()
+        active = _active_game_id()
         items = ""
         for g in rows:
             started = time.strftime("%Y-%m-%d %H:%M",
                                     time.localtime(g["started_at"]))
             open_tag = "" if g["ended_at"] else " (in progress)"
+            is_active = (g["id"] == active)
+            if is_active:
+                del_cell = '<span class="muted">active</span>'
+            else:
+                del_cell = (
+                    f'<form class="inline" method="post" '
+                    f'action="/games/{g["id"]}/delete" '
+                    f'onsubmit="return confirm('
+                    f"'Delete Game {g['id']} and its rolls?')\">"
+                    f'<button style="padding:6px 10px;font-size:0.85rem">'
+                    f'delete</button></form>')
             items += (f'<tr><td><a class="btn" style="padding:6px 12px" '
                       f'href="/games/{g["id"]}">Game {g["id"]}</a></td>'
                       f'<td>{started}{open_tag}</td>'
                       f'<td>{g["player1_name"]} vs {g["player2_name"]}</td>'
-                      f'<td>{g["roll_count"]} rolls</td></tr>')
-        body = (f"<h1>Games</h1><div class='tablewrap'><table>"
-                f"<tr><th></th><th>Started</th>"
-                f"<th>Players</th><th>Rolls</th></tr>{items}</table></div>"
-                if items else "<h1>Games</h1><p>No games recorded yet.</p>")
+                      f'<td>{g["roll_count"]} rolls</td>'
+                      f'<td>{del_cell}</td></tr>')
+        if items:
+            clear_btn = (
+                '<form method="post" action="/games/clear" '
+                'style="margin:14px 0" '
+                "onsubmit=\"return confirm('Delete ALL games"
+                + (" except the active one" if active else "")
+                + "? This cannot be undone.')\">"
+                '<button class="big">Clear all games</button></form>')
+            body = (f"<h1>Games</h1>{clear_btn}"
+                    f"<div class='tablewrap'><table>"
+                    f"<tr><th></th><th>Started</th>"
+                    f"<th>Players</th><th>Rolls</th><th></th></tr>"
+                    f"{items}</table></div>")
+        else:
+            body = "<h1>Games</h1><p>No games recorded yet.</p>"
         return _page(body)
+
+    @app.post("/games/<int:game_id>/delete")
+    def game_delete(game_id):
+        if game_id == _active_game_id():
+            return _page("<p>Can't delete the game that's currently being "
+                         "recorded. <a href='/games'>Back</a></p>"), 409
+        db.delete_game(game_id)
+        return redirect(url_for("games"))
+
+    @app.post("/games/clear")
+    def games_clear():
+        db.delete_all_games(except_id=_active_game_id())
+        return redirect(url_for("games"))
 
     @app.route("/games/<int:game_id>")
     def game_detail(game_id):

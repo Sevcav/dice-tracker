@@ -84,6 +84,26 @@ def set_player_names(game_id: int, p1: str, p2: str):
             "WHERE id = ?", (p1, p2, game_id))
 
 
+def delete_game(game_id: int):
+    """Remove a game and all its rolls (rolls cascade via the FK, which
+    only fires because _connect() sets PRAGMA foreign_keys = ON)."""
+    with _connect() as con:
+        con.execute("DELETE FROM games WHERE id = ?", (game_id,))
+
+
+def delete_all_games(except_id: int | None = None):
+    """Clear every game (and its rolls). If except_id is given, that game
+    is kept — used to avoid deleting the session the live tracker is
+    actively logging to. Returns the number of games deleted."""
+    with _connect() as con:
+        if except_id is None:
+            cur = con.execute("DELETE FROM games")
+        else:
+            cur = con.execute("DELETE FROM games WHERE id != ?",
+                              (except_id,))
+        return cur.rowcount
+
+
 def get_game(game_id: int) -> dict | None:
     with _connect() as con:
         row = con.execute("SELECT * FROM games WHERE id = ?",
