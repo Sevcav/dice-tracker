@@ -12,10 +12,21 @@ echo "== BB Dice Tracker Pi setup =="
 echo "repo: $REPO"
 
 # 1. System packages (camera/SPI/I2C deps + GPIO/OLED libs via apt) ----------
+# Installed one at a time so a single missing/renamed package (e.g.
+# libatlas-base-dev was retired on Debian Trixie) can't abort the whole
+# setup under `set -e`. libatlas is optional anyway — the ARM numpy/
+# onnxruntime wheels bundle their own BLAS.
 echo "-- apt packages"
 sudo apt-get update
-sudo apt-get install -y python3-venv python3-pip libatlas-base-dev \
-  python3-gpiozero python3-luma.oled avahi-daemon v4l-utils
+APT_PKGS="python3-venv python3-pip python3-gpiozero python3-luma.oled \
+avahi-daemon v4l-utils libopenblas0"
+for pkg in $APT_PKGS; do
+  if sudo apt-get install -y "$pkg"; then
+    echo "   installed: $pkg"
+  else
+    echo "   SKIP (unavailable): $pkg"
+  fi
+done
 
 # 2. Enable SPI (needed for the two SSD1309 OLEDs) ---------------------------
 echo "-- enabling SPI"
