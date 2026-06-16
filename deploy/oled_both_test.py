@@ -21,8 +21,12 @@ from PIL import ImageFont
 font = ImageFont.load_default()
 
 # Build BOTH displays, each on its own chip-select, shared DC/RST.
-dev0 = ssd1309(spi(port=0, device=0, gpio_DC=9, gpio_RST=25))  # CE0 / pin24
-dev1 = ssd1309(spi(port=0, device=1, gpio_DC=9, gpio_RST=25))  # CE1 / pin26
+# IMPORTANT: RST (GPIO25) is shared. Each ssd1309 constructor pulses RST,
+# so if BOTH claim gpio_RST=25 the second build RESETS the first panel
+# right after it init'd -> first screen goes blank. Only the FIRST device
+# drives the shared reset; the second passes gpio_RST=None.
+dev0 = ssd1309(spi(port=0, device=0, gpio_DC=9, gpio_RST=25))    # CE0 / pin24
+dev1 = ssd1309(spi(port=0, device=1, gpio_DC=9, gpio_RST=None))  # CE1 / pin26
 
 screens = [
     (dev0, "P1", "pin24", "CE0"),
