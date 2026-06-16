@@ -38,8 +38,13 @@ OLED_PINS   = dict(sclk=11, mosi=10, dc=9, res=25, ce0=8, ce1=7)
 # Three-state uncertainty colors are monochrome on OLED: we render a "?"
 # suffix for uncertain reads (same semantics as the HUD CONF_UNCERTAIN).
 
+# LED brightness 0.0-1.0 via software PWM (PWMLED works on any GPIO pin).
+# The 5mm LEDs at full drive are blinding indoors; 0.2 is a calm tabletop
+# glow. Edit this to taste.
+LED_BRIGHTNESS = 0.2
+
 try:
-    from gpiozero import LED, Button
+    from gpiozero import PWMLED, Button
     _GPIO_OK = True
 except Exception:
     _GPIO_OK = False
@@ -66,7 +71,7 @@ class Hardware:
 
         if _GPIO_OK:
             for name, pin in LED_PINS.items():
-                self._leds[name] = LED(pin)
+                self._leds[name] = PWMLED(pin)   # software PWM, dimmable
             for name, pin in BUTTON_PINS.items():
                 b = Button(pin, pull_up=True, bounce_time=debounce_s)
                 b.when_pressed = (lambda n=name: self.on_event(n))
@@ -90,7 +95,8 @@ class Hardware:
     def set_led(self, name: str, on: bool):
         led = self._leds.get(name)
         if led is not None:
-            led.on() if on else led.off()
+            # PWMLED.value is the duty cycle 0.0-1.0; "on" = dimmed level.
+            led.value = LED_BRIGHTNESS if on else 0.0
 
     def all_leds_off(self):
         for led in self._leds.values():

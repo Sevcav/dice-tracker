@@ -851,13 +851,33 @@ def main():
         hud_line(annotated, hint, actual_h - 20, color=(0, 255, 255), scale=0.6)
 
         # Live read shared by the phone UI and the physical OLEDs.
-        dice_status = [{
-            "label": model.names.get(cid, str(cid)),
-            "conf": int(round(conf * 100)),
-            "stable": bool(stable),
-            "uncertain": bool(stable and conf < uncertain_threshold(
-                model.names.get(cid, str(cid)))),
-        } for cid, conf, stable in label_states]
+        # For d16: a die shows 3 glyph faces, but the player only cares about
+        # the rolled VALUE (the top face). Once SETTLED, collapse each die's
+        # 3 faces into ONE entry — the deduced top — using the geometry
+        # verdicts computed at settle. While still watching, show the raw
+        # faces (that's the "what the camera sees now" view).
+        if (detected_type == "d16" and state == "settled"
+                and last_settled_d16):
+            dice_status = []
+            for v in last_settled_d16:
+                idxs = v.get("indices", [])
+                confs = [last_settled_labels[i][1] for i in idxs
+                         if i < len(last_settled_labels)]
+                top_conf = int(round(max(confs) * 100)) if confs else 0
+                dice_status.append({
+                    "label": f"D16_{v['top']}",
+                    "conf": top_conf,
+                    "stable": True,
+                    "uncertain": v["status"] == "impossible",
+                })
+        else:
+            dice_status = [{
+                "label": model.names.get(cid, str(cid)),
+                "conf": int(round(conf * 100)),
+                "stable": bool(stable),
+                "uncertain": bool(stable and conf < uncertain_threshold(
+                    model.names.get(cid, str(cid)))),
+            } for cid, conf, stable in label_states]
         if web_control is not None:
             recent = [(f"#{lr['roll_id']} {lr['player']} {lr['dice_type']}: "
                        + ", ".join(lr["results"])
@@ -954,24 +974,23 @@ def main():
 
         elif key == 32:   # SPACE = confirm
             if state == "settled":
-                results_str = [model.names.get(c, str(c))
-                               for c, _, _ in last_settled_labels]
-                confs       = [conf for _, conf, _ in last_settled_labels]
-                # d16: when the verified adjacency table contradicts a
-                # low-confidence top face, the geometry wins (two flanking
-                # sides uniquely determine the top). Inactive until
-                # d16_geometry.ADJACENCY_VERIFIED is set.
-                for v in last_settled_d16:
-                    if (v["status"] == "deduced"
-                            and d16_geometry.ADJACENCY_VERIFIED
-                            and v["indices"]):
-                        i = v["indices"][0]
-                        if (i < len(results_str)
-                                and confs[i] < CONF_UNCERTAIN["d16"]):
-                            old = results_str[i]
-                            results_str[i] = f"D16_{v['deduced_top']}"
-                            print(f"  [d16-check] corrected {old} -> "
-                                  f"{results_str[i]} ({v['note']})")
+                if detected_type == "d16" and last_settled_d16:
+                    # A d16 roll = one die, one VALUE. The model sees 3 glyph
+                    # faces per die; collapse each die to its single deduced
+                    # TOP face so the log + game tally count ONE value per
+                    # die, not three faces. (last_settled_d16 has one verdict
+                    # per die with the geometry-deduced top.)
+                    results_str = [f"D16_{v['top']}" for v in last_settled_d16]
+                    confs = []
+                    for v in last_settled_d16:
+                        idxs = v.get("indices", [])
+                        cs = [last_settled_labels[i][1] for i in idxs
+                              if i < len(last_settled_labels)]
+                        confs.append(max(cs) if cs else 0.0)
+                else:
+                    results_str = [model.names.get(c, str(c))
+                                   for c, _, _ in last_settled_labels]
+                    confs       = [conf for _, conf, _ in last_settled_labels]
                 logged_type = (majority_type(results_str) or "unknown"
                                if current_type == "auto" else current_type)
                 rec = session.record(
