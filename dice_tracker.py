@@ -37,6 +37,7 @@ Output:
 
 import csv
 import json
+import os
 import sys
 import time
 from collections import Counter, defaultdict, deque
@@ -709,25 +710,36 @@ def main():
             [model.names.get(c, str(c)) for c, _, _ in label_states])
             if current_type == "auto" else current_type)
         if detected_type == "d16":
-            # d16 settle gates on STABLE boxes only: a die shows 2-3 small
-            # glyph boxes and the marginal one flickers at the conf
-            # threshold — requiring the raw count to hold for the full
-            # window means the roll never settles. Transients are ignored
-            # and excluded from the read; the adjacency layer makes a
-            # 2-face read safe (sides determine the top).
+            # d16 settle gates on the NUMBER OF DICE (clusters), NOT the
+            # number of stable glyph boxes. A die has 2-3 small glyph faces
+            # that each flicker in/out at the conf threshold every frame, so
+            # len(stable_ids) thrashes 2<->3 and the "identical for 10 frames"
+            # window would reset forever -> never settles. The robust signal
+            # is the cluster count: a physically-resting die is ONE cluster
+            # whether 2 or 3 of its faces are seen this frame. We require >=2
+            # stable faces (enough for the adjacency layer to deduce a top)
+            # and a steady cluster count.
             stable_ids = [i for i, (_c, _cf, s) in enumerate(label_states)
                           if s]
             n_units = (len(d16_geometry.cluster_faces(
                 [list(map(float, detections.xyxy[i])) for i in stable_ids]))
                 if stable_ids else 0)
-            all_stable = len(stable_ids) > 0
-            count_hist.append(("d16", len(stable_ids), n_units))
+            all_stable = len(stable_ids) >= 2
+            count_hist.append(("d16", n_units))   # cluster count only
         else:
             stable_ids = list(range(n_det))
             all_stable = (n_det > 0 and stable_count == n_det)
             count_hist.append(n_det)
         count_stable = (len(count_hist) == COUNT_STABLE_FRAMES
                         and len(set(count_hist)) == 1)
+
+        # Settle diagnostics for d16 (DICE_DEBUG=1): why a roll won't lock.
+        if (os.environ.get("DICE_DEBUG") and detected_type == "d16"
+                and frame_count % 10 == 0 and state == "watching"):
+            print(f"  [d16-dbg] stable_faces={len(stable_ids)} "
+                  f"units={n_units} all_stable={all_stable} "
+                  f"count_stable={count_stable} "
+                  f"hist={list(count_hist)}")
 
         # State machine
         if state == "watching":
