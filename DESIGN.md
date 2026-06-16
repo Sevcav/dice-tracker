@@ -629,7 +629,7 @@ Dice Code/
 
 | Topic | Status |
 |---|---|
-| Lighting strategy | B0205 IR mode is photoresistor-only (no software control) — Bambu lamps will be the consistent-illumination strategy |
+| Lighting strategy | **Always IR mode.** B0205 IR is photoresistor-only (no software toggle), so a 3D-printed lens cap / light shield permanently darkens the photoresistor to FORCE IR — the mode the dice models are trained on. The day-mode self-check warning means a real fault (shield not sealing), not an acceptable state. (Bambu lamps + day-mode is NOT the strategy.) |
 | Camera angle | Set empirically to satisfy "full tray visible + arm clear of rolling area" — near-overhead shallow angle in as-built rig |
 | D16 detection | Deferred until block + d6 working end-to-end |
 | OLED retention method | Friction / hot glue / M2 screws — TBD when OLEDs in hand |
@@ -681,7 +681,7 @@ Dice Code/
 - **Female-to-female dupont jumpers still needed** for OLED wiring — pre-crimped JST pigtails are wrong connector type for OLED pin strip.
 - **M5 captive nut pocket** — circumscribed 9.80mm, flat-to-flat 8.56mm, depth 4.1mm at 0.28mm gap. Confirmed by test print.
 - **Camera arm requires M5×25mm** — M5×20mm button heads are 3.3mm too short for the 16.5mm friction joint. Use M5×25 SHCS instead.
-- **B0205 (Arducam UC-A53) IR is photoresistor-controlled only** — no software/UVC control of the IR LEDs or IR-cut filter. The 6 IR LEDs only activate in genuinely dark ambient conditions. Software-controlled IR is **not possible** on this unit. Bambu LED lamps + day-mode is the lighting strategy instead.
+- **B0205 (Arducam UC-A53) IR is photoresistor-controlled only** — no software/UVC control of the IR LEDs or IR-cut filter. The 6 IR LEDs only activate in genuinely dark ambient conditions. Software-controlled IR is **not possible** on this unit. **Solution: a 3D-printed lens cap / light shield over the photoresistor permanently forces IR mode regardless of room brightness — IR is the mode the dice models are trained on.** (Earlier "Bambu lamps + day-mode" idea is abandoned: the models are IR-only, so day-mode reads degrade — always IR.)
 - **B0205 spec lists 1m minimum focus** — but the lens is in fact adjustable to focus at ~12 inches once the locking ring is loosened. Confirmed empirically by getting a sharp image at the actual rig working distance.
 - **B0205 lens locking ring is partially obstructed by the IR LED ring** — adjustment is possible but tight. Do NOT force it. Loosen with care; replacement lens would require desoldering LEDs.
 - **Camera angle is empirical, not a target** — earlier "~35°" figure was wrong for the as-built rig. The functional constraints (full tray + arm clear of rolling area) drive the angle, and what comes out is shallow / near-overhead. Always measure as-built rather than declaring a degree number.
