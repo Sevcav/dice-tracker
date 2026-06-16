@@ -254,14 +254,19 @@ SMOOTHER_LENGTH    = 5
 LABEL_HISTORY_LEN  = 8
 LABEL_MIN_VOTES    = 4
 SETTLE_REQUIRES_ALL_STABLE = True   # green flash only when every die is stable
-# The detection COUNT must also be constant this many consecutive frames
-# before settle. Without this, a die whose detection flickers in/out near
-# the conf threshold lets the roll settle during an "out" frame and the die
-# is silently dropped from the read — 2026-06-11 eval: 16 of 50 rolls lost
-# dice this way, and 14/16 saved miss-frames had ALL dice detectable on the
-# very frame that settled. (The legacy DiceStabilityTracker had a count
-# requirement; it was lost in the supervision port.)
-COUNT_STABLE_FRAMES = 10
+# The detection COUNT must be constant this many consecutive frames before
+# settle. Without it, a die flickering in/out near the conf threshold lets
+# the roll settle during an "out" frame and the die is dropped from the
+# read (2026-06-11 eval: 16/50 rolls lost dice this way).
+#
+# This is a FRAME count, so its real-time meaning depends on FPS: the PC
+# ran ~30fps (10 frames ~= 0.33s), but the Pi's CPU-only onnxruntime is
+# much slower (~5fps), making 10 frames ~= 2s — the sluggish settle seen
+# live 2026-06-15. SETTLE_SECONDS is the target dwell time; the frame count
+# is derived from the measured FPS at startup so settle feels the same on
+# both. (Floor of 4 frames so a brief flicker can't settle a moving die.)
+SETTLE_SECONDS = 0.5
+COUNT_STABLE_FRAMES = 10   # default until FPS is measured at startup
 
 # Uncertainty marker thresholds — PER DICE TYPE, recalibrated 2026-06-12
 # for the tray-crop combined model (its confidence scale runs lower than
@@ -560,9 +565,17 @@ def main():
     # IR-mode self-check before starting — models only know IR frames.
     # Auto-exposure takes ~2s to settle after open and reads high during
     # settling, so warm up generously and take the median of 5 probes.
+    # The warm-up loop ALSO measures real capture FPS so the settle dwell
+    # (SETTLE_SECONDS) maps to the right frame count on this hardware.
     t_warm = time.time()
+    warm_frames = 0
     while time.time() - t_warm < 2.0:
-        cap.read()
+        if cap.read()[0]:
+            warm_frames += 1
+    measured_fps = warm_frames / 2.0 if warm_frames else 10.0
+    settle_frames = max(4, round(SETTLE_SECONDS * measured_fps))
+    print(f"Capture ~{measured_fps:.1f} fps -> settle needs "
+          f"{settle_frames} steady frames (~{SETTLE_SECONDS}s)")
     devs = []
     for _ in range(5):
         ret, probe = cap.read()
@@ -625,7 +638,7 @@ def main():
     # tracker_id -> (cx, cy) at settle time, used for nudge detection
     last_settled_centroids: dict[int, tuple[int, int]] = {}
     flash_until = 0.0
-    count_hist: deque = deque(maxlen=COUNT_STABLE_FRAMES)
+    count_hist: deque = deque(maxlen=settle_frames)
 
     win = "Dice Tracker - SPACE confirm, R reject, BKSP undo, S save, Q quit"
     if not headless:
@@ -730,7 +743,7 @@ def main():
             stable_ids = list(range(n_det))
             all_stable = (n_det > 0 and stable_count == n_det)
             count_hist.append(n_det)
-        count_stable = (len(count_hist) == COUNT_STABLE_FRAMES
+        count_stable = (len(count_hist) == settle_frames
                         and len(set(count_hist)) == 1)
 
         # Settle diagnostics for d16 (DICE_DEBUG=1): why a roll won't lock.
