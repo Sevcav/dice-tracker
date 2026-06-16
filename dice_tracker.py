@@ -673,7 +673,20 @@ def main():
             out[tid] = ((x1 + x2) // 2, (y1 + y2) // 2)
         return out
 
-    while True:
+    # Clean Ctrl-C: a SIGINT handler flips a flag the loop checks each
+    # frame, so a KeyboardInterrupt landing inside a blocking cap.read()
+    # can't get swallowed (the prior cause of unresponsive Ctrl-C on the
+    # Pi). 'pkill -f dice_tracker.py' from another SSH session also works.
+    import signal as _signal
+    _stop = {"flag": False}
+
+    def _on_sigint(_sig, _frame):
+        _stop["flag"] = True
+        print("\n  [stopping] Ctrl-C received, shutting down...")
+    _signal.signal(_signal.SIGINT, _on_sigint)
+    print("Running. Ctrl-C to stop.")
+
+    while not _stop["flag"]:
         ret, frame = cap.read()
         if not ret:
             continue
