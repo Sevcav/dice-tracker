@@ -65,6 +65,11 @@ class WebControl:
         # corners (in streamed-frame pixel coords); the tracker loop picks
         # them up, rewrites tray_roi.json, and reloads the ROI live.
         self.new_corners: list | None = None
+        # True only while the startup alignment loop is streaming the green
+        # outline. Once the session goes live the stream carries the live
+        # read instead, so /align shows a "session running" notice rather
+        # than a confusing broken image. Alignment is a startup-only step.
+        self.aligning: bool = False
 
     def request_type(self, dice_type: str):
         with self._lock:
@@ -118,6 +123,14 @@ class WebControl:
             v = self.align_confirmed
             self.align_confirmed = False
             return v
+
+    def set_aligning(self, on: bool):
+        with self._lock:
+            self.aligning = on
+
+    def is_aligning(self) -> bool:
+        with self._lock:
+            return self.aligning
 
     def update_status(self, **kwargs):
         with self._lock:
@@ -557,10 +570,22 @@ setInterval(poll, 700); poll();
         return Response(gen(),
                         mimetype="multipart/x-mixed-replace; boundary=frame")
 
+    @app.get("/api/align_state")
+    def api_align_state():
+        return {"aligning": bool(control and control.is_aligning())}
+
     @app.route("/align")
     def align():
         body = """
 <h2>Camera alignment</h2>
+<div id="notalign" style="display:none">
+  <p>A session is already running — alignment is a <b>startup-only</b>
+  step, so the live read is showing on the <b>Live</b> tab instead.</p>
+  <p class="muted">To re-align (e.g. the camera got bumped), restart the
+  rig service, then come back here before confirming:</p>
+  <pre style="background:#222;padding:10px;border-radius:6px;overflow:auto">sudo systemctl restart dice-tracker</pre>
+</div>
+<div id="aligning" style="display:none">
 <p>Adjust the camera arm until the tray edges line up with the GREEN
 outline, then tap Confirm. (Alignment is always step one — the model only
 knows the calibrated tray perspective.)</p>
@@ -568,7 +593,7 @@ knows the calibrated tray perspective.)</p>
 tray's 4 corners on the image in order: <b>top-left, top-right,
 bottom-right, bottom-left</b>. Save to recalibrate.</p>
 <div style="position:relative;display:inline-block;max-width:640px;width:100%">
-  <img id="feed" src="/stream.mjpg"
+  <img id="feed" data-src="/stream.mjpg"
        style="width:100%;display:block;border:2px solid #444;border-radius:8px">
   <canvas id="ov" style="position:absolute;left:0;top:0;width:100%;height:100%;
        pointer-events:none"></canvas>
@@ -582,6 +607,7 @@ bottom-right, bottom-left</b>. Save to recalibrate.</p>
           style="display:none">Undo last</button>
 </div>
 <p id="msg" style="margin-top:10px;color:#6c6"></p>
+</div>
 """
         script = """
 <script>
@@ -589,6 +615,16 @@ var feed=document.getElementById('feed'),ov=document.getElementById('ov'),
     msg=document.getElementById('msg');
 var picking=false, pts=[];
 var LABELS=['top-left','top-right','bottom-right','bottom-left'];
+
+// Show the alignment UI only during the startup alignment step; otherwise
+// show the "session running" notice (alignment is startup-only).
+fetch('/api/align_state').then(r=>r.json()).then(function(s){
+  document.getElementById('aligning').style.display = s.aligning?'block':'none';
+  document.getElementById('notalign').style.display = s.aligning?'none':'block';
+  // Only open the MJPEG stream during alignment so a live session has no
+  // phantom stream client sitting on this page.
+  if(s.aligning){ feed.src = feed.getAttribute('data-src'); fit(); }
+});
 
 function fit(){ ov.width=feed.clientWidth; ov.height=feed.clientHeight; draw(); }
 window.addEventListener('resize',fit);

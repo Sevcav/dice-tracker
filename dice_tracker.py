@@ -255,6 +255,7 @@ def alignment_check_web(cap, actual_w, actual_h, web_control) -> bool:
     print("to the green outline, then tap Confirm.")
     web_control.take_alignment()   # clear any stale confirm
     web_control.take_new_corners()  # clear any stale corner post
+    web_control.set_aligning(True)  # /align shows the live outline now
     while True:
         ret, frame = cap.read()
         if not ret:
@@ -275,6 +276,7 @@ def alignment_check_web(cap, actual_w, actual_h, web_control) -> bool:
             web_control.set_frame(buf.tobytes())
         if web_control.take_alignment():
             print("Alignment confirmed from phone.")
+            web_control.set_aligning(False)
             return True
 
 
