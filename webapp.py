@@ -25,6 +25,7 @@ Phone access: http://<pi-or-pc-ip>:5000/  (same WiFi / hotspot).
 """
 
 import csv
+import html
 import io
 import json
 import math
@@ -54,6 +55,7 @@ class WebControl:
         self.requested_type: str | None = None
         self.requested_player: str | None = None
         self.requested_action: str | None = None   # reject / undo / confirm
+        self.requested_names: tuple | None = None   # (p1_name, p2_name)
         self.status: dict = {}
         # Headless support: the tracker pushes the latest JPEG here so the
         # phone can show a live view (camera alignment + monitoring) without
@@ -82,6 +84,16 @@ class WebControl:
     def request_action(self, action: str):
         with self._lock:
             self.requested_action = action
+
+    def request_names(self, p1: str, p2: str):
+        with self._lock:
+            self.requested_names = (p1, p2)
+
+    def take_names(self) -> tuple | None:
+        with self._lock:
+            n = self.requested_names
+            self.requested_names = None
+            return n
 
     def take_requests(self) -> tuple[str | None, str | None]:
         with self._lock:
@@ -195,6 +207,8 @@ _BASE = """
   .d16num { font-weight: 800; font-size: 15px; }
   .rollcard { background: #1a1a1a; border: 1px solid #333;
            border-radius: 10px; padding: 10px 12px; margin: 8px 0; }
+  .rollcard.pinned { border: 2px solid #457b9d; background: #16243f; }
+  .rollcard.pinned .faces { font-size: 1.4rem; }
   .rollcard .head { font-size: 0.85rem; color: #aaa; }
   .rollcard .faces { font-size: 1.15rem; font-weight: 600; margin: 4px 0; }
   .rollcard details { margin-top: 6px; }
@@ -726,10 +740,38 @@ function confirmAlign(){
             return None
         return control.get_status().get("active_game_id")
 
+    def _current_names():
+        """Names to prefill the form: live session names if the tracker is
+        running, else the most recent game's, else defaults."""
+        if control is not None:
+            st = control.get_status()
+            if st.get("p1_name") or st.get("p2_name"):
+                return (st.get("p1_name", "Player 1"),
+                        st.get("p2_name", "Player 2"))
+        rows = db.list_games()
+        if rows:
+            return rows[0]["player1_name"], rows[0]["player2_name"]
+        return "Player 1", "Player 2"
+
     @app.route("/games")
     def games():
         rows = db.list_games()
         active = _active_game_id()
+        cur_p1, cur_p2 = _current_names()
+        names_form = (
+            '<form method="post" action="/games/names" '
+            'style="background:#1a1a1a;border:1px solid #333;'
+            'border-radius:10px;padding:12px;margin:10px 0">'
+            '<div style="font-weight:600;margin-bottom:8px">Player names</div>'
+            '<div style="display:flex;gap:8px;flex-wrap:wrap;'
+            'align-items:center">'
+            f'<input type="text" name="p1" value="{html.escape(cur_p1)}" '
+            'placeholder="Player 1" style="flex:1;min-width:120px">'
+            f'<input type="text" name="p2" value="{html.escape(cur_p2)}" '
+            'placeholder="Player 2" style="flex:1;min-width:120px">'
+            '<button class="big">Save names</button></div>'
+            '<p class="muted" style="margin:8px 0 0">Applies to the next '
+            'game; renames the in-progress game too.</p></form>')
         items = ""
         for g in rows:
             started = time.strftime("%Y-%m-%d %H:%M",
@@ -760,14 +802,28 @@ function confirmAlign(){
                 + (" except the active one" if active else "")
                 + "? This cannot be undone.')\">"
                 '<button class="big">Clear all games</button></form>')
-            body = (f"<h1>Games</h1>{clear_btn}"
+            body = (f"<h1>Games</h1>{names_form}{clear_btn}"
                     f"<div class='tablewrap'><table>"
                     f"<tr><th></th><th>Started</th>"
                     f"<th>Players</th><th>Rolls</th><th></th></tr>"
                     f"{items}</table></div>")
         else:
-            body = "<h1>Games</h1><p>No games recorded yet.</p>"
+            body = (f"<h1>Games</h1>{names_form}"
+                    f"<p class='muted'>No games recorded yet. Names above "
+                    f"apply to the next game.</p>")
         return _page(body)
+
+    @app.post("/games/names")
+    def games_set_names():
+        p1 = (request.form.get("p1") or "Player 1").strip()
+        p2 = (request.form.get("p2") or "Player 2").strip()
+        if control is not None:
+            control.request_names(p1, p2)
+        # If no tracker is running but a game exists, rename the latest
+        # directly so the change isn't silently lost in review-only mode.
+        elif (rows := db.list_games()):
+            db.set_player_names(rows[0]["id"], p1, p2)
+        return redirect(url_for("games"))
 
     @app.post("/games/<int:game_id>/delete")
     def game_delete(game_id):
@@ -802,8 +858,7 @@ function confirmAlign(){
             else:
                 tally_html += _player_record_html(tallies[player])
 
-        roll_cards = ""
-        for r in reversed(rolls):       # newest first on the phone
+        def _roll_card(r, *, open_fix=False, pinned=False):
             ts = time.strftime("%H:%M:%S", time.localtime(r["timestamp"]))
             flags = ""
             if r["rejected"]:
@@ -813,13 +868,20 @@ function confirmAlign(){
             confs = " ".join(f"{int(c*100)}%" for c in r["confidences"])
             results = ", ".join(r["results"])
             pname = names.get(r["player"], r["player"])
-            roll_cards += f"""
-<div class="rollcard">
+            cls = "rollcard pinned" if pinned else "rollcard"
+            openattr = " open" if open_fix else ""
+            # The pinned card's fix panel is open by default; mark it so the
+            # auto-refresh guard ignores it (only MANUALLY opened panels on
+            # the log below should hold the refresh).
+            detcls = ' class="pinnedfix"' if pinned else ""
+            summary = "edit / delete" if pinned else "fix"
+            return f"""
+<div class="{cls}">
   <div class="head">#{r['roll_no']} &middot; {ts} &middot; {pname}
        &middot; {r['dice_type']}{flags}</div>
   <div class="faces">{results}</div>
   <div class="muted">{confs}</div>
-  <details><summary>fix</summary>
+  <details{openattr}{detcls}><summary>{summary}</summary>
     <form class="inline" method="post"
           action="/games/{game_id}/rolls/{r['id']}/edit">
       {_fix_fields(r)}
@@ -833,19 +895,31 @@ function confirmAlign(){
   </details>
 </div>"""
 
+        # Latest roll pinned at the very top, fix panel open for quick
+        # correction (the main reason the user sits on this page). The full
+        # log below shows every roll newest-first, including this one.
+        latest = rolls[-1] if rolls else None
+        latest_html = (_roll_card(latest, open_fix=True, pinned=True)
+                       if latest else
+                       '<p class="muted">No rolls yet.</p>')
+        roll_cards = "".join(_roll_card(r) for r in reversed(rolls))
+
         started = time.strftime("%Y-%m-%d %H:%M",
                                 time.localtime(g["started_at"]))
         body = f"""
 <h1>Game {game_id} — {names['P1']} vs {names['P2']}</h1>
-<p class="muted">Started {started}.
-<a class="btn" style="padding:6px 12px"
-   href="/games/{game_id}/export.csv">Export CSV</a></p>
+<h2>Latest roll</h2>
+{latest_html}
 <h1>Dice record</h1>
 {tally_html}
 <h1>Roll log <span class="muted">(newest first)</span></h1>
 {roll_cards or '<p class="muted">No rolls yet.</p>'}
 <p class="muted">Edits replace the faces for a roll (comma-separated) and
 are flagged. Rejected rolls are excluded from the record.</p>
+<hr style="border:none;border-top:1px solid #333;margin:18px 0">
+<p class="muted">Started {started}.
+<a class="btn" style="padding:6px 12px"
+   href="/games/{game_id}/export.csv">Export CSV</a></p>
 """
         script = f"""
 <script>
@@ -855,8 +929,9 @@ const RENDERED_COUNT = {len(rolls)};
 async function checkNew() {{
   const el = document.activeElement;
   if (el && ['INPUT', 'TEXTAREA', 'SELECT'].includes(el.tagName)) return;
-  // also hold the refresh while any fix panel is open
-  if (document.querySelector('details[open]')) return;
+  // hold the refresh while a MANUALLY opened fix panel is open, but not
+  // for the pinned latest-roll card (its panel is always open).
+  if (document.querySelector('details[open]:not(.pinnedfix)')) return;
   try {{
     const r = await fetch('/api/games/{game_id}/roll_count');
     const j = await r.json();

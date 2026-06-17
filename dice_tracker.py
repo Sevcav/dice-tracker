@@ -736,6 +736,19 @@ def main():
             if req_player and req_player != session.active_player:
                 session.active_player = req_player
                 print(f"  active player -> {req_player} (web)")
+            # Player names set from the phone (Games tab). Apply to the
+            # session so the NEXT game created uses them, and if a game is
+            # already in progress, rename it live too.
+            req_names = web_control.take_names()
+            if req_names:
+                p1, p2 = req_names
+                session.player1_name = p1 or "Player 1"
+                session.player2_name = p2 or "Player 2"
+                if game_id is not None:
+                    db.set_player_names(game_id, session.player1_name,
+                                        session.player2_name)
+                print(f"  player names -> {session.player1_name} vs "
+                      f"{session.player2_name} (web)")
 
         # Live IR re-check — lighting can change mid-session (sun, lamps).
         frame_count += 1
