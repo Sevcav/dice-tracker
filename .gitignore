@@ -51,6 +51,8 @@ training/train_err*.txt
 .DS_Store
 Thumbs.db
 
-# Wiring reference diagrams are deliverables (override *.png)
-!wiring/
-!wiring/*.png
+# Wiring reference diagrams are NOT committed: they're reference material
+# for building the rig, the Pi never reads them, and at ~12 MB each they
+# bloated every pull on the Pi (caused fetch resets on slow links
+# 2026-06-17). They live on the build PC; regenerate from DESIGN.md's pin
+# map if needed. (They fall under the *.png ignore above — no override.)
