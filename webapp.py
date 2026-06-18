@@ -37,6 +37,7 @@ from flask import (Flask, Response, redirect, render_template_string,
                    request, url_for)
 
 import db
+import tourplay
 from dice_types import TYPE_FACES as FACES
 
 DICE_TYPES = ["auto", "block", "d6", "d16"]
@@ -412,6 +413,59 @@ def _fix_fields(roll: dict) -> str:
 
 
 # ── App factory ─────────────────────────────────────────────────────────────
+_GAMES_IMPORT_JS = """
+<script>
+let SHEET_MATCHES = [];
+function loadSheet(){
+  const url = document.getElementById('sheeturl').value.trim();
+  const msg = document.getElementById('sheetmsg');
+  msg.textContent = 'Fetching from TourPlay...';
+  fetch('/api/gamesheet/matches', {method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({url})})
+    .then(r=>r.json()).then(function(d){
+      if(!d.ok){ msg.textContent = d.error || 'Fetch failed.'; return; }
+      SHEET_MATCHES = d.matches || [];
+      const rs = document.getElementById('roundsel');
+      rs.innerHTML = '';
+      (d.rounds||[]).forEach(function(rn){
+        const o=document.createElement('option'); o.value=rn;
+        o.textContent='Round '+rn; if(rn===d.current_round)o.selected=true;
+        rs.appendChild(o);
+      });
+      rs.style.display = 'inline-block';
+      document.getElementById('matchsel').style.display = 'inline-block';
+      fillMatches();
+      msg.textContent = SHEET_MATCHES.length + ' matches loaded. Pick a round + match.';
+    }).catch(function(e){ msg.textContent = 'Error: '+e; });
+}
+function fillMatches(){
+  const rn = parseInt(document.getElementById('roundsel').value, 10);
+  const ms = document.getElementById('matchsel');
+  ms.innerHTML = '<option value="">-- pick match --</option>';
+  SHEET_MATCHES.filter(m=>m.round===rn).forEach(function(m, i){
+    const idx = SHEET_MATCHES.indexOf(m);
+    const o=document.createElement('option'); o.value=idx;
+    o.textContent = m.home_coach+' ('+m.home_team+')  vs  '
+                  + m.away_coach+' ('+m.away_team+')';
+    ms.appendChild(o);
+  });
+}
+function pickMatch(){
+  const idx = document.getElementById('matchsel').value;
+  if(idx==='') return;
+  const m = SHEET_MATCHES[parseInt(idx,10)];
+  // Use coach names as the player names (fall back to team if no coach).
+  document.getElementById('p1in').value = m.home_coach || m.home_team;
+  document.getElementById('p2in').value = m.away_coach || m.away_team;
+  document.getElementById('sheetmsg').textContent =
+    'Filled: '+document.getElementById('p1in').value+' vs '
+    +document.getElementById('p2in').value+' — now tap Save names.';
+}
+</script>
+"""
+
+
 def create_app(control: WebControl | None = None) -> Flask:
     app = Flask(__name__)
     db.init_db()
@@ -765,13 +819,36 @@ function confirmAlign(){
             '<div style="font-weight:600;margin-bottom:8px">Player names</div>'
             '<div style="display:flex;gap:8px;flex-wrap:wrap;'
             'align-items:center">'
-            f'<input type="text" name="p1" value="{html.escape(cur_p1)}" '
+            f'<input type="text" id="p1in" name="p1" '
+            f'value="{html.escape(cur_p1)}" '
             'placeholder="Player 1" style="flex:1;min-width:120px">'
-            f'<input type="text" name="p2" value="{html.escape(cur_p2)}" '
+            f'<input type="text" id="p2in" name="p2" '
+            f'value="{html.escape(cur_p2)}" '
             'placeholder="Player 2" style="flex:1;min-width:120px">'
             '<button class="big">Save names</button></div>'
             '<p class="muted" style="margin:8px 0 0">Applies to the next '
             'game; renames the in-progress game too.</p></form>')
+        sheet_url = html.escape(_sheet["url"])
+        import_block = (
+            '<div style="background:#1a1a1a;border:1px solid #333;'
+            'border-radius:10px;padding:12px;margin:10px 0">'
+            '<div style="font-weight:600;margin-bottom:8px">'
+            'Load from Game Sheets</div>'
+            f'<input type="text" id="sheeturl" value="{sheet_url}" '
+            'placeholder="Paste Game Sheets URL (with slug &amp; phaseId)" '
+            'style="width:100%;box-sizing:border-box;margin-bottom:8px">'
+            '<div style="display:flex;gap:8px;flex-wrap:wrap;'
+            'align-items:center">'
+            '<button type="button" class="big" onclick="loadSheet()">'
+            'Fetch matches</button>'
+            '<select id="roundsel" onchange="fillMatches()" '
+            'style="display:none"></select>'
+            '<select id="matchsel" onchange="pickMatch()" '
+            'style="display:none;flex:1;min-width:160px"></select>'
+            '</div>'
+            '<p class="muted" id="sheetmsg" style="margin:8px 0 0">'
+            'Pick a match to fill the names below, then Save names.</p>'
+            '</div>')
         items = ""
         for g in rows:
             started = time.strftime("%Y-%m-%d %H:%M",
@@ -802,16 +879,40 @@ function confirmAlign(){
                 + (" except the active one" if active else "")
                 + "? This cannot be undone.')\">"
                 '<button class="big">Clear all games</button></form>')
-            body = (f"<h1>Games</h1>{names_form}{clear_btn}"
+            body = (f"<h1>Games</h1>{import_block}{names_form}{clear_btn}"
                     f"<div class='tablewrap'><table>"
                     f"<tr><th></th><th>Started</th>"
                     f"<th>Players</th><th>Rolls</th><th></th></tr>"
                     f"{items}</table></div>")
         else:
-            body = (f"<h1>Games</h1>{names_form}"
+            body = (f"<h1>Games</h1>{import_block}{names_form}"
                     f"<p class='muted'>No games recorded yet. Names above "
                     f"apply to the next game.</p>")
-        return _page(body)
+        return _page(body, _GAMES_IMPORT_JS)
+
+    # Remembered Game Sheets URL so you don't re-paste it each round.
+    _sheet = {"url": ""}
+
+    @app.post("/api/gamesheet/matches")
+    def api_gamesheet_matches():
+        """Fetch league fixtures (teams + coaches) from the Game Sheets
+        TourPlay source via the Cloudflare Worker. Body: {url} (a Game
+        Sheets URL with slug/phaseId)."""
+        data = request.get_json(silent=True) or {}
+        url = (data.get("url") or _sheet["url"] or "").strip()
+        params = tourplay.parse_sheet_url(url)
+        if not params:
+            return {"ok": False,
+                    "error": "Paste a Game Sheets URL containing slug "
+                             "and phaseId."}, 400
+        try:
+            res = tourplay.fetch_matches(params["slug"], params["phaseId"])
+        except Exception as e:
+            return {"ok": False,
+                    "error": f"Fetch failed (Pi online?): {e}"}, 502
+        _sheet["url"] = url
+        return {"ok": True, "current_round": res["current_round"],
+                "rounds": res["rounds"], "matches": res["matches"]}
 
     @app.post("/games/names")
     def games_set_names():
