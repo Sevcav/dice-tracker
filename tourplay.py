@@ -28,6 +28,15 @@ import urllib.request
 WORKER = "https://bb-gamesheet-app.chapman-thor.workers.dev"
 _TIMEOUT = 25
 
+# Default league/season so the Games tab can pre-fill (and auto-load) the
+# current league without re-typing. Update this URL each season (or just
+# paste a new one into the box, which is remembered for the session).
+DEFAULT_SHEET_URL = (
+    "https://sevcav.github.io/BB-Printed-Game-Sheet/"
+    "?league=cobb-s03&slug=cobb-s03-sponsored-by-modern-games"
+    "&categoryId=23924&phaseId=31846&name=Modern+Games+COBB+S03"
+)
+
 
 def parse_sheet_url(url: str) -> dict | None:
     """Pull slug / categoryId / phaseId from a Game Sheets URL (the address

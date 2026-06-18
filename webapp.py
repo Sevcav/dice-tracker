@@ -462,6 +462,12 @@ function pickMatch(){
     'Filled: '+document.getElementById('p1in').value+' vs '
     +document.getElementById('p2in').value+' — now tap Save names.';
 }
+// Auto-load matches on page open if the URL is already filled (league
+// default), so you go straight to picking a round + match.
+window.addEventListener('DOMContentLoaded', function(){
+  const u = document.getElementById('sheeturl');
+  if (u && u.value.trim()) loadSheet();
+});
 </script>
 """
 
@@ -891,7 +897,9 @@ function confirmAlign(){
         return _page(body, _GAMES_IMPORT_JS)
 
     # Remembered Game Sheets URL so you don't re-paste it each round.
-    _sheet = {"url": ""}
+    # Seeded with the league default so the box is pre-filled and the page
+    # auto-loads matches without typing.
+    _sheet = {"url": tourplay.DEFAULT_SHEET_URL}
 
     @app.post("/api/gamesheet/matches")
     def api_gamesheet_matches():
