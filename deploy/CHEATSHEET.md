@@ -2,6 +2,32 @@
 
 Quick copy-paste commands. The stuff I always forget.
 
+## Keep docs/ off the Pi (sparse-checkout — one-time setup)
+
+The repo holds a `docs/` folder (showcase document + images, ~15 MB) that
+the Pi does NOT need. Configure the Pi's clone to pull code only, skipping
+`docs/`, so pulls stay small. Run ONCE on the Pi:
+
+```bash
+cd ~/dice-tracker
+git sparse-checkout init --cone
+git sparse-checkout set '/*'          # everything at the repo root...
+git sparse-checkout add '!/docs'      # ...except docs/  (cone mode excludes it)
+git read-tree -mu HEAD                 # apply: drops docs/ from the working tree
+```
+
+If the above cone syntax gives trouble on an older git, use non-cone mode:
+
+```bash
+cd ~/dice-tracker
+git sparse-checkout init --no-cone
+printf '/*\n!/docs/\n' > .git/info/sparse-checkout
+git read-tree -mu HEAD
+```
+
+Verify: `ls ~/dice-tracker` should show NO `docs/` folder. Normal
+`git pull` from then on skips docs/ automatically.
+
 ## SSH into the rig (from the PC)
 
 ```bash

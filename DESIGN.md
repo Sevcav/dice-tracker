@@ -406,28 +406,47 @@ will drive the physical OLEDs.
 
 ## 6. Hardware
 
-### On hand
+### As-built BOM (components actually used in the rig)
 
 - Raspberry Pi 4B in TH3D aluminum case (91 × 65 × 33mm)
-- Pi 3B (spare)
-- Pi Camera v2.1 with 22" ribbon (CSI port non-functional on this Pi 4 — moved to USB path)
-- USB camera (test only, not the production camera)
-- Bambu P1S 3D printer
-- M3 + M4 hardware in stock (M4 lengths: 8/12/16/20mm)
-- M3 + M4 nuts in stock
-- 32GB microSD (current, getting full)
-- HiLetgo SPI 2.42" OLED 128×64 (verified dimensions): PCB 71×43mm, glass 62.25×40mm, header zone 14mm at top
-
-### On order / shipping
-
-- 64GB A2 microSD
-- Arducam 1080P Day/Night IR USB camera (OV2710 sensor)
-- Bambu LED Lamp Kit 001 ×2 (USB 5V, built-in PC diffuser)
-- WMYCONGCONG arcade buttons (verified: thread Ø26.25mm, dial Ø33mm, body length 62mm — using Ø27.78mm holes for print clearance)
-- 5mm pre-wired LEDs in 7.5mm snap-in bezels (using Ø8mm holes)
+- 64GB A2 microSD (upgraded from the original 32GB, which was getting full)
+- Arducam 1080P Day/Night IR USB camera (OV2710 sensor) — the production
+  camera; forced into IR mode by a printed lens cap over the photoresistor
+- 4× WMYCONGCONG arcade buttons (verified: thread Ø26.25mm, dial Ø33mm, body
+  length 62mm — using Ø27.78mm holes for print clearance)
+- 4× 5mm pre-wired LEDs in 7.5mm snap-in bezels (Ø8mm holes); inline
+  resistor under heatshrink on the red lead (status LEDs: P1/P2/reject/undo)
+- 2× HiLetgo SPI 2.42" OLED 128×64 (SSD1309, 7-pin SPI): PCB 71×43mm, glass
+  62.25×40mm, header zone 14mm at top
 - UGREEN Power Bank (160.5 × 81 × 26.5mm)
-- Pre-crimped JST pigtails (5 red, 5 black, ~500mm, pins both ends)
-- M4 brass heat-set inserts (production future use, not yet needed)
+- Dupont female-to-female jumper wires (OLED / button / LED GPIO wiring)
+- 1-to-2 wire splitters (ground consolidation to the Pi's GND pins — see
+  the Ground consolidation note below)
+- M5×25mm SHCS + M5 nyloc nuts (camera arm friction joints)
+- M3 + M4 screws (M4 lengths: 8/12/16/20mm) + M3/M4 nuts (case assembly)
+
+### Optional add-on
+
+- 7" HDMI touchscreen — on-rig display (Mediatrix MPI7002, runs at 1920×1080;
+  desktop scaled to 2× for readability via labwc autostart `wlr-randr`). Handy
+  for on-rig use but NOT required — the rig is normally controlled phone-only.
+
+### Ordered but NOT used
+
+- M4 brass heat-set inserts (kept for a future production revision)
+- Bambu LED Lamp Kit 001 ×2 — was for the abandoned day-mode lighting
+  strategy; the rig is **always IR** (see §6 Lighting / IR), so the lamps
+  are unused
+- Pre-crimped JST pigtails (5 red / 5 black) — replaced by Dupont jumpers
+  + 1-to-2 splitters (wrong connector type for the OLED pin strip anyway)
+
+### Equipment (tools / spares, not consumed in the build)
+
+- Bambu P1S 3D printer
+- Pi 3B (spare)
+- Pi Camera v2.1 with 22" ribbon (CSI port non-functional on this Pi 4 —
+  superseded by the USB Arducam)
+- USB camera (test only, not the production camera)
 
 ### Wiring notes
 

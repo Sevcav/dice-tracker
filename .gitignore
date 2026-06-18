@@ -4,6 +4,20 @@
 *.png
 *.bmp
 
+# EXCEPTION: the showcase document + its images live in docs/ and ARE
+# tracked (the Pi skips docs/ via sparse-checkout, so they don't bloat the
+# rig — see deploy/CHEATSHEET.md). The big standalone wiring PNGs stay out.
+!docs/
+!docs/*.docx
+!docs/*.js
+!docs/*.png
+!docs/*.jpg
+!docs/*.jpeg
+
+# Node deps for the docs generator (npm install docx) — never committed
+node_modules/
+package-lock.json
+
 # Python cache
 __pycache__/
 *.pyc
