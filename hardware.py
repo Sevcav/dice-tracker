@@ -114,12 +114,20 @@ class Hardware:
         per-player placement is ergonomic, not different data)."""
         if not self._oleds:
             return
-        lines = [f"Player: {player}   {state}"]
-        for d in dice_status:
-            mark = "?" if d.get("uncertain") else ""
-            lines.append(f"  {d['label']}{mark}  {d.get('conf','')}%")
-        if not dice_status:
-            lines.append("  (roll...)")
+        # After a confirm, stop showing the (now-logged) dice — that reads
+        # as if it's still live. Show a clear "logged, ready for next roll"
+        # message instead, so the player knows the read was recorded.
+        if state == "confirmed":
+            lines = ["Last roll CONFIRMED",
+                     f"Player {player}",
+                     "watching (roll...)"]
+        else:
+            lines = [f"Player: {player}   {state}"]
+            for d in dice_status:
+                mark = "?" if d.get("uncertain") else ""
+                lines.append(f"  {d['label']}{mark}  {d.get('conf','')}%")
+            if not dice_status:
+                lines.append("  (roll...)")
         for dev in self._oleds:
             try:
                 from luma.core.render import canvas
