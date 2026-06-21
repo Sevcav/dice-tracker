@@ -222,6 +222,32 @@ toggle available). A 3D-printed light shield over the photoresistor will
 force IR mode on regardless of room brightness — see Section 3 component
 list.
 
+> **VERIFIED 2026-06-21 (UVC enumeration on the Pi).** `v4l2-ctl
+> --list-ctrls-menus` and `uvcdynctrl -c` against `/dev/video0` return only
+> the stock OV2710 UVC control set (brightness, contrast, saturation, hue,
+> white balance, gamma, gain, power-line-freq, sharpness, backlight
+> compensation, auto-exposure, exposure time). **No IR / night / day /
+> IR-cut control and no vendor extension units exist.** There is therefore
+> no software path to force the IR-cut filter — confirming this decision.
+> Do not re-open "replace the camera software to force IR"; the firmware
+> does not expose the filter. The day-mode self-check is healthy and **auto-white-balance is load-bearing
+> for IR detection.** Measured + VISUALLY CONFIRMED 2026-06-21 (tracker
+> stopped, `/dev/video0`, rig in a sunlit window, shield sealed): saved
+> frames `sun_awb_on.jpg` / `sun_awb_off.jpg` show the SAME dark IR scene —
+> no daylight floods the sensor (shield works). With **AWB ON** the raw
+> violet IR cast is corrected to near-neutral → `color_dev` **3.58** (reads
+> IR, correct). With **AWB OFF** the identical scene goes strongly purple
+> (OV2710 raw channel imbalance in near-IR) → `color_dev` **11.84** → false
+> day-mode, against the `DAY_MODE_DEVIATION = 8.0` threshold.
+>
+> Therefore: **do NOT pin `white_balance_automatic=0`** — AWB-on is what
+> keeps IR frames neutral; disabling it BREAKS the day-mode check. Leading
+> hypothesis for the intermittent real-world day-mode trips: the live
+> re-check (`dice_tracker.py` ~L753, `IR_CHECK_INTERVAL`) sampling during a
+> window where **AWB has not yet converged** (just after open, or after a
+> lighting change) and briefly seeing the raw violet cast. To confirm: log
+> `color_dev` + save the frame on every re-check trip over a real session.
+
 ### Roboflow + training workflow
 
 - **Dataset:** Roboflow Public/Free workspace `bbdicetracker`
