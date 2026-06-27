@@ -42,6 +42,15 @@ in the polish/debug phase of the first real run.
 (DHCP — may shift; re-find via router or `ping dicetracker.local`).
 SSH: `ssh sevcav@192.168.68.85`.
 
+**Bluetooth fallback for the web UI (no-WiFi venues):** when hotspot/cellular
+WiFi is unreliable at a store/tournament, the Surface Pro can reach the phone
+web UI over **Bluetooth PAN** instead — same Align/Live/Games pages, zero app
+code changes. Pi runs a Bluetooth NAP; the Surface joins as a PAN client and
+browses the *fixed* URL `http://192.168.44.1:5000/` (static, so it never moves
+like the WiFi DHCP IP). One-time setup + pairing + daily-use steps in
+`deploy/BLUETOOTH_PAN.md` (configs: `deploy/pan0.sh`, `deploy/dnsmasq-pan.conf`,
+`deploy/bt-nap.service`).
+
 **Run the rig — ALWAYS these 3 lines in order, every restart.** The
 `. .venv/bin/activate` is MANDATORY; without it you get
 `ModuleNotFoundError: No module named 'cv2'`. The venv does NOT persist

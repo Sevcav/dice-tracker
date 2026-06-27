@@ -1,0 +1,18 @@
+[Unit]
+Description=Bluetooth PAN (NAP) for the Dice Tracker — Surface Pro access over Bluetooth
+After=bluetooth.service
+Requires=bluetooth.service
+
+[Service]
+Type=simple
+# Bring the pan0 bridge up first, then run the NAP server bound to it.
+# bt-network (from the bluez-tools apt package) registers the NAP profile and
+# enslaves each connecting client's bnepX interface into pan0; dnsmasq
+# (dnsmasq-pan.conf) then leases it a 192.168.44.x address.
+ExecStartPre=/home/sevcav/dice-tracker/deploy/pan0.sh
+ExecStart=/usr/bin/bt-network -s nap pan0
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
