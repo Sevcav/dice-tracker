@@ -34,12 +34,45 @@ Verify: `ls ~/dice-tracker` should show NO `docs/` folder. Normal
 ssh sevcav@dicetracker.local
 ```
 
-User `sevcav`, mDNS hostname `dicetracker.local`. Prompts for the Pi password.
-If `dicetracker.local` won't resolve (network blocks mDNS), use the LAN IP:
+User `sevcav` (LOWERCASE — capitalized fails). mDNS hostname
+`dicetracker.local`. Prompts for the Pi password. If `dicetracker.local`
+won't resolve (network blocks mDNS), use the LAN IP:
 
 ```bash
 ssh sevcav@<pi-ip-address>
 ```
+
+PowerShell note: if `ssh` is "not recognized", call it by full path:
+`& "C:\WINDOWS\System32\OpenSSH\ssh.exe" sevcav@dicetracker.local`
+(a fresh PowerShell window usually fixes the PATH).
+
+## Reach the rig — three ways
+
+| From | When | Address |
+|---|---|---|
+| Phone/PC on same WiFi or hotspot | normal | `http://dicetracker.local:5000` |
+| Surface over Bluetooth (no WiFi) | dead venue WiFi | `http://192.168.44.1:5000` |
+| Phone via Tailscale (remote) | from anywhere | `100.72.200.96` (SSH) |
+
+- **Tailscale** (remote SSH from the phone): Pi is `100.72.200.96` on the
+  tailnet. Phone needs the Tailscale app ON (only one VPN at a time on iOS —
+  toggle your regular VPN off). SSH via Termius, username lowercase `sevcav`.
+  The PC can't use `100.x` unless Tailscale is installed on the PC too.
+- **Bluetooth PAN** (Surface, no WiFi): on the Surface, Devices & Printers →
+  right-click *dicetracker* → Connect using → Access point, then browse
+  `192.168.44.1:5000`. Full setup in `deploy/BLUETOOTH_PAN.md`.
+- **iPhone hotspot won't connect?** Turn ON **Maximize Compatibility**
+  (Settings → Personal Hotspot) so it broadcasts 2.4GHz the Pi can see, then
+  `sudo nmcli device wifi rescan` (needs sudo, or it errors "not authorized").
+
+## 7" screen too small
+
+Runs at 1920×1080 → tiny UI. Scale 2× (already set to persist via
+`~/.config/labwc/autostart`). To change live:
+```bash
+wlr-randr --output HDMI-A-1 --scale 2     # 1.5 / 2 / 2.5 to taste
+```
+View the app on the Pi at `http://127.0.0.1:5000` (the `http://` is required).
 
 ## Activate the venv (BEFORE running anything by hand)
 

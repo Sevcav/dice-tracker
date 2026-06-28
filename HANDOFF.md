@@ -1,9 +1,91 @@
 # Session Hand-off — Blood Bowl Dice Tracker
 
-*Last updated: 2026-06-15 (LIVE RIG BRING-UP underway on the Pi — dice
-reading off-camera headless; mid-fixing d16 settle + LED dim. See "Live
-rig bring-up" section below for exact resume point). Paste the prompt
-below into a new session, or just point the assistant at this file.*
+*Last updated: 2026-06-27 (rig is LIVE and reading dice; this session was
+field-readiness + UX polish + connectivity + docs. See "⭐ SESSION
+2026-06-27" below for the current state and what's open. The older
+"LIVE RIG BRING-UP" section remains for deeper background.)*
+
+---
+
+## ⭐ SESSION 2026-06-27 — CURRENT STATE (read this first)
+
+The rig is operational and reading dice live. This session focused on
+field readiness: connectivity, UX, the 7" screen, and documentation.
+
+### Connectivity — THREE ways to reach the rig (all working)
+
+| Path | Use when | Address |
+|---|---|---|
+| Phone over WiFi/hotspot | normal | `http://dicetracker.local:5000` |
+| Surface over **Bluetooth PAN** | no WiFi at venue | `http://192.168.44.1:5000` |
+| Phone via **Tailscale** | remote admin/SSH anywhere | `100.72.200.96` |
+
+- **Hotspot:** Pi auto-joins the iPhone hotspot ("Ken's iPhone (2)", saved
+  profile). The fix when it won't connect: iPhone **Maximize Compatibility
+  ON** (forces 2.4GHz the Pi can see) + `sudo nmcli device wifi rescan`
+  (plain rescan errors "not authorized" — needs sudo). On the hotspot the
+  Pi's IP is `172.20.10.x`; use `dicetracker.local`, not the home IP.
+- **Tailscale** (installed this session): mesh VPN, Pi = `100.72.200.96`,
+  tailnet `chapman_thor@yahoo.com`. SSH from the phone via Termius (username
+  must be lowercase `sevcav`). iOS allows only ONE VPN at a time — toggle
+  Tailscale on / regular VPN off to use it. PC can't reach `100.x` unless
+  Tailscale is installed on the PC too.
+- **Bluetooth PAN** (other session built it, set up + TESTED this session):
+  paired KENS-SURFACE (`68:F7:D8:C4:C1:A6`, trusted). Daily recurring step
+  on the Surface: Devices & Printers → right-click *dicetracker* →
+  **Connect using → Access point**, then browse `192.168.44.1:5000`. Pi side
+  is automatic (bt-nap + dnsmasq services). See `deploy/BLUETOOTH_PAN.md`.
+
+### 7" touchscreen (optional add-on, now in use)
+
+ELECROW/Mediatrix MPI7002 over HDMI, runs at 1920×1080 → desktop UI is
+microscopic. **Fix: display scale 2× via labwc autostart** —
+`~/.config/labwc/autostart` has `wlr-randr --output HDMI-A-1 --scale 2 &`
+(survives reboot). View the app on the Pi at `http://127.0.0.1:5000`
+(the `http://` is required — Chromium searches otherwise). cups-browsed
+auth-popup nuisance was disabled (`systemctl disable --now cups-browsed`).
+
+### Software changes shipped this session (all pushed)
+
+- **P1 OLED fix** — both OLEDs share RST (GPIO25); building the 2nd ssd1309
+  with `gpio_RST=25` reset the 1st, blanking P1. Fix: 2nd device uses
+  `gpio_RST=None` (in `hardware.py` AND the test scripts). Root cause of
+  "Player 1 OLED not working" — was NOT the wiring.
+- **OLED confirmed-state** — after a confirm the OLED shows
+  "Last roll CONFIRMED / Player X / watching (roll...)" instead of leaving
+  the dice up (was confusing).
+- **Phone tap-4-corners re-alignment** — `/align` has a "Re-set corners"
+  tool: tap the tray's 4 corners (TL,TR,BR,BL) → Save → rewrites
+  `tray_roi.json` (overlay quad + axis-aligned crop). Does NOT perspective-
+  warp (model only knows the rectangular crop). Alignment is startup-only;
+  once live, `/align` shows a "session running" notice (live read is on the
+  Live tab — that's expected, not a bug).
+- **Games tab** — pinned editable latest roll at top; Started/Export moved
+  to bottom; per-game delete + Clear-all (active game protected); a Player
+  Names form; and **Load from Game Sheets** (imports coach/team names from
+  the league's TourPlay schedule via the Cloudflare Worker proxy —
+  `tourplay.py`, default URL pre-filled + auto-loads, see DEFAULT_SHEET_URL).
+- **Showcase doc + BOM** — `docs/BB-Dice-Tracker-Showcase.docx` (styled,
+  images embedded; regen with `node docs/build_showcase.js`). DESIGN.md §6
+  rewritten to the as-built BOM (Dupont+splitters in; lamps/JST/heat-set
+  inserts NOT used; 7" screen optional).
+- **Repo hygiene** — wiring PNGs (~23MB) removed from git (bloated Pi
+  pulls); `docs/` tracked but meant to be skipped on the Pi via
+  sparse-checkout (see `deploy/CHEATSHEET.md`).
+
+### OPEN ITEMS / risks (not yet done)
+
+1. **OVERHEATING — real tournament risk.** The Pi thermally shut down once
+   this session (sealed case, sustained inference). Recovered on cooldown,
+   but a sealed rig WILL overheat across an all-day event. Needs heatsinks /
+   a fan / vents. UNADDRESSED.
+2. **Sparse-checkout NOT set up on the Pi** — so `git pull` on the rig still
+   drags the ~30MB `docs/` folder. Commands are in `deploy/CHEATSHEET.md`;
+   run them on the Pi before the next pull.
+3. **Day-mode on startup** — rig came up at color-deviation 8.9 (just over
+   the 8.0 IR threshold). Reseat the photoresistor lens cap so it forces IR;
+   the camera was also clicking (IR-cut filter oscillating at threshold).
+4. **Pi password is in chat transcripts** — change with `passwd` when convenient.
 
 ---
 
